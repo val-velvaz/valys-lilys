@@ -3,6 +3,7 @@
 import { initHeader } from './header.js';
 import { loadCatalog, el, formatDate, dateLine, norm, SECTIONS, sectionName, postIcon, langTag } from './data.js';
 import { renderSyllabus } from './syllabus.js';
+import { renderTopicGraph } from './graph.js';
 import { t } from './i18n.js';
 import { getLastOpened, getStreak, getSummary, getStatus, isTopic, CHALLENGE } from './progress.js';
 
@@ -136,13 +137,25 @@ function renderPanel(all) {
       el('span', {}, t(`st_${s}`)),
       el('strong', {}, String(summary[s]))))));
 
-  // 4. Reserved space for the future topic graph (only the container for now)
-  const graphBlock = panelBlock(t('panel_graph'),
-    el('div', { class: 'panel__graph', id: 'topic-graph', 'data-graph': 'pending' },
-      el('span', { class: 'panel__muted' }, t('panel_graph_soon'))));
+  // 4. Topic map: how topics connect ("requiere:" in the front matter), see graph.js
+  const graphBox = el('div', { class: 'panel__graph', id: 'topic-graph' });
+  const graphBlock = panelBlock(t('panel_graph'), graphBox);
 
   panelBody.replaceChildren(continueBlock, streakBlock, summaryBlock, graphBlock);
+  // drawn after it is on the page, so it can measure its width
+  renderTopicGraph(graphBox, all, { current: last?.slug });
 }
+
+// the map is drawn for the panel's width: redraw it if that width changes
+let graphWidth = 0;
+new ResizeObserver((entries) => {
+  const box = document.getElementById('topic-graph');
+  const w = Math.round(entries[0].contentRect.width);
+  if (box && w && Math.abs(w - graphWidth) > 8) {
+    graphWidth = w;
+    loadCatalog().then(({ posts }) => renderTopicGraph(box, posts, { current: getLastOpened()?.slug })).catch(() => {});
+  }
+}).observe(document.getElementById('progress-panel'));
 
 try {
   const { posts: all, syllabus } = await loadCatalog();

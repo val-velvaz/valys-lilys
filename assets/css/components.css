@@ -283,10 +283,27 @@ h1 .accent { color: var(--md-h1); }
 .st--en-progreso { background: var(--tone-pink); }
 .st--disponible { background: var(--tone-lav); }
 .st--bloqueado { background: var(--border); }
-.panel__graph {
-  min-height: 72px; display: grid; place-items: center; padding: 12px; text-align: center;
-  border: 1px dashed var(--border); border-radius: var(--radius-sm); background: var(--surface-2);
+.panel__graph { min-width: 0; }
+
+/* ---------- Topic map (graph.js) ----------
+   The SVG is drawn at the panel's real width (viewBox = width), so text never gets scaled. */
+.graph { display: block; max-width: 100%; height: auto; overflow: visible; }
+.graph__edge { fill: none; stroke: var(--text-soft); stroke-opacity: .45; stroke-width: 1.5; }
+.graph__node { stroke: var(--surface); stroke-width: 2; }
+.graph__node.st--dominado { fill: var(--tone-mint); }
+.graph__node.st--en-progreso { fill: var(--tone-pink); }
+.graph__node.st--disponible { fill: var(--tone-lav); }
+.graph__node.st--bloqueado { fill: var(--border); }
+.graph__ring { fill: none; stroke: var(--accent-2); stroke-width: 2; }
+/* the halo (stroke painted under the letters, in the panel color) hides any line behind the text */
+.graph__label {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--text);
+  stroke: var(--surface); stroke-width: 4px; paint-order: stroke; stroke-linejoin: round;
 }
+.graph__link:hover .graph__label, .graph__link:focus .graph__label { fill: var(--accent-2); text-decoration: underline; }
+.graph__link:focus { outline: none; }
+.graph__link:focus-visible .graph__node { stroke: var(--focus); stroke-width: 3; }
+.graph__caption { margin-top: 6px; font-size: 12px; line-height: 1.4; color: var(--text-soft); }
 
 /* ---------- Home sections ---------- */
 #content { margin: 24px 0 60px; }
