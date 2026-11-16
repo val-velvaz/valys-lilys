@@ -1,0 +1,128 @@
+/* =========================================================
+   tokens.css — the ONLY place where colors and fonts live.
+   Change the palette here and the whole site updates.
+   ========================================================= */
+
+/* ---------- Default theme: PASTEL ---------- */
+:root {
+  /* Fonts */
+  --font-sans: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-read: 'Tinos', 'Times New Roman', Georgia, serif;
+  --font-mono: 'Fira Code', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Pastel palette */
+  --pink:        #FF99C9;
+  --pink-soft:   #F6B9DB;
+  --bubblegum:   #F99DCE;
+  --salmon:      #FFB7C3;
+  --peach:       #FEC9C3;
+  --lavender:    #E4C1F9;
+  --orchid:      #F5D2F0;
+  --periwinkle:  #C5C6E4;
+  --sky:         #BFD4F2;
+  --mint:        #D7FBCB;
+  --mint-2:      #D3F4DF;
+  --butter:      #FCF5BF;
+  --cream:       #FFF6EA;
+  --blush:       #FFECF2;
+  --ink:         #414040;
+
+  /* Semantic roles (components use ONLY these) */
+  --bg:            var(--blush);
+  --bg-glow-1:     #FDE3F1;
+  --bg-glow-2:     #EAFBE4;
+  --surface:       #FFFFFF;
+  --surface-2:     var(--cream);
+  --text:          var(--ink);
+  --text-soft:     #6B6670;
+  --heading:       var(--ink);
+  /* Markdown headings: one color per level (# ## ### ####) */
+  --md-h1: #8E5BC9;               /* lavender */
+  --md-h2: #D2508F;               /* pink */
+  --md-h3: #3C8F63;               /* mint */
+  --md-h4: #5A78B0;               /* sky */
+  --accent:        #B0457F;
+  --accent-2:      #C23F84;        /* links / accents on light background */
+  --accent-soft:   var(--lavender);
+  --border:        #F3DCE8;
+  --focus:         #8E5BC9;
+
+  --code-bg:       #3A3540;
+  --code-text:     #FFF6EA;
+  --code-comment:  #E4C1F9;
+
+  /* Highlighter (subrayado) */
+  --hl-pink:   var(--salmon);
+  --hl-yellow: #FDF7B0;
+  --hl-blue:   var(--sky);
+  --hl-green:  var(--mint);
+  --hl-lilac:  #E4D5EA;
+
+  /* Section tones (card bar + chip) */
+  --tone-pink:   var(--pink);
+  --tone-lav:    var(--lavender);
+  --tone-mint:   var(--mint);
+  --tone-sky:    var(--sky);
+  --tone-peach:  var(--peach);
+  --tone-butter: var(--butter);
+  --tone-peri:   var(--periwinkle);
+
+  --shadow:        0 6px 24px rgba(176, 69, 127, .08);
+  --shadow-hover:  0 14px 34px rgba(176, 69, 127, .16);
+  --radius:        20px;
+  --radius-sm:     12px;
+
+  color-scheme: light;
+}
+
+/* ---------- HIGH CONTRAST theme (neon on dark) ----------
+   Enabled with <html data-theme="contrast"> (header button)
+   or automatically when the system asks for "more contrast".     */
+:root[data-theme="contrast"] {
+  --neon-pink:   #FF2E97;
+  --neon-purple: #C77DFF;
+  --neon-green:  #39FF14;
+  --neon-yellow: #FFE600;
+  --neon-cyan:   #00E5FF;
+
+  --bg:            #0B0912;
+  --bg-glow-1:     #0B0912;
+  --bg-glow-2:     #0B0912;
+  --surface:       #15111F;
+  --surface-2:     #221B33;
+  --text:          #FFFFFF;
+  --text-soft:     #E2DAF2;
+  --heading:       #FFFFFF;
+  --md-h1: var(--neon-purple);
+  --md-h2: var(--neon-pink);
+  --md-h3: var(--neon-green);
+  --md-h4: var(--neon-yellow);
+  --accent:        var(--neon-green);
+  --accent-2:      var(--neon-cyan);
+  --accent-soft:   var(--neon-yellow);
+  --border:        #FFFFFF;
+  --focus:         var(--neon-yellow);
+
+  --code-bg:       #000000;
+  --code-text:     #FFFFFF;
+  --code-comment:  var(--neon-green);
+
+  --hl-pink:   #FF2E97;
+  --hl-yellow: #FFE600;
+  --hl-blue:   #00E5FF;
+  --hl-green:  #39FF14;
+  --hl-lilac:  #C77DFF;
+
+  --tone-pink:   var(--neon-pink);
+  --tone-lav:    var(--neon-purple);
+  --tone-mint:   var(--neon-green);
+  --tone-sky:    var(--neon-cyan);
+  --tone-peach:  var(--neon-pink);
+  --tone-butter: var(--neon-yellow);
+  --tone-peri:   var(--neon-purple);
+
+  --shadow:        none;
+  --shadow-hover:  0 0 0 2px var(--neon-yellow);
+
+  color-scheme: dark;
+}

@@ -1,0 +1,40 @@
+/* base.css — reset, typography and general layout */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background:
+    radial-gradient(1200px 500px at 10% -10%, var(--bg-glow-1) 0%, transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, var(--bg-glow-2) 0%, transparent 55%),
+    var(--bg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+.wrap--narrow { max-width: 780px; }
+
+a { color: var(--accent-2); font-weight: 600; }
+a:hover { text-decoration-thickness: 2px; }
+button { font: inherit; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 8px;
+  background: var(--surface); color: var(--text); padding: 8px 12px; border-radius: 8px;
+}
+.skip-link:focus { left: 8px; z-index: 10; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

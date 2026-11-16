@@ -1,31 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Subrayados · valy's lilys</title>
-  <meta name="description" content="Todo lo que has subrayado.">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/markdown.css">
-  <link rel="stylesheet" href="css/widgets.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Security: HTTPS only, no external or inline scripts -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;family=Tinos:ital,wght@0,400;0,700;1,400&amp;family=Fira+Code:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<script src="assets/js/theme.js"></script>
+<title>Mis subrayados · valy's lilys</title>
+<script type="module" src="assets/js/highlights-page.js"></script>
 </head>
-<body data-page="highlights">
-<main id="main"><div class="paper"><p class="muted">✿ cargando…</p></div></main>
+<body data-i18n-title="meta.highlights_title">
+<div class="wrap wrap--narrow">
+  <header class="site-header">
+    <div class="topbar">
+      <a class="logo" href="./" data-i18n="logo">valy's lilys</a>
+      <div class="controls">
+        <a class="pill-link" href="subrayados.html" aria-current="page" data-i18n="nav_highlights">✎ subrayados</a>
+        <div id="lang-switch" class="lang-switch" role="group" aria-label="Idioma" data-i18n-attr="aria-label:lang_label"></div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+          <span class="to-contrast" data-i18n="theme_to_contrast">◑ alto contraste</span>
+          <span class="to-pastel" data-i18n="theme_to_pastel">◐ modo pastel</span>
+        </button>
+      </div>
+    </div>
+    <h1 class="page-title"><span data-i18n="highlights_title">Mis</span> <span class="accent" data-i18n="highlights_accent">subrayados</span></h1>
+    <p class="tagline" data-i18n="highlights_tagline">Todo lo que subrayaste en las entradas.</p>
+    <div class="toolbar"><button id="export" class="btn" type="button" hidden data-i18n="export_md">⬇ exportar .md</button></div>
+  </header>
 
-<noscript>✿ Este sitio necesita JavaScript para cargar las entradas en Markdown. ✿</noscript>
+  <!-- Highlights are saved only in this browser (localStorage) -->
+  <main id="list" aria-live="polite"></main>
 
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/core.js"></script>
-<script src="js/widgets.js"></script>
-<script src="js/highlight.js"></script>
-<script src="js/layout.js"></script>
-<script src="js/pages/highlights.js"></script>
+<footer class="site-footer">
+  <span data-i18n="footer">Hecho con ♡ y el método Feynman</span> · <a href="./">valy's lilys</a>
+</footer>
+</div>
 </body>
 </html>
