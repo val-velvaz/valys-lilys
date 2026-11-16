@@ -1,5 +1,5 @@
 // data.js — catalog access and helpers shared between pages.
-import { locale, t } from './i18n.js';
+import { locale, t, getLang } from './i18n.js';
 
 export const CATALOG_URL = 'content/index.json';
 export const GITHUB_USER = 'val-velvaz';
@@ -10,17 +10,33 @@ export const SECTIONS = {
 };
 export const sectionName = (s) => t(`sec_${s}`) === `sec_${s}` ? s : t(`sec_${s}`);
 
+// Safe path to a post file, as written by build-index.mjs
+const isSafeFile = (f) => typeof f === 'string' && /^content\/posts\/[a-z0-9-]+(\.[a-z]{2})?\.md$/.test(f);
+
 let catalogPromise;
 export function loadCatalog() {
   catalogPromise ??= fetch(CATALOG_URL, { cache: 'no-cache' }).then(async (res) => {
     if (!res.ok) throw new Error(`${CATALOG_URL} (${res.status})`);
     const data = await res.json();
-    // Drafts are hidden; newest on top
-    data.posts = data.posts.filter((p) => !p.draft).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    const lang = getLang();
+    // One version per slug: the active language if it exists, otherwise the original.
+    // "foreign" marks posts shown in another language (they get a small language tag).
+    const bySlug = new Map();
+    for (const p of data.posts) {
+      if (p.draft || !isSafeFile(p.file)) continue;
+      const current = bySlug.get(p.slug);
+      if (!current || p.lang === lang || (current.lang !== lang && p.original)) bySlug.set(p.slug, p);
+    }
+    data.posts = [...bySlug.values()]
+      .map((p) => ({ ...p, foreign: p.lang !== lang }))
+      .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     return data;
   });
   return catalogPromise;
 }
+
+// Small "ES" / "EN" tag for posts shown in a language other than the interface
+export const langTag = (post) => (post.foreign ? el('span', { class: 'lang-tag', title: post.lang }, post.lang.toUpperCase()) : null);
 
 // Safe slug: lowercase letters, numbers and hyphens only (no odd paths)
 export const isSafeSlug = (s) => typeof s === 'string' && /^[a-z0-9-]+$/.test(s);
