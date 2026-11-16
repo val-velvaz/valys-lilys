@@ -19,7 +19,7 @@
 <script type="module" src="assets/js/home.js"></script>
 </head>
 <body data-i18n-title="meta.home_title">
-<a class="skip-link" href="#grid" data-i18n="skip_home">Saltar a las entradas</a>
+<a class="skip-link" href="#content" data-i18n="skip_home">Saltar a las entradas</a>
 <div class="wrap">
   <header class="site-header">
     <div class="topbar">
@@ -54,7 +54,8 @@
   </div>
   <nav class="filters" id="filters" aria-label="Filtrar por sección" data-i18n-attr="aria-label:filters_label"></nav>
   <p class="empty" id="no-results" hidden data-i18n="no_results">Ninguna entrada coincide con tu búsqueda.</p>
-  <main class="grid" id="grid" aria-live="polite">
+  <!-- Sections (start here, tools, explanations, diary) or, while searching/filtering, one list of results -->
+  <main id="content" aria-live="polite">
     <p class="empty" data-i18n="loading">Cargando…</p>
   </main>
 
