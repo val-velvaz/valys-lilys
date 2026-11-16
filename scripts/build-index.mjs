@@ -9,7 +9,8 @@
                 a file without suffix is the original, Spanish unless it says "lang: en|de"
        featured "destacado: true" in the front matter
        minutes  reading time of the whole post
-       langs    every language available for that slug */
+       langs    every language available for that slug
+   - Reads the side-menu syllabus from content/temario.md (+ temario.en.md / temario.de.md) */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -121,6 +122,61 @@ for (const p of posts) {
   p.langs = posts.filter((q) => q.slug === p.slug).map((q) => q.lang);
 }
 posts.sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.slug.localeCompare(b.slug));
-await writeFile(join(ROOT, 'content', 'index.json'), `${JSON.stringify({ generated: new Date().toISOString(), posts }, null, 1)}\n`);
-console.log(`✿ content/index.json: ${posts.length} posts (${posts.filter((p) => p.draft).length} drafts)`);
+
+/* ---------- Syllabus (side menu): content/temario.md and temario.<lang>.md ----------
+   # Área          → level 1 (an emoji or symbol before the name becomes its icon)
+   ## Unidad       → level 2
+   - Tema          → level 3, "coming soon"
+   - [Tema](slug)  → level 3, links to the post
+   Mistakes here are warnings only: a broken link just shows as "coming soon". */
+const warnings = [];
+const published = new Set(posts.filter((p) => !p.draft).map((p) => p.slug));
+
+function parseSyllabus(file, src) {
+  const areas = [];
+  let area = null, unit = null;
+  const text = src.replace(/<!--[\s\S]*?-->/g, '');
+  text.split(/\r?\n/).forEach((raw, i) => {
+    const line = raw.trim();
+    if (!line) return;
+    let m;
+    if ((m = /^#\s+(.+)$/.exec(line))) {
+      // "∑ Matemáticas" → icon "∑", title "Matemáticas" (icon = first word if it has no letters)
+      const [first, ...rest] = m[1].split(/\s+/);
+      const hasIcon = rest.length && !/\p{L}/u.test(first);
+      area = { title: hasIcon ? rest.join(' ') : m[1], icon: hasIcon ? first : '', units: [] };
+      unit = null;
+      areas.push(area);
+    } else if ((m = /^##\s+(.+)$/.exec(line))) {
+      if (!area) return warnings.push(`${file}:${i + 1}: "## ${m[1]}" needs a "# Área" above it`);
+      unit = { title: m[1], topics: [] };
+      area.units.push(unit);
+    } else if ((m = /^[-*]\s+(.+)$/.exec(line))) {
+      if (!unit) return warnings.push(`${file}:${i + 1}: "- ${m[1]}" needs a "## Unidad" above it`);
+      const link = /^\[([^\]]+)\]\(([^)\s]+)\)\s*$/.exec(m[1]);
+      let slug = link ? link[2] : null;
+      if (slug && !published.has(slug)) {
+        warnings.push(`${file}:${i + 1}: "${slug}" is not a published post (shown as "coming soon")`);
+        slug = null;
+      }
+      unit.topics.push({ title: link ? link[1] : m[1], slug });
+    } else {
+      warnings.push(`${file}:${i + 1}: line ignored (use "# ", "## " or "- ")`);
+    }
+  });
+  return areas;
+}
+
+const syllabus = {};
+for (const lang of LANGS) {
+  const name = lang === DEFAULT_LANG ? 'temario.md' : `temario.${lang}.md`;
+  const path = join(ROOT, 'content', name);
+  if (existsSync(path)) syllabus[lang] = parseSyllabus(name, await readFile(path, 'utf8'));
+}
+
+await writeFile(join(ROOT, 'content', 'index.json'), `${JSON.stringify({ generated: new Date().toISOString(), syllabus, posts }, null, 1)}\n`);
+const topics = Object.values(syllabus[DEFAULT_LANG] || []).flatMap((a) => a.units.flatMap((u) => u.topics));
+console.log(`✿ content/index.json: ${posts.length} posts (${posts.filter((p) => p.draft).length} drafts), ` +
+  `syllabus: ${(syllabus[DEFAULT_LANG] || []).length} areas, ${topics.length} topics (${topics.filter((t) => t.slug).length} with a post)`);
+if (warnings.length) console.warn(warnings.map((w) => `  · ${w}`).join('\n'));
 if (problems.length) { console.warn(problems.map((p) => `  ⚠ ${p}`).join('\n')); process.exitCode = 1; }

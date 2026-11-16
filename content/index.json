@@ -1,5 +1,371 @@
 {
- "generated": "2026-11-16T22:19:12.644Z",
+ "generated": "2026-11-16T22:38:04.402Z",
+ "syllabus": {
+  "es": [
+   {
+    "title": "Matemáticas",
+    "icon": "∑",
+    "units": [
+     {
+      "title": "Cálculo",
+      "topics": [
+       {
+        "title": "Límites",
+        "slug": null
+       },
+       {
+        "title": "La derivada es un velocímetro",
+        "slug": "derivadas"
+       },
+       {
+        "title": "Integrales",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Álgebra lineal",
+      "topics": [
+       {
+        "title": "Vectores",
+        "slug": null
+       },
+       {
+        "title": "Matrices",
+        "slug": null
+       },
+       {
+        "title": "Transformaciones lineales",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Matemáticas discretas",
+      "topics": [
+       {
+        "title": "Lógica",
+        "slug": null
+       },
+       {
+        "title": "Conjuntos",
+        "slug": null
+       },
+       {
+        "title": "Grafos",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Computación",
+    "icon": "💻",
+    "units": [
+     {
+      "title": "Aprender a aprender",
+      "topics": [
+       {
+        "title": "¿Qué es el método Feynman?",
+        "slug": "metodo-feynman"
+       },
+       {
+        "title": "Mi hoja Feynman",
+        "slug": "hoja-feynman"
+       }
+      ]
+     },
+     {
+      "title": "Algoritmos",
+      "topics": [
+       {
+        "title": "Recursión",
+        "slug": "recursion"
+       },
+       {
+        "title": "Ordenamiento",
+        "slug": null
+       },
+       {
+        "title": "Notación Big O",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Estructuras de datos",
+      "topics": [
+       {
+        "title": "Estructuras de datos con analogías",
+        "slug": "estructuras-de-datos"
+       },
+       {
+        "title": "Pilas y colas",
+        "slug": null
+       },
+       {
+        "title": "Árboles",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Bases de datos",
+      "topics": [
+       {
+        "title": "Una base de datos es una biblioteca",
+        "slug": "bases-de-datos"
+       },
+       {
+        "title": "SQL básico",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Ciberseguridad",
+    "icon": "🛡",
+    "units": [
+     {
+      "title": "Fundamentos",
+      "topics": [
+       {
+        "title": "Redes y modelo TCP/IP",
+        "slug": null
+       },
+       {
+        "title": "Linux para seguridad",
+        "slug": null
+       },
+       {
+        "title": "Criptografía básica",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Pentesting",
+      "topics": [
+       {
+        "title": "Reconocimiento con nmap",
+        "slug": null
+       },
+       {
+        "title": "Enumeración de servicios",
+        "slug": null
+       },
+       {
+        "title": "Escalada de privilegios",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Seguridad web",
+      "topics": [
+       {
+        "title": "OWASP Top 10",
+        "slug": null
+       },
+       {
+        "title": "Inyección SQL",
+        "slug": null
+       },
+       {
+        "title": "Cross-site scripting (XSS)",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "en": [
+   {
+    "title": "Math",
+    "icon": "∑",
+    "units": [
+     {
+      "title": "Calculus",
+      "topics": [
+       {
+        "title": "Limits",
+        "slug": null
+       },
+       {
+        "title": "The derivative is a speedometer",
+        "slug": "derivadas"
+       },
+       {
+        "title": "Integrals",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Linear algebra",
+      "topics": [
+       {
+        "title": "Vectors",
+        "slug": null
+       },
+       {
+        "title": "Matrices",
+        "slug": null
+       },
+       {
+        "title": "Linear transformations",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Discrete math",
+      "topics": [
+       {
+        "title": "Logic",
+        "slug": null
+       },
+       {
+        "title": "Sets",
+        "slug": null
+       },
+       {
+        "title": "Graphs",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Computer science",
+    "icon": "💻",
+    "units": [
+     {
+      "title": "Learning to learn",
+      "topics": [
+       {
+        "title": "What is the Feynman method?",
+        "slug": "metodo-feynman"
+       },
+       {
+        "title": "My Feynman sheet",
+        "slug": "hoja-feynman"
+       }
+      ]
+     },
+     {
+      "title": "Algorithms",
+      "topics": [
+       {
+        "title": "Recursion",
+        "slug": "recursion"
+       },
+       {
+        "title": "Sorting",
+        "slug": null
+       },
+       {
+        "title": "Big O notation",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Data structures",
+      "topics": [
+       {
+        "title": "Data structures with analogies",
+        "slug": "estructuras-de-datos"
+       },
+       {
+        "title": "Stacks and queues",
+        "slug": null
+       },
+       {
+        "title": "Trees",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Databases",
+      "topics": [
+       {
+        "title": "A database is a library",
+        "slug": "bases-de-datos"
+       },
+       {
+        "title": "Basic SQL",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Cybersecurity",
+    "icon": "🛡",
+    "units": [
+     {
+      "title": "Fundamentals",
+      "topics": [
+       {
+        "title": "Networks and the TCP/IP model",
+        "slug": null
+       },
+       {
+        "title": "Linux for security",
+        "slug": null
+       },
+       {
+        "title": "Basic cryptography",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Pentesting",
+      "topics": [
+       {
+        "title": "Recon with nmap",
+        "slug": null
+       },
+       {
+        "title": "Service enumeration",
+        "slug": null
+       },
+       {
+        "title": "Privilege escalation",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Web security",
+      "topics": [
+       {
+        "title": "OWASP Top 10",
+        "slug": null
+       },
+       {
+        "title": "SQL injection",
+        "slug": null
+       },
+       {
+        "title": "Cross-site scripting (XSS)",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
  "posts": [
   {
    "slug": "hoja-feynman",
