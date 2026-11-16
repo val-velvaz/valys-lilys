@@ -1,9 +1,9 @@
-// home.js — home page: sections (start here, tools, explanations, diary),
+// home.js — home page: syllabus side menu, sections (start here, tools, explanations, diary),
 // search and section filters (from content/index.json).
 import { initHeader } from './header.js';
-import { loadCatalog, el, formatDate, dateLine, norm, SECTIONS, sectionName, postIcon, langTag } from './data.js';
+import { loadCatalog, el, formatDate, dateLine, norm, SECTIONS, sectionName, postIcon, langTag, store } from './data.js';
 import { t } from './i18n.js';
-import { getLastOpened, getStreak, getSummary, CHALLENGE } from './progress.js';
+import { getLastOpened, getStreak, getSummary, getStatus, CHALLENGE } from './progress.js';
 
 initHeader();
 
@@ -131,11 +131,56 @@ function renderPanel(all) {
   panelBody.replaceChildren(continueBlock, streakBlock, summaryBlock, graphBlock);
 }
 
+/* ---------- Syllabus side menu (content/temario.md): area → unit → topic ---------- */
+const syllabusBody = document.getElementById('syllabus-body');
+const AREA_TONES = ['pink', 'mint', 'sky', 'lav', 'peach', 'butter'];
+const OPEN_KEY = 'syllabus-open';
+
+function renderSyllabus(areas, all) {
+  const known = new Set(all.map((p) => p.slug));
+  // which areas are open is remembered; the first time only the first one is open
+  // (on phones all start closed so the menu doesn't push the content down)
+  const firstTime = matchMedia('(min-width: 1000px)').matches ? [0] : [];
+  const open = new Set(store.get(OPEN_KEY, firstTime));
+  syllabusBody.replaceChildren(...areas.map((area, i) => {
+    const topics = area.units.flatMap((u) => u.topics);
+    const ready = topics.filter((tp) => tp.slug && known.has(tp.slug)).length;
+    const details = el('details', { class: 'syllabus__area', open: open.has(i) },
+      el('summary', { class: 'syllabus__summary' },
+        el('span', { class: `syllabus__icon tone--${AREA_TONES[i % AREA_TONES.length]}`, 'aria-hidden': 'true' }, area.icon || area.title[0]),
+        el('span', { class: 'syllabus__area-title' }, area.title),
+        el('span', { class: 'syllabus__count', title: t('syllabus_ready') }, `${ready}/${topics.length}`)),
+      area.units.map((unit) => el('div', { class: 'syllabus__unit' },
+        el('h3', { class: 'syllabus__unit-title' }, unit.title),
+        el('ul', { class: 'syllabus__topics' }, unit.topics.map((topic) => {
+          if (!topic.slug || !known.has(topic.slug)) {
+            return el('li', { class: 'syllabus__topic is-soon' },
+              el('span', { class: 'syllabus__dot', 'aria-hidden': 'true' }),
+              el('span', {}, topic.title),
+              el('span', { class: 'syllabus__soon' }, t('syllabus_soon')));
+          }
+          const status = getStatus(topic.slug);
+          return el('li', { class: 'syllabus__topic' },
+            el('a', { href: `post.html?p=${encodeURIComponent(topic.slug)}` },
+              el('span', { class: `syllabus__dot st--${status}`, title: t(`status_${status}`), 'aria-hidden': 'true' }),
+              el('span', {}, topic.title),
+              el('span', { class: 'visually-hidden' }, ` (${t(`status_${status}`)})`)));
+        })))));
+    details.addEventListener('toggle', () => {
+      if (details.open) open.add(i); else open.delete(i);
+      store.set(OPEN_KEY, [...open]);
+    });
+    return details;
+  }));
+  document.getElementById('syllabus').hidden = !areas.length;
+}
+
 try {
-  const { posts: all } = await loadCatalog();
+  const { posts: all, syllabus } = await loadCatalog();
   renderPanel(all);
-  // coming back with the browser's back button shows the page from cache: refresh the panel
-  window.addEventListener('pageshow', (e) => { if (e.persisted) renderPanel(all); });
+  renderSyllabus(syllabus, all);
+  // coming back with the browser's back button shows the page from cache: refresh progress
+  window.addEventListener('pageshow', (e) => { if (e.persisted) { renderPanel(all); renderSyllabus(syllabus, all); } });
   const posts = all.filter((p) => !HIDDEN.has(p.section));
   const present = Object.keys(SECTIONS).filter((s) => !HIDDEN.has(s) && posts.some((p) => p.section === s));
   const count = (s) => posts.filter((p) => p.section === s).length;
