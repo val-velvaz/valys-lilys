@@ -40,6 +40,8 @@ Después abre <http://localhost:8000>.
    Sirve cualquier `png`, `jpg`, `webp`, `gif`, `svg` o `avif`. Mejor si es cuadrada (por ejemplo 240×240) y pesa poco. También vale una URL `https://…`. `build-index.mjs` avisa si la ruta no existe.
 
    **Destacar una entrada (opcional):** `destacado: true` la pone en **Empieza aquí**, arriba de la portada (se muestran como mucho 2).
+
+   **Prerrequisitos (opcional):** `requiere: [metodo-feynman, recursion]` dice qué temas conviene leer antes. Se usa para dibujar el **mapa de temas**.
 3. Regenera el índice que usan la portada y el buscador:
 
    ```bash
@@ -128,7 +130,36 @@ El panel **Tu progreso** (a la derecha en pantallas anchas y bajo la cabecera en
 
 - Un tema pasa a `dominado` al marcar los 4 pasos Feynman al final de la entrada. Si desmarcas uno, vuelve a `en-progreso`.
 - `bloqueado` ya existe, pero aún no hay reglas de desbloqueo: irían en `isUnlocked(post)`.
-- El panel tiene un hueco reservado (`#topic-graph`) para un futuro mapa de temas.
+- **En las tarjetas:** cada tema de la portada lleva una pastilla con su estado (○ disponible, • en progreso, ✓ dominado). Usa icono y texto, no solo color. El diario y "sobre mí" no la llevan porque no son temas.
+
+### Mapa de temas
+
+El último bloque del panel (`assets/js/graph.js`) dibuja cómo se conectan los temas:
+
+```
+● ¿Qué es el método Feynman?
+│  ● La recursión explicada con escaleras
+│  │  ● Estructuras de datos con analogías
+│  ● Mi hoja Feynman
+│  │  ● Reto de 30 días Feynman
+● Cómo hice esta página
+```
+
+- Cada tema es una fila con un punto del color de su estado. Haz clic en él para abrir la entrada.
+- El **sangrado** es el nivel: cuántos temas hay que leer antes.
+- Las **líneas** salen del campo `requiere:` de cada entrada y van del tema previo a los que se apoyan en él.
+- El aro marca el último tema que abriste.
+
+**Para conectar temas** solo añade `requiere:` al front matter del tema que va *después*:
+
+```markdown
+---
+title: Estructuras de datos con analogías
+requiere: [recursion]
+---
+```
+
+`build-index.mjs` revisa estos enlaces: ignora (con un aviso `·`) los que apuntan a entradas que no existen y rompe los bucles (A requiere B y B requiere A). Nunca para la publicación. Una traducción usa siempre los prerrequisitos del original.
 
 ## Markdown que se puede usar
 
@@ -199,7 +230,7 @@ subrayados.html           mis subrayados
 assets/css/tokens.css     colores y fuentes (el único sitio donde viven)
 assets/css/base.css       reset y tipografía
 assets/css/components.css piezas: cabecera, tarjetas, entrada, juegos, subrayado
-assets/js/                theme · i18n · data · header · markdown · games · highlight · progress · syllabus · home · post · highlights-page
+assets/js/                theme · i18n · data · header · markdown · games · highlight · progress · syllabus · graph · home · post · highlights-page
 content/posts/*.md        entradas
 content/temario.md        menú lateral de temas (temario.en.md, temario.de.md)
 content/index.json        índice generado
