@@ -1,5 +1,5 @@
-// i18n.js — interface texts in EN / ES / DE. Posts are written in Markdown (content/posts).
-const LANGS = ['en', 'es', 'de'];
+// i18n.js — interface texts. Posts are written in Markdown, one folder per language (content/<lang>/posts).
+import { LANGS, DEFAULT_LANG } from './langs.js';
 
 const STRINGS = {
   es: {
@@ -30,6 +30,7 @@ const STRINGS = {
     panel_summary: 'Tus temas', 'st_dominado': 'dominados', 'st_en-progreso': 'en progreso', 'st_disponible': 'disponibles', 'st_bloqueado': 'bloqueados',
     panel_graph: 'Mapa de temas', panel_graph_soon: 'Cuando haya temas, aquí verás cómo se conectan.',
     graph_desc: 'Cada punto es un tema; las líneas van de un tema a los que se apoyan en él.', graph_caption: 'Las líneas van del tema que conviene leer antes a los que se apoyan en él. ○ aro = el último que abriste.',
+    read_in: 'Leer en:', read_in_note: 'Esta entrada aún no está traducida a tu idioma.',
     syllabus_title: 'Temario', syllabus_ready: 'temas con entrada / temas en total', syllabus_soon: 'pronto',
     'status_dominado': 'dominado', 'status_en-progreso': 'en progreso', 'status_disponible': 'disponible', 'status_bloqueado': 'bloqueado',
     sec_math: 'matemáticas', sec_cs: 'computación', sec_games: 'juegos', sec_projects: 'proyectos',
@@ -77,6 +78,7 @@ const STRINGS = {
     panel_graph: 'Topic map', panel_graph_soon: 'Once there are topics, you will see here how they connect.',
     graph_desc: 'Each dot is a topic; lines go from a topic to the ones that build on it.', graph_caption: 'Lines go from the topic to read first to the ones that build on it. ○ ring = the last one you opened.',
     syllabus_title: 'Courses', syllabus_ready: 'topics with a post / total topics', syllabus_soon: 'soon',
+    read_in: 'Read in:', read_in_note: 'This post is not translated into your language yet.',
     'status_dominado': 'mastered', 'status_en-progreso': 'in progress', 'status_disponible': 'available', 'status_bloqueado': 'locked',
     sec_math: 'math', sec_cs: 'computer science', sec_games: 'games', sec_projects: 'projects',
     sec_challenges: 'challenges', sec_blog: 'blog', sec_about: 'about me',
@@ -124,6 +126,7 @@ const STRINGS = {
     graph_desc: 'Jeder Punkt ist ein Thema; Linien führen zu den Themen, die darauf aufbauen.', graph_caption: 'Linien führen vom Thema, das man zuerst lesen sollte, zu denen, die darauf aufbauen. ○ Ring = zuletzt geöffnet.',
     syllabus_title: 'Kurse', syllabus_ready: 'Themen mit Beitrag / Themen insgesamt', syllabus_soon: 'bald',
     'status_dominado': 'gemeistert', 'status_en-progreso': 'in Arbeit', 'status_disponible': 'verfügbar', 'status_bloqueado': 'gesperrt',
+    read_in: 'Lesen auf:', read_in_note: 'Dieser Beitrag ist noch nicht in deine Sprache übersetzt.',
     sec_math: 'Mathe', sec_cs: 'Informatik', sec_games: 'Spiele', sec_projects: 'Projekte',
     sec_challenges: 'Challenges', sec_blog: 'Blog', sec_about: 'über mich',
     feynman_title: '⚛ Hast du die Feynman-Methode angewendet?',
@@ -148,13 +151,14 @@ function detect() {
     if (LANGS.includes(saved)) return saved;
   } catch (e) { /* private mode */ }
   const nav = (navigator.language || 'es').slice(0, 2).toLowerCase();
-  return LANGS.includes(nav) ? nav : 'es';
+  return LANGS.includes(nav) ? nav : DEFAULT_LANG;
 }
 
 let lang = detect();
 
 export const getLang = () => lang;
-export const t = (key) => STRINGS[lang][key] ?? STRINGS.es[key] ?? key;
+// a language listed in langs.js but without texts here falls back to the default language's texts
+export const t = (key) => STRINGS[lang]?.[key] ?? STRINGS[DEFAULT_LANG][key] ?? key;
 export const locale = () => ({ en: 'en-GB', es: 'es-ES', de: 'de-DE' })[lang];
 
 // Fills [data-i18n] (text), [data-i18n-attr="attr:key;attr:key"] and <body data-i18n-title>

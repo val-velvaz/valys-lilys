@@ -1,0 +1,10 @@
+{
+  "name": "valys-lilys",
+  "private": true,
+  "type": "module",
+  "description": "Static site. No dependencies: \"type\": \"module\" only lets scripts/*.mjs import assets/js/langs.js.",
+  "scripts": {
+    "index": "node scripts/build-index.mjs",
+    "traducir": "node scripts/traducir.mjs"
+  }
+}

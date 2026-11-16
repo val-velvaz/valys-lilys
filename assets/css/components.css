@@ -135,6 +135,19 @@ h1 .accent { color: var(--md-h1); }
 :root[data-theme="contrast"] .status-pill--dominado { background: var(--tone-mint); color: #000; }
 .tool .status-pill { margin-top: 6px; }
 
+/* "Leer en: ES · EN · DE" in the post header (same look as the language switch) */
+.read-in { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.read-in__label { font-family: var(--font-mono); font-size: 12px; color: var(--text-soft); }
+.read-in__lang {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-decoration: none;
+  padding: 3px 10px; border-radius: 999px; color: var(--text-soft);
+  background: var(--surface); border: 1px solid var(--border);
+}
+.read-in__lang:hover { color: var(--accent-2); }
+.read-in__lang[aria-current="true"] { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+:root[data-theme="contrast"] .read-in__lang[aria-current="true"] { color: #000; }
+.read-in--note { font-size: 13px; color: var(--text-soft); font-style: italic; }
+
 /* Post shown in a language other than the interface (no translation yet) */
 .lang-tag {
   display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px;

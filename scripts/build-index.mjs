@@ -1,26 +1,29 @@
 #!/usr/bin/env node
 /* Builds content/index.json from the Markdown posts.
    Usage:  node scripts/build-index.mjs
-   - Reads content/posts/*.md (files starting with "_" are ignored, e.g. the template)
-   - Takes the front matter (title, date, section, tags, summary, emoji, image, destacado, lang, draft)
+
+   One folder per language (the list lives in assets/js/langs.js):
+     content/es/posts/recursion.md   content/es/temario.md
+     content/en/posts/recursion.md   content/en/temario.md
+     content/de/posts/…              content/de/temario.md
+   The same file name in two folders = the same post in two languages (same slug).
+
+   - Files starting with "_" are ignored (e.g. the template)
+   - Takes the front matter (title, date, section, tags, summary, emoji, image, destacado, requiere, draft)
+   - The "main" version of each post is the first one found in FALLBACK order (es → en → de).
+     Other languages only need title, summary and the text: the rest is copied from the main one.
+   - Computes fields so the browser doesn't have to: lang, featured, minutes, langs (available languages)
    - Stores plain text too, so the home search finds words inside the posts.
-   - Computes fields so the browser doesn't have to:
-       lang     "recursion.en.md" is the English version of "recursion.md" (same slug);
-                a file without suffix is the original, Spanish unless it says "lang: en|de"
-       featured "destacado: true" in the front matter
-       minutes  reading time of the whole post
-       langs    every language available for that slug
-   - Reads the side-menu syllabus from content/temario.md (+ temario.en.md / temario.de.md) */
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+   - Prints how many posts each language has and which ones are missing. */
+import { readdir, readFile, writeFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LANGS, FALLBACK, DEFAULT_LANG } from '../assets/js/langs.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const POSTS = join(ROOT, 'content', 'posts');
+const CONTENT = join(ROOT, 'content');
 const SECTIONS = ['math', 'cs', 'games', 'projects', 'challenges', 'blog', 'about'];
-const LANGS = ['es', 'en', 'de'];
-const DEFAULT_LANG = 'es';
 const WORDS_PER_MINUTE = 200;
 
 function parseFrontMatter(src) {
@@ -75,24 +78,34 @@ function safeImage(file, value) {
   problems.push(`${file}: image "${v}" must be a repo path like assets/img/posts/name.png or an https:// URL`);
   return '';
 }
+const warnings = [];
+
+// folders inside content/ that are not a known language (e.g. a typo like "content/ed/")
+for (const name of await readdir(CONTENT)) {
+  if ((await stat(join(CONTENT, name))).isDirectory() && !LANGS.includes(name)) {
+    warnings.push(`content/${name}/ is not a language from assets/js/langs.js (${LANGS.join(', ')}), ignored`);
+  }
+}
+
 const posts = [];
-for (const name of (await readdir(POSTS)).sort()) {
-  if (!name.endsWith('.md') || name.startsWith('_')) continue;
-  // "slug.md" (original) or "slug.<lang>.md" (translation)
-  const m = /^([a-z0-9-]+)(?:\.([a-z]{2}))?\.md$/.exec(name);
-  if (!m) { problems.push(`${name}: the file name may only use a-z, 0-9 and "-" (plus an optional .en/.de/.es before .md)`); continue; }
-  const [, slug, suffix] = m;
-  if (suffix && !LANGS.includes(suffix)) { problems.push(`${name}: language "${suffix}" is not one of ${LANGS.join(', ')}`); continue; }
-  const { data, body } = parseFrontMatter(await readFile(join(POSTS, name), 'utf8'));
-  const lang = suffix || (LANGS.includes(data.lang) ? data.lang : DEFAULT_LANG);
-  if (data.lang && !LANGS.includes(data.lang)) problems.push(`${name}: lang "${data.lang}" is not one of ${LANGS.join(', ')}`);
-  if (data.section && !SECTIONS.includes(data.section)) problems.push(`${name}: section "${data.section}" is not one of ${SECTIONS.join(', ')}`);
-  const text = plainText(body);
-  posts.push({
-    slug,
-    lang,
-    original: !suffix,
-    file: `content/posts/${name}`,
+for (const lang of FALLBACK) {
+  const dir = join(CONTENT, lang, 'posts');
+  if (!existsSync(dir)) continue;
+  for (const name of (await readdir(dir)).sort()) {
+    if (!name.endsWith('.md') || name.startsWith('_')) continue;
+    const rel = `content/${lang}/posts/${name}`;
+    const m = /^([a-z0-9-]+)\.md$/.exec(name);
+    if (!m) { problems.push(`${rel}: the file name may only use a-z, 0-9 and "-"`); continue; }
+    const slug = m[1];
+    const { data, body } = parseFrontMatter(await readFile(join(dir, name), 'utf8'));
+    if (data.section && !SECTIONS.includes(data.section)) problems.push(`${rel}: section "${data.section}" is not one of ${SECTIONS.join(', ')}`);
+    const text = plainText(body);
+    posts.push({
+      slug,
+      lang,
+      // the first version found (FALLBACK order) is the main one
+      original: !posts.some((p) => p.slug === slug),
+      file: rel,
     section: data.section || '',
     title: data.title || slug,
     date: data.date || '',
@@ -106,15 +119,15 @@ for (const name of (await readdir(POSTS)).sort()) {
     draft: data.draft === true,
     minutes: Math.max(1, Math.round(text.split(/\s+/).filter(Boolean).length / WORDS_PER_MINUTE)),
     text: text.slice(0, 6000)
-  });
+    });
+  }
 }
 
-// Translations inherit what they don't set from the original (section, date, emoji, image…)
+// Other languages inherit what they don't set from the main version (section, date, emoji, image…)
 const originals = new Map(posts.filter((p) => p.original).map((p) => [p.slug, p]));
 for (const p of posts) {
   const base = originals.get(p.slug);
-  if (!p.original && !base) problems.push(`${p.file}: translation without an original ${p.slug}.md`);
-  if (!p.original && base) {
+  if (!p.original) {
     for (const key of ['section', 'date', 'emoji', 'image']) if (!p[key]) p[key] = base[key];
     if (!p.tags.length) p.tags = base.tags;
     p.featured = p.featured || base.featured;
@@ -125,13 +138,12 @@ for (const p of posts) {
 }
 posts.sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.slug.localeCompare(b.slug));
 
-/* ---------- Syllabus (side menu): content/temario.md and temario.<lang>.md ----------
+/* ---------- Syllabus (side menu): content/<lang>/temario.md ----------
    # Área          → level 1 (an emoji or symbol before the name becomes its icon)
    ## Unidad       → level 2
    - Tema          → level 3, "coming soon"
    - [Tema](slug)  → level 3, links to the post
    Mistakes here are warnings only: a broken link just shows as "coming soon". */
-const warnings = [];
 const published = new Set(posts.filter((p) => !p.draft).map((p) => p.slug));
 
 /* ---------- Prerequisites ("requiere:") ----------
@@ -198,14 +210,24 @@ function parseSyllabus(file, src) {
 
 const syllabus = {};
 for (const lang of LANGS) {
-  const name = lang === DEFAULT_LANG ? 'temario.md' : `temario.${lang}.md`;
-  const path = join(ROOT, 'content', name);
-  if (existsSync(path)) syllabus[lang] = parseSyllabus(name, await readFile(path, 'utf8'));
+  const name = `${lang}/temario.md`;
+  const path = join(CONTENT, lang, 'temario.md');
+  if (existsSync(path)) syllabus[lang] = parseSyllabus(`content/${name}`, await readFile(path, 'utf8'));
 }
 
-await writeFile(join(ROOT, 'content', 'index.json'), `${JSON.stringify({ generated: new Date().toISOString(), syllabus, posts }, null, 1)}\n`);
+await writeFile(join(CONTENT, 'index.json'), `${JSON.stringify({ generated: new Date().toISOString(), syllabus, posts }, null, 1)}\n`);
 const topics = Object.values(syllabus[DEFAULT_LANG] || []).flatMap((a) => a.units.flatMap((u) => u.topics));
 console.log(`✿ content/index.json: ${posts.length} posts (${posts.filter((p) => p.draft).length} drafts), ` +
   `syllabus: ${(syllabus[DEFAULT_LANG] || []).length} areas, ${topics.length} topics (${topics.filter((t) => t.slug).length} with a post)`);
+
+// Translation coverage: which posts each language still lacks
+const slugs = [...new Set(posts.filter((p) => !p.draft).map((p) => p.slug))];
+console.log('  languages:');
+for (const lang of LANGS) {
+  const has = new Set(posts.filter((p) => p.lang === lang && !p.draft).map((p) => p.slug));
+  const missing = slugs.filter((s) => !has.has(s));
+  console.log(`    ${lang}  ${has.size}/${slugs.length} posts${syllabus[lang] ? '' : ', no temario.md'}` +
+    (missing.length && missing.length < slugs.length ? `  · missing: ${missing.join(', ')}` : ''));
+}
 if (warnings.length) console.warn(warnings.map((w) => `  · ${w}`).join('\n'));
 if (problems.length) { console.warn(problems.map((p) => `  ⚠ ${p}`).join('\n')); process.exitCode = 1; }

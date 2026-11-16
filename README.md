@@ -15,7 +15,7 @@ Después abre <http://localhost:8000>.
 
 ## Añadir una entrada
 
-1. Copia `content/posts/_plantilla.md` a `content/posts/mi-entrada.md`. El nombre del archivo es el *slug* y solo puede tener `a-z`, `0-9` y `-`.
+1. Copia `content/es/posts/_plantilla.md` a `content/es/posts/mi-entrada.md`. El nombre del archivo es el *slug* y solo puede tener `a-z`, `0-9` y `-`.
 2. Rellena el *front matter*:
 
    ```markdown
@@ -52,20 +52,79 @@ La entrada queda en `post.html?p=mi-entrada`, y cada sección tiene su propio en
 
 `build-index.mjs` también calcula los minutos de lectura (solo se muestran desde 3 minutos), el idioma y si la entrada está destacada.
 
-## Traducir una entrada
+## Idiomas
 
-Una traducción es otro archivo con el **mismo nombre y el código del idioma** antes de `.md`:
+Todo el contenido está separado por **una carpeta por idioma**:
 
 ```
-content/posts/recursion.md      ← original (español)
-content/posts/recursion.en.md   ← traducción al inglés
-content/posts/recursion.de.md   ← traducción al alemán
+content/
+├── es/                      ← español (versión principal)
+│   ├── temario.md
+│   └── posts/
+│       ├── recursion.md
+│       └── derivadas.md
+├── en/                      ← inglés
+│   ├── temario.md
+│   └── posts/
+│       └── recursion.md     ← mismo nombre = misma entrada, traducida
+└── de/                      ← alemán
+    ├── temario.md
+    └── posts/
+        └── derivadas.md
 ```
 
-- Comparten el enlace `post.html?p=recursion`: se abre la versión del idioma activo.
-- La traducción solo necesita `title`, `summary` y el texto. Hereda del original la sección, la fecha, los tags, el emoji, la imagen y `destacado`.
-- Si una entrada no tiene traducción, se muestra el original con una etiqueta pequeña de su idioma (por ejemplo **ES**).
-- Si escribes un original en otro idioma, ponle `lang: en` (o `de`) en el front matter. Sin ese campo se considera español.
+**La regla es una sola:** el mismo nombre de archivo en otra carpeta es la misma entrada en otro idioma.
+
+### Traducir una entrada (2 pasos)
+
+1. Crea el archivo de la traducción con el script (copia la versión principal a la carpeta del idioma):
+
+   ```bash
+   node scripts/traducir.mjs recursion de
+   ```
+
+   Esto crea `content/de/posts/recursion.md` con el texto listo para traducir. En el front matter solo deja `title` y `summary`: la sección, la fecha, los tags, el emoji, la imagen, `destacado` y `requiere` se copian solos de la versión principal. Nunca sobrescribe un archivo que ya existe.
+
+2. Traduce el texto y regenera el índice (o haz push a `main`):
+
+   ```bash
+   node scripts/build-index.mjs
+   ```
+
+También puedes crear el archivo a mano: copia `content/es/posts/recursion.md` a `content/de/posts/recursion.md` y tradúcelo.
+
+**El temario** se traduce igual: `node scripts/traducir.mjs temario de` crea `content/de/temario.md`. Cambia los nombres y deja igual los `(slug)` de los enlaces.
+
+### Qué ve quien visita la web
+
+- **Botones EN · ES · DE de la cabecera:** cambian la interfaz y muestran cada entrada en ese idioma si existe.
+- **Si una entrada no está traducida**, se muestra la versión principal con una etiqueta pequeña (**ES**) y el aviso "Esta entrada aún no está traducida a tu idioma".
+- **"Leer en: ES · EN · DE"**: en cada entrada que tiene más de un idioma, estos botones cambian **a mano** el idioma de esa entrada sin tocar el de la interfaz. Equivalen a añadir `&lang=` al enlace: `post.html?p=recursion&lang=en`.
+- **Subrayados:** cada versión tiene los suyos, porque el texto es distinto.
+
+### Saber qué falta traducir
+
+`build-index.mjs` lo dice cada vez que se ejecuta:
+
+```
+  languages:
+    es  12/12 posts
+    en  1/12 posts  · missing: hoja-feynman, derivadas, …
+    de  1/12 posts  · missing: recursion, …
+```
+
+### Versión principal y orden de respaldo
+
+La lista de idiomas vive en **un solo archivo**, `assets/js/langs.js`:
+
+```js
+export const LANGS = ['es', 'en', 'de'];     // idiomas del sitio
+export const FALLBACK = ['es', 'en', 'de'];  // si falta una traducción, se busca en este orden
+export const DEFAULT_LANG = 'es';
+```
+
+- La **versión principal** de cada entrada es la primera que exista siguiendo `FALLBACK`. Puedes escribir una entrada solo en inglés (`content/en/posts/…`) y será la principal.
+- **Añadir un idioma** (por ejemplo francés): pon `'fr'` en `LANGS` y en `FALLBACK`, crea `content/fr/posts/` y añade sus textos de interfaz en `assets/js/i18n.js`. Mientras no estén, la interfaz usa los del español.
 
 ## Portada
 
@@ -80,7 +139,7 @@ El reparto está en `GROUPS`, al principio de `assets/js/home.js`.
 
 ## Temario (menú lateral)
 
-El menú de la izquierda (en la portada y en cada entrada) sale de **un solo archivo**: `content/temario.md`. Tiene tres niveles:
+El menú de la izquierda (en la portada y en cada entrada) sale de **un solo archivo por idioma**: `content/es/temario.md` (y `content/en/temario.md`, `content/de/temario.md`). Tiene tres niveles:
 
 | Nivel | Se escribe | Ejemplo |
 | --- | --- | --- |
@@ -98,7 +157,7 @@ El menú de la izquierda (en la portada y en cada entrada) sale de **un solo arc
 ```
 
 - **Tema sin enlace** (`- Límites`): sale en gris con la etiqueta "pronto". Sirve para anunciar lo que vas a escribir.
-- **Tema con enlace** (`- [Título](slug)`): el `slug` es el nombre del archivo de la entrada sin `.md` (`derivadas` → `content/posts/derivadas.md`). Sale como enlace, con un punto de color según el progreso de quien lo visita: lila = disponible, rosa = en progreso, verde = dominado.
+- **Tema con enlace** (`- [Título](slug)`): el `slug` es el nombre del archivo de la entrada sin `.md` (`derivadas` → `content/es/posts/derivadas.md`). Sale como enlace, con un punto de color según el progreso de quien lo visita: lila = disponible, rosa = en progreso, verde = dominado.
 - El emoji o símbolo antes del nombre del área es su icono. Si no pones ninguno, se usa la primera letra.
 - Los colores de las áreas se asignan solos, por orden: rosa, menta, azul, lila, melocotón, mantequilla.
 - El contador `1/9` de cada área es "temas con entrada / temas en total".
@@ -107,14 +166,14 @@ El menú de la izquierda (en la portada y en cada entrada) sale de **un solo arc
 
 ### Recetas rápidas
 
-- **Publicar un tema que estaba en "pronto":** escribe la entrada (`content/posts/integrales.md`) y en el temario cambia `- Integrales` por `- [Integrales](integrales)`.
+- **Publicar un tema que estaba en "pronto":** escribe la entrada (`content/es/posts/integrales.md`) y en el temario cambia `- Integrales` por `- [Integrales](integrales)`.
 - **Añadir una unidad:** una línea `## Nombre` debajo del área, y sus temas debajo con `- `.
 - **Añadir un área nueva:** una línea `# 🎨 Diseño` al final, con sus `##` y `- `.
 - **Cambiar el orden:** mueve las líneas. El menú respeta el orden del archivo.
 
 Después de editar, ejecuta `node scripts/build-index.mjs` (o haz push a `main`, que lo hace solo). El script avisa con `·` de cualquier línea que no entienda o de un enlace a una entrada que no existe, y ese tema sale como "pronto" en vez de romper la página.
 
-**En otros idiomas:** `content/temario.en.md` y `content/temario.de.md`, con la misma estructura. Si falta el de un idioma, se muestra el español. Los enlaces usan el mismo `slug`, así que llevan a la traducción de la entrada si existe.
+**En otros idiomas:** `content/en/temario.md` y `content/de/temario.md`, con la misma estructura (`node scripts/traducir.mjs temario de` lo crea). Si falta el de un idioma, se muestra el español. Los enlaces usan el mismo `slug`, así que llevan a la traducción de la entrada si existe.
 
 ## Progreso
 
@@ -208,7 +267,7 @@ concepto: la recursión
 ````
 
 - **jerga**: puntúa si un niño de 12 años entendería tu explicación.
-- **hoja-feynman**: los 4 pasos del método. Se exporta como una entrada `.md` lista para `content/posts/`.
+- **hoja-feynman**: los 4 pasos del método. Se exporta como una entrada `.md` lista para `content/es/posts/`.
 
 ## Funciones
 
@@ -231,10 +290,12 @@ assets/css/tokens.css     colores y fuentes (el único sitio donde viven)
 assets/css/base.css       reset y tipografía
 assets/css/components.css piezas: cabecera, tarjetas, entrada, juegos, subrayado
 assets/js/                theme · i18n · data · header · markdown · games · highlight · progress · syllabus · graph · home · post · highlights-page
-content/posts/*.md        entradas
-content/temario.md        menú lateral de temas (temario.en.md, temario.de.md)
+content/<idioma>/posts/   entradas (es, en, de)
+content/<idioma>/temario.md  menú lateral de temas
 content/index.json        índice generado
 scripts/build-index.mjs   genera el índice
+scripts/traducir.mjs      crea el archivo de una traducción
+assets/js/langs.js        lista de idiomas (el único sitio)
 ```
 
 ## Seguridad

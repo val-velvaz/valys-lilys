@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-16T22:50:58.621Z",
+ "generated": "2026-11-16T23:14:09.725Z",
  "syllabus": {
   "es": [
    {
@@ -364,6 +364,188 @@
      }
     ]
    }
+  ],
+  "de": [
+   {
+    "title": "Mathe",
+    "icon": "∑",
+    "units": [
+     {
+      "title": "Analysis",
+      "topics": [
+       {
+        "title": "Grenzwerte",
+        "slug": null
+       },
+       {
+        "title": "Die Ableitung ist ein Tacho",
+        "slug": "derivadas"
+       },
+       {
+        "title": "Integrale",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Lineare Algebra",
+      "topics": [
+       {
+        "title": "Vektoren",
+        "slug": null
+       },
+       {
+        "title": "Matrizen",
+        "slug": null
+       },
+       {
+        "title": "Lineare Abbildungen",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Diskrete Mathematik",
+      "topics": [
+       {
+        "title": "Logik",
+        "slug": null
+       },
+       {
+        "title": "Mengen",
+        "slug": null
+       },
+       {
+        "title": "Graphen",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Informatik",
+    "icon": "💻",
+    "units": [
+     {
+      "title": "Lernen lernen",
+      "topics": [
+       {
+        "title": "Was ist die Feynman-Methode?",
+        "slug": "metodo-feynman"
+       },
+       {
+        "title": "Mein Feynman-Blatt",
+        "slug": "hoja-feynman"
+       }
+      ]
+     },
+     {
+      "title": "Algorithmen",
+      "topics": [
+       {
+        "title": "Rekursion",
+        "slug": "recursion"
+       },
+       {
+        "title": "Sortieren",
+        "slug": null
+       },
+       {
+        "title": "O-Notation",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Datenstrukturen",
+      "topics": [
+       {
+        "title": "Datenstrukturen mit Analogien",
+        "slug": "estructuras-de-datos"
+       },
+       {
+        "title": "Stapel und Warteschlangen",
+        "slug": null
+       },
+       {
+        "title": "Bäume",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Datenbanken",
+      "topics": [
+       {
+        "title": "Eine Datenbank ist eine Bibliothek",
+        "slug": "bases-de-datos"
+       },
+       {
+        "title": "SQL-Grundlagen",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Cybersicherheit",
+    "icon": "🛡",
+    "units": [
+     {
+      "title": "Grundlagen",
+      "topics": [
+       {
+        "title": "Netzwerke und das TCP/IP-Modell",
+        "slug": null
+       },
+       {
+        "title": "Linux für Sicherheit",
+        "slug": null
+       },
+       {
+        "title": "Grundlagen der Kryptografie",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Pentesting",
+      "topics": [
+       {
+        "title": "Aufklärung mit nmap",
+        "slug": null
+       },
+       {
+        "title": "Dienste aufzählen",
+        "slug": null
+       },
+       {
+        "title": "Rechteausweitung",
+        "slug": null
+       }
+      ]
+     },
+     {
+      "title": "Websicherheit",
+      "topics": [
+       {
+        "title": "OWASP Top 10",
+        "slug": null
+       },
+       {
+        "title": "SQL-Injection",
+        "slug": null
+       },
+       {
+        "title": "Cross-Site-Scripting (XSS)",
+        "slug": null
+       }
+      ]
+     }
+    ]
+   }
   ]
  },
  "posts": [
@@ -371,7 +553,7 @@
    "slug": "hoja-feynman",
    "lang": "es",
    "original": true,
-   "file": "content/posts/hoja-feynman.md",
+   "file": "content/es/posts/hoja-feynman.md",
    "section": "games",
    "title": "Mi hoja Feynman",
    "date": "2026-11-16",
@@ -388,7 +570,7 @@
    ],
    "draft": false,
    "minutes": 1,
-   "text": "Esta es la herramienta que uso para escribir cada entrada del blog. Se guarda sola mientras escribes, y al final puedes exportarla como archivo .md para ponerla en content/posts/. concepto: El archivo exportado ya trae el front matter (título, fecha, sección, tags…). Solo muévelo a content/posts/ y ejecuta node scripts/build-index.mjs.",
+   "text": "Esta es la herramienta que uso para escribir cada entrada del blog. Se guarda sola mientras escribes, y al final puedes exportarla como archivo .md para ponerla en content/es/posts/. concepto: El archivo exportado ya trae el front matter (título, fecha, sección, tags…). Solo muévelo a content/es/posts/ y ejecuta node scripts/build-index.mjs.",
    "langs": [
     "es"
    ]
@@ -397,7 +579,7 @@
    "slug": "como-hice-esta-pagina",
    "lang": "es",
    "original": true,
-   "file": "content/posts/como-hice-esta-pagina.md",
+   "file": "content/es/posts/como-hice-esta-pagina.md",
    "section": "projects",
    "title": "Cómo hice esta página",
    "date": "2026-11-15",
@@ -412,7 +594,7 @@
    "requires": [],
    "draft": false,
    "minutes": 1,
-   "text": "La idea Una página sencilla: una portada con buscador, filtros por sección y tarjetas, y una página por entrada. Dos temas, pastel y alto contraste, y la interfaz en inglés, español y alemán. Cómo funciona Pieza Archivo --- --- Colores y fuentes assets/css/tokens.css Portada: búsqueda, filtros y tarjetas assets/js/home.js Markdown → página assets/js/markdown.js Juegos assets/js/games.js Subrayados assets/js/highlight.js Índice de entradas scripts/build-index.mjs Cada entrada es un .md en content/posts/ con front matter: - title: Mi entrada section: cs date: 2026-11-15 tags: [python, feynman] summary: Una frase que la resume. emoji: 🌸 - Aquí va el contenido ✿ Después se ejecuta node scripts/build-index.mjs para regenerar el índice que usan la portada y el buscador. Por seguridad, la página no carga scripts de otros sitios: el Markdown se convierte a HTML con un intérprete propio que nunca usa innerHTML.",
+   "text": "La idea Una página sencilla: una portada con buscador, filtros por sección y tarjetas, y una página por entrada. Dos temas, pastel y alto contraste, y la interfaz en inglés, español y alemán. Cómo funciona Pieza Archivo --- --- Colores y fuentes assets/css/tokens.css Portada: búsqueda, filtros y tarjetas assets/js/home.js Markdown → página assets/js/markdown.js Juegos assets/js/games.js Subrayados assets/js/highlight.js Índice de entradas scripts/build-index.mjs Cada entrada es un .md en content/es/posts/ con front matter: - title: Mi entrada section: cs date: 2026-11-15 tags: [python, feynman] summary: Una frase que la resume. emoji: 🌸 - Aquí va el contenido ✿ Después se ejecuta node scripts/build-index.mjs para regenerar el índice que usan la portada y el buscador. Por seguridad, la página no carga scripts de otros sitios: el Markdown se convierte a HTML con un intérprete propio que nunca usa innerHTML.",
    "langs": [
     "es"
    ]
@@ -421,7 +603,7 @@
    "slug": "estructuras-de-datos",
    "lang": "es",
    "original": true,
-   "file": "content/posts/estructuras-de-datos.md",
+   "file": "content/es/posts/estructuras-de-datos.md",
    "section": "games",
    "title": "Estructuras de datos con analogías",
    "date": "2026-11-14",
@@ -447,7 +629,7 @@
    "slug": "detector-de-jerga",
    "lang": "es",
    "original": true,
-   "file": "content/posts/detector-de-jerga.md",
+   "file": "content/es/posts/detector-de-jerga.md",
    "section": "games",
    "title": "Detector de jerga",
    "date": "2026-11-12",
@@ -473,7 +655,7 @@
    "slug": "diario-semana-2",
    "lang": "es",
    "original": true,
-   "file": "content/posts/diario-semana-2.md",
+   "file": "content/es/posts/diario-semana-2.md",
    "section": "blog",
    "title": "Diario de estudio · semana 2",
    "date": "2026-11-10",
@@ -496,37 +678,9 @@
   },
   {
    "slug": "recursion",
-   "lang": "en",
-   "original": false,
-   "file": "content/posts/recursion.en.md",
-   "section": "cs",
-   "title": "Recursion explained with stairs",
-   "date": "2026-11-09",
-   "tags": [
-    "python",
-    "algorithms",
-    "feynman"
-   ],
-   "summary": "A function that calls itself sounds like magic. It's more like asking someone identical to you for help.",
-   "emoji": "🪜",
-   "image": "assets/img/posts/recursion.svg",
-   "featured": false,
-   "requires": [
-    "metodo-feynman"
-   ],
-   "draft": false,
-   "minutes": 1,
-   "text": "Explained like to a kid You want to count the steps of a very long staircase. You cheat: you count one and tell your clone \"you count the rest\". Your clone does the same… until someone reaches the top and says \"there are none left here: zero\". Then every clone adds its one and the answer comes back down the stairs. That is recursion: solving a big problem using the same problem, only smaller. def count(steps): if steps 0: # base case: nothing left return 0 return 1 + count(steps - 1) # one + the rest The two rules A base case that is solved without help (otherwise the clones never stop). A recursive step that makes the problem smaller. If you forget the base case, the function calls itself forever and Python complains with RecursionError. Review with cards What is recursion? Solving a problem using a smaller version of the same problem. What is the base case? The case that is solved without calling the function again. What happens without a base case? The function calls itself forever → RecursionError. Favorite analogy Counting steps by asking your clone to count the rest. Test yourself What does a recursive function ALWAYS need? A base case A for loop A global variable Without a base case, the function never stops calling itself. count(3) returns… 1 3 0 1 + 1 + 1 + 0 = 3",
-   "langs": [
-    "en",
-    "es"
-   ]
-  },
-  {
-   "slug": "recursion",
    "lang": "es",
    "original": true,
-   "file": "content/posts/recursion.md",
+   "file": "content/es/posts/recursion.md",
    "section": "cs",
    "title": "La recursión explicada con escaleras",
    "date": "2026-11-09",
@@ -546,15 +700,43 @@
    "minutes": 1,
    "text": "Explicado como a un niño Quieres contar los escalones de una escalera muy larga. Haces trampa: cuentas uno y le dices a tu clon \"cuenta tú el resto\". Tu clon hace lo mismo… hasta que alguien llega arriba y dice \"aquí ya no quedan: cero\". Entonces cada clon suma su uno y la respuesta baja la escalera. Eso es la recursión: resolver un problema grande usando el mismo problema, pero más pequeño. def contar(escalones): if escalones 0: # caso base: ya no quedan return 0 return 1 + contar(escalones - 1) # uno + el resto Las dos reglas Un caso base que se resuelve sin ayuda (si no, los clones nunca paran). Un paso recursivo que hace el problema más pequeño. Si olvidas el caso base, la función se llama para siempre y Python se queja con RecursionError. Repasa con tarjetas ¿Qué es la recursión? Resolver un problema usando una versión más pequeña del mismo problema. ¿Qué es el caso base? El caso que se resuelve sin volver a llamar a la función. ¿Qué pasa sin caso base? La función se llama infinitamente → RecursionError. Analogía favorita Contar escalones pidiéndole a tu clon que cuente el resto. Ponte a prueba ¿Qué necesita SIEMPRE una función recursiva? Un caso base Un bucle for Una variable global Sin caso base, la función nunca deja de llamarse a sí misma. contar(3) devuelve… 1 3 0 1 + 1 + 1 + 0 = 3",
    "langs": [
-    "en",
-    "es"
+    "es",
+    "en"
+   ]
+  },
+  {
+   "slug": "recursion",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/recursion.md",
+   "section": "cs",
+   "title": "Recursion explained with stairs",
+   "date": "2026-11-09",
+   "tags": [
+    "python",
+    "algorithms",
+    "feynman"
+   ],
+   "summary": "A function that calls itself sounds like magic. It's more like asking someone identical to you for help.",
+   "emoji": "🪜",
+   "image": "assets/img/posts/recursion.svg",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Explained like to a kid You want to count the steps of a very long staircase. You cheat: you count one and tell your clone \"you count the rest\". Your clone does the same… until someone reaches the top and says \"there are none left here: zero\". Then every clone adds its one and the answer comes back down the stairs. That is recursion: solving a big problem using the same problem, only smaller. def count(steps): if steps 0: # base case: nothing left return 0 return 1 + count(steps - 1) # one + the rest The two rules A base case that is solved without help (otherwise the clones never stop). A recursive step that makes the problem smaller. If you forget the base case, the function calls itself forever and Python complains with RecursionError. Review with cards What is recursion? Solving a problem using a smaller version of the same problem. What is the base case? The case that is solved without calling the function again. What happens without a base case? The function calls itself forever → RecursionError. Favorite analogy Counting steps by asking your clone to count the rest. Test yourself What does a recursive function ALWAYS need? A base case A for loop A global variable Without a base case, the function never stops calling itself. count(3) returns… 1 3 0 1 + 1 + 1 + 0 = 3",
+   "langs": [
+    "es",
+    "en"
    ]
   },
   {
    "slug": "bases-de-datos",
    "lang": "es",
    "original": true,
-   "file": "content/posts/bases-de-datos.md",
+   "file": "content/es/posts/bases-de-datos.md",
    "section": "cs",
    "title": "Una base de datos es una biblioteca",
    "date": "2026-11-07",
@@ -580,7 +762,7 @@
    "slug": "derivadas",
    "lang": "es",
    "original": true,
-   "file": "content/posts/derivadas.md",
+   "file": "content/es/posts/derivadas.md",
    "section": "math",
    "title": "La derivada es un velocímetro",
    "date": "2026-11-05",
@@ -599,14 +781,42 @@
    "minutes": 1,
    "text": "La idea en una frase La derivada es lo que marca el velocímetro: qué tan rápido cambia algo en este instante. Si vas en coche, la posición cambia con el tiempo. El velocímetro no te dice dónde estás, sino qué tan rápido cambia tu posición. Eso es la derivada de la posición. ¿Y la fórmula? Mide cuánto cambias en un ratito muy, muy pequeño: velocidad ≈ (dónde estoy después − dónde estaba) / (tiempo que pasó) Cuando ese \"ratito\" se hace casi cero, obtienes la velocidad exacta del momento. Los matemáticos lo escriben así: f'(x) = lim (f(x+h) − f(x)) / h. Si la función… La derivada es… Analogía --- --- --- sube positiva acelerador baja negativa marcha atrás está plana cero coche parado Mi laguna: al principio no entendía por qué h tiende a cero. La analogía del velocímetro me lo resolvió: quiero la velocidad de ahora, no la media del viaje. Si una función está subiendo, su derivada es… positiva negativa cero La derivada de una función constante (f(x) = 5) es… 5 0 1 Un coche parado no cambia de posición: velocidad cero.",
    "langs": [
-    "es"
+    "es",
+    "de"
+   ]
+  },
+  {
+   "slug": "derivadas",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/derivadas.md",
+   "section": "math",
+   "title": "Die Ableitung ist ein Tacho",
+   "date": "2026-11-05",
+   "tags": [
+    "calculo",
+    "feynman"
+   ],
+   "summary": "Vergiss die Grenzwerte für einen Moment. Eine Ableitung sagt dir, wie schnell sich etwas genau jetzt verändert.",
+   "emoji": "🏎",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Die Idee in einem Satz Die Ableitung ist das, was der Tacho anzeigt: wie schnell sich etwas in diesem Moment verändert. Wenn du Auto fährst, ändert sich deine Position mit der Zeit. Der Tacho sagt dir nicht, wo du bist, sondern wie schnell sich deine Position ändert. Das ist die Ableitung der Position. Und die Formel? Miss, wie sehr du dich in einem ganz, ganz kurzen Augenblick veränderst: Geschwindigkeit ≈ (wo ich danach bin − wo ich vorher war) / (vergangene Zeit) Wenn dieser „Augenblick“ fast null wird, bekommst du die genaue Geschwindigkeit des Moments. Mathematiker schreiben das so: f'(x) = lim (f(x+h) − f(x)) / h. Wenn die Funktion… ist die Ableitung… Analogie --- --- --- steigt positiv Gaspedal fällt negativ Rückwärtsgang flach ist null stehendes Auto Meine Lücke: Am Anfang verstand ich nicht, warum h gegen null geht. Die Tacho-Analogie hat es gelöst: Ich will die Geschwindigkeit von jetzt, nicht den Durchschnitt der Fahrt. Wenn eine Funktion steigt, ist ihre Ableitung… positiv negativ null Die Ableitung einer konstanten Funktion (f(x) = 5) ist… 5 0 1 Ein stehendes Auto ändert seine Position nicht: Geschwindigkeit null.",
+   "langs": [
+    "es",
+    "de"
    ]
   },
   {
    "slug": "reto-30-dias",
    "lang": "es",
    "original": true,
-   "file": "content/posts/reto-30-dias.md",
+   "file": "content/es/posts/reto-30-dias.md",
    "section": "challenges",
    "title": "Reto de 30 días Feynman",
    "date": "2026-11-03",
@@ -633,7 +843,7 @@
    "slug": "metodo-feynman",
    "lang": "es",
    "original": true,
-   "file": "content/posts/metodo-feynman.md",
+   "file": "content/es/posts/metodo-feynman.md",
    "section": "cs",
    "title": "¿Qué es el método Feynman?",
    "date": "2026-11-02",
@@ -657,7 +867,7 @@
    "slug": "hola-mundo",
    "lang": "es",
    "original": true,
-   "file": "content/posts/hola-mundo.md",
+   "file": "content/es/posts/hola-mundo.md",
    "section": "blog",
    "title": "hola mundo ✿",
    "date": "2026-11-01",
@@ -680,7 +890,7 @@
    "slug": "sobre-mi",
    "lang": "es",
    "original": true,
-   "file": "content/posts/sobre-mi.md",
+   "file": "content/es/posts/sobre-mi.md",
    "section": "about",
    "title": "about me ♡",
    "date": "2026-10-20",

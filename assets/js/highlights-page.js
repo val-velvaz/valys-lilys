@@ -15,8 +15,9 @@ function render() {
   exportBtn.hidden = !slugs.length;
   if (!slugs.length) { list.replaceChildren(el('p', { class: 'empty' }, t('highlights_empty'))); return; }
   list.replaceChildren(...slugs.map((slug) => {
-    // translations are saved as "slug.en"; the link uses only the slug
-    const url = `post.html?p=${encodeURIComponent(slug.split('.')[0])}`;
+    // other languages are saved as "slug.en": open that same version (?lang=en)
+    const [base, lang] = slug.split('.');
+    const url = `post.html?p=${encodeURIComponent(base)}${/^[a-z]{2}$/.test(lang || '') ? `&lang=${lang}` : ''}`;
     return el('section', { class: 'hl-group' },
       el('h2', {}, el('a', { href: url }, all[slug].title)),
       all[slug].items.map((item) => el('div', { class: 'hl-item' },

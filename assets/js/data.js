@@ -1,5 +1,6 @@
 // data.js — catalog access and helpers shared between pages.
 import { locale, t, getLang } from './i18n.js';
+import { LANGS, FALLBACK } from './langs.js';
 
 export const CATALOG_URL = 'content/index.json';
 export const GITHUB_USER = 'val-velvaz';
@@ -10,8 +11,15 @@ export const SECTIONS = {
 };
 export const sectionName = (s) => t(`sec_${s}`) === `sec_${s}` ? s : t(`sec_${s}`);
 
-// Safe path to a post file, as written by build-index.mjs
-const isSafeFile = (f) => typeof f === 'string' && /^content\/posts\/[a-z0-9-]+(\.[a-z]{2})?\.md$/.test(f);
+// Safe path to a post file, as written by build-index.mjs: content/<lang>/posts/<slug>.md
+const isSafeFile = (f) => typeof f === 'string' &&
+  new RegExp(`^content/(${LANGS.join('|')})/posts/[a-z0-9-]+\\.md$`).test(f);
+
+// Best version of a post for a language: that language, else the FALLBACK order (es → en → de)
+export function pickVersion(versions, lang) {
+  return versions.find((v) => v.lang === lang) ||
+    FALLBACK.map((l) => versions.find((v) => v.lang === l)).find(Boolean) || versions[0];
+}
 
 let catalogPromise;
 export function loadCatalog() {
@@ -19,19 +27,22 @@ export function loadCatalog() {
     if (!res.ok) throw new Error(`${CATALOG_URL} (${res.status})`);
     const data = await res.json();
     const lang = getLang();
-    // One version per slug: the active language if it exists, otherwise the original.
-    // "foreign" marks posts shown in another language (they get a small language tag).
-    const bySlug = new Map();
+    // every published version, grouped by slug (post.js uses it for "Leer en: ES · EN")
+    data.versions = new Map();
     for (const p of data.posts) {
       if (p.draft || !isSafeFile(p.file)) continue;
-      const current = bySlug.get(p.slug);
-      if (!current || p.lang === lang || (current.lang !== lang && p.original)) bySlug.set(p.slug, p);
+      if (!data.versions.has(p.slug)) data.versions.set(p.slug, []);
+      data.versions.get(p.slug).push(p);
     }
-    data.posts = [...bySlug.values()]
+    // One version per slug, in the interface language when it exists.
+    // "foreign" marks posts shown in another language (they get a small language tag).
+    data.posts = [...data.versions.values()]
+      .map((versions) => pickVersion(versions, lang))
       .map((p) => ({ ...p, foreign: p.lang !== lang }))
       .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    // side menu in the active language, or the Spanish one
-    data.syllabus = (data.syllabus && (data.syllabus[lang] || data.syllabus.es)) || [];
+    // side menu in the active language, or the first one available in FALLBACK order
+    const menus = data.syllabus || {};
+    data.syllabus = menus[lang] || FALLBACK.map((l) => menus[l]).find(Boolean) || [];
     return data;
   });
   return catalogPromise;

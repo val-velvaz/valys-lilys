@@ -4,7 +4,7 @@
     # Área         (con un emoji o símbolo delante, opcional)
     ## Unidad
     - Tema         → sin enlace sale como "próximamente"
-    - [Tema](slug) → enlaza a content/posts/slug.md
+    - [Tema](slug) → enlaza a content/es/posts/slug.md
   Después de editarlo: node scripts/build-index.mjs  (o haz push a main)
 -->
 

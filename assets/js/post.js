@@ -1,8 +1,9 @@
 // post.js — renders one Markdown post (post.html?p=slug) with games, highlighter and Feynman checklist.
 import { initHeader } from './header.js';
-import { loadCatalog, el, dateLine, isSafeSlug, sectionName, norm, store, postIcon, langTag } from './data.js';
+import { loadCatalog, el, dateLine, isSafeSlug, sectionName, norm, store, postIcon, langTag, pickVersion } from './data.js';
+import { LANGS, LANG_NAMES, DEFAULT_LANG } from './langs.js';
 import { markOpened, getStatus, setStatus, isTopic } from './progress.js';
-import { t } from './i18n.js';
+import { t, getLang } from './i18n.js';
 import { renderMarkdown, parseFrontMatter } from './markdown.js';
 import { renderGame } from './games.js';
 import { initHighlighter } from './highlight.js';
@@ -20,20 +21,44 @@ async function showSyllabus(current) {
 }
 
 const main = document.getElementById('post');
-const slug = new URLSearchParams(location.search).get('p');
+const params = new URLSearchParams(location.search);
+const slug = params.get('p');
+// manual language: post.html?p=recursion&lang=en opens the English version,
+// whatever the interface language is
+const wantedLang = LANGS.includes(params.get('lang')) ? params.get('lang') : null;
 const back = el('a', { class: 'back', href: './' }, t('back'));
 
 async function load() {
   if (!isSafeSlug(slug)) throw new Error('not-found');
-  const { posts } = await loadCatalog();
-  // the catalog already picked the version in the active language (or the original)
-  const meta = posts.find((p) => p.slug === slug);
-  if (!meta) throw new Error('not-found');
-  const res = await fetch(meta.file, { cache: 'no-cache' });
+  const { versions } = await loadCatalog();
+  const all = versions.get(slug);
+  if (!all) throw new Error('not-found');
+  // the language asked for in the URL, else the interface language, else the fallback order
+  const chosen = pickVersion(all, wantedLang || getLang());
+  const res = await fetch(chosen.file, { cache: 'no-cache' });
   if (!res.ok) throw new Error('not-found');
   const { data, body } = parseFrontMatter(await res.text());
   // image, section and language come from the index, where build-index.mjs already checked them
-  return { ...meta, ...data, image: meta.image, section: meta.section, lang: meta.lang, body };
+  return {
+    ...chosen, ...data, image: chosen.image, section: chosen.section, lang: chosen.lang,
+    foreign: chosen.lang !== getLang(), versions: all, body
+  };
+}
+
+// "Leer en: ES · EN · DE" — one link per language this post exists in
+function languageLinks(post) {
+  if (post.versions.length < 2) {
+    return post.foreign ? el('p', { class: 'read-in read-in--note' }, t('read_in_note')) : null;
+  }
+  const ordered = LANGS.map((l) => post.versions.find((v) => v.lang === l)).filter(Boolean);
+  return el('nav', { class: 'read-in', 'aria-label': t('read_in') },
+    el('span', { class: 'read-in__label' }, t('read_in')),
+    ordered.map((v) => el('a', {
+      class: 'read-in__lang',
+      href: `post.html?p=${encodeURIComponent(slug)}&lang=${v.lang}`,
+      hreflang: v.lang, lang: v.lang, title: LANG_NAMES[v.lang] || v.lang,
+      'aria-current': v.lang === post.lang ? 'true' : null
+    }, v.lang.toUpperCase())));
 }
 
 try {
@@ -93,6 +118,7 @@ try {
         el('span', { class: 'section-label' }, sectionName(post.section), ' ', langTag(post)),
         el('h1', { class: 'article__title' }, postIcon(post, 'title-icon'), post.title),
         el('p', { class: 'date' }, dateLine(post)),
+        languageLinks(post),
         tags.length ? el('ul', { class: 'tags' }, tags.map((tag) => el('li', { class: 'tag' }, `#${tag}`))) : null),
       content),
     el('section', { class: 'feynman', 'aria-labelledby': 'feynman-title' },
@@ -101,7 +127,8 @@ try {
       el('div', { class: 'progress' }, bar)));
 
   // each language version keeps its own highlights (the text positions are different)
-  const hl = initHighlighter(content, { slug: post.original ? slug : `${slug}.${post.lang}`, title: post.title });
+  // (the default language keeps the plain slug, so highlights saved before still work)
+  const hl = initHighlighter(content, { slug: post.lang === DEFAULT_LANG ? slug : `${slug}.${post.lang}`, title: post.title });
   const m = /#hl=([\w-]+)/.exec(location.hash);
   if (m) hl.flash(m[1]);
   else if (location.hash.length > 1) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
