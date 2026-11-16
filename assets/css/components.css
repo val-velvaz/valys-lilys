@@ -116,6 +116,11 @@ a.card:hover .card__cta { text-decoration: underline; }
 .meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
 .date { font-size: 13px; color: var(--text-soft); }
 .emoji { margin-left: auto; font-size: 20px; }
+/* Post image instead of the emoji (front matter "image:") */
+.emoji--img { width: 40px; height: 40px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface-2); }
+.article__title { display: flex; align-items: center; gap: 12px; }
+.title-icon { flex: none; }
+.title-icon--img { width: 56px; height: 56px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface-2); }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; list-style: none; }
 .tag {
   font-family: var(--font-mono); font-size: 11px;

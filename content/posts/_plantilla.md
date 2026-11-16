@@ -5,6 +5,7 @@ date: 2026-11-16
 tags: [feynman, python]
 summary: Una frase que resume la entrada (sale en las tarjetas y en la búsqueda).
 emoji: 🌸
+# image: assets/img/posts/mi-entrada.png   (opcional: sustituye al emoji)
 draft: true
 ---
 

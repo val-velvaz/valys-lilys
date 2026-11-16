@@ -1,6 +1,6 @@
 // post.js — renders one Markdown post (post.html?p=slug) with games, highlighter and Feynman checklist.
 import { initHeader } from './header.js';
-import { loadCatalog, el, formatDate, readingTime, isSafeSlug, sectionName, norm, store } from './data.js';
+import { loadCatalog, el, formatDate, readingTime, isSafeSlug, sectionName, norm, store, postIcon } from './data.js';
 import { t } from './i18n.js';
 import { renderMarkdown, parseFrontMatter } from './markdown.js';
 import { renderGame } from './games.js';
@@ -20,7 +20,8 @@ async function load() {
   const res = await fetch(`content/posts/${slug}.md`, { cache: 'no-cache' });
   if (!res.ok) throw new Error('not-found');
   const { data, body } = parseFrontMatter(await res.text());
-  return { ...meta, ...data, body };
+  // image comes from the index, where build-index.mjs already checked it
+  return { ...meta, ...data, image: meta.image, body };
 }
 
 try {
@@ -69,7 +70,7 @@ try {
     el('article', { class: 'article' },
       el('header', { class: 'article__head' },
         el('span', { class: 'section-label' }, sectionName(post.section)),
-        el('h1', {}, post.emoji ? `${post.emoji} ` : '', post.title),
+        el('h1', { class: 'article__title' }, postIcon(post, 'title-icon'), post.title),
         el('p', { class: 'date' }, `${formatDate(post.date)} · ${readingTime(post.body)} ${t('min_read')}`),
         tags.length ? el('ul', { class: 'tags' }, tags.map((tag) => el('li', { class: 'tag' }, `#${tag}`))) : null),
       content),
