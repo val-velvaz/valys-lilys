@@ -4,6 +4,7 @@ section: games
 date: 2026-11-12
 tags: [feynman, juego]
 summary: Escribe tu explicación y el detector te dice si un niño de 12 años la entendería. ¡Consigue 85 puntos o más!
+requiere: [metodo-feynman]
 emoji: 🔍
 ---
 

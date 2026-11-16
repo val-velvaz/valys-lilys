@@ -4,6 +4,7 @@ section: math
 date: 2026-11-05
 tags: [calculo, feynman]
 summary: Olvida los límites por un momento. Una derivada te dice qué tan rápido cambia algo justo ahora.
+requiere: [metodo-feynman]
 emoji: 🏎
 ---
 

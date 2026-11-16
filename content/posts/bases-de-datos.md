@@ -4,6 +4,7 @@ section: cs
 date: 2026-11-07
 tags: [databases, feynman]
 summary: Tablas, filas y consultas explicadas como estanterías, libros y bibliotecarias.
+requiere: [metodo-feynman]
 emoji: 📚
 ---
 
