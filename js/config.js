@@ -5,9 +5,12 @@ window.VL_CONFIG = {
   version: "0.1.0",
   defaultLang: "es",
 
-  // Foto de perfil: guarda tu imagen en assets/img/ (p. ej. perfil.png) y cambia esta ruta.
-  // Si la imagen no existe, se muestra la lila de assets/img/perfil.svg.
-  profileImage: "assets/img/perfil.svg",
+  // Foto de perfil:
+  //  - "github" → usa tu avatar de GitHub (githubUser) y se actualiza solo cuando lo cambias.
+  //  - o una ruta propia, p. ej. "assets/img/perfil.png".
+  // Si no se puede cargar, se muestra la lila de assets/img/perfil.svg.
+  profileImage: "github",
+  avatarRefreshMinutes: 5,
 
   // Usuario de GitHub para el widget (repos públicos vía https://api.github.com)
   githubUser: "val-velvaz",

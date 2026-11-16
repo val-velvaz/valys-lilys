@@ -118,7 +118,7 @@ concepto: la recursión
 - `js/config.js`: nombre, versión, foto de perfil, usuario de GitHub, enlaces de `media`, botones, macarons y temas de la columna derecha.
 - `js/i18n.js`: textos de la interfaz en cada idioma.
 - `css/main.css`: paleta (variables en `:root`) y layout.
-- Foto de perfil: guarda tu imagen en `assets/img/` y cambia `profileImage` en `js/config.js`.
+- **Foto de perfil sincronizada con GitHub**: con `profileImage: "github"` (por defecto) la página usa tu avatar de `https://github.com/<githubUser>.png`. Lo vuelve a pedir cada `avatarRefreshMinutes` (5 min) y al volver a la pestaña, así que si cambias tu foto en GitHub, la web se actualiza sola y aparece el sello **● live**. Si GitHub no responde, se muestra la lila de `assets/img/perfil.svg`. Para usar otra imagen, pon su ruta en `profileImage`.
 
 ## Estructura
 

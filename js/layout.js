@@ -76,7 +76,8 @@
     </div>
     <a class="profile" href="about.html" aria-label="about me">
       <span class="profile-ring" aria-hidden="true"></span>
-      <img src="${esc(C.profileImage)}" alt="foto de perfil" onerror="this.onerror=null;this.src='assets/img/perfil.svg'">
+      <img id="vl-avatar" src="assets/img/perfil.svg" alt="foto de perfil">
+      <span class="avatar-live" id="vl-avatar-live" hidden title="sincronizada con GitHub">● live</span>
       <span class="orn orn-t" aria-hidden="true"></span><span class="orn orn-b" aria-hidden="true"></span>
       <span class="orn orn-l" aria-hidden="true"></span><span class="orn orn-r" aria-hidden="true"></span>
     </a>
@@ -155,6 +156,7 @@
     wireLang(frame);
     wireTools(frame);
     sparkleBanner(frame);
+    githubAvatar(frame);
     VL.loadIndex().then((entries) => {
       calendar(VL.$("#vl-calendar", frame), entries);
       topicCounts(frame, entries);
@@ -332,6 +334,41 @@
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     for (let i = 0; i < n; i++) spawn(x, y, chars[i % chars.length], "burst");
   };
+
+  /* ---------- foto de perfil sincronizada con GitHub ----------
+     Si profileImage es "github", se usa tu avatar de https://github.com/<usuario>.png.
+     Se vuelve a pedir cada pocos minutos (y al volver a la pestaña), así que cuando
+     cambias tu foto en GitHub la página la actualiza sola. */
+  function githubAvatar(frame) {
+    const img = VL.$("#vl-avatar", frame), live = VL.$("#vl-avatar-live", frame);
+    const fallback = "assets/img/perfil.svg";
+    const src = C.profileImage;
+    if (src && src !== "github") {
+      img.onerror = () => { img.onerror = null; img.src = fallback; };
+      img.src = src;
+      return;
+    }
+    const user = encodeURIComponent(C.githubUser);
+    const every = (C.avatarRefreshMinutes || 5) * 60000;
+    function load() {
+      // el parámetro "v" cambia cada intervalo para saltarse la caché del navegador
+      const url = `https://github.com/${user}.png?size=400&v=${Math.floor(Date.now() / every)}`;
+      const probe = new Image();
+      probe.onload = () => {
+        if (img.src !== probe.src) {
+          img.src = probe.src;
+          img.classList.remove("is-fresh"); void img.offsetWidth; img.classList.add("is-fresh");
+        }
+        img.alt = `foto de perfil de ${C.githubUser} en GitHub`;
+        live.hidden = false;
+      };
+      probe.onerror = () => { live.hidden = true; };
+      probe.src = url;
+    }
+    load();
+    setInterval(load, every);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) load(); });
+  }
 
   function sparkleBanner(frame) {
     const box = VL.$(".banner-sparkles", frame);
