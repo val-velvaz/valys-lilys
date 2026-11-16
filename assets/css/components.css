@@ -92,22 +92,27 @@ h1 .accent { color: var(--md-h1); }
   grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
 }
 .card {
+  position: relative; /* the stretched title link covers this box */
   background: var(--surface); border-radius: var(--radius);
   border: 1px solid var(--border); box-shadow: var(--shadow);
   overflow: hidden; display: flex; flex-direction: column;
-  color: inherit; text-decoration: none; font-weight: 400;
+  color: inherit; font-weight: 400;
   transition: transform .18s, box-shadow .18s;
 }
-a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
 .card__bar { height: 8px; }
 .card__body { flex: 1; display: flex; flex-direction: column; padding: 20px 20px 22px; }
 .card h3 { font-size: 22px; font-weight: 800; margin: 4px 0 6px; color: var(--heading); line-height: 1.25; }
 .card__summary { font-family: var(--font-read); font-size: 16px; color: var(--text-soft); }
-.card__cta {
-  margin-top: auto; padding-top: 16px; font-family: var(--font-mono); font-size: 13px;
-  font-weight: 600; color: var(--accent-2);
-}
-a.card:hover .card__cta { text-decoration: underline; }
+
+/* Single accessible link per card: the title. Its ::after is an invisible layer
+   that fills the nearest positioned ancestor (.card or .tool), so a click
+   anywhere on the card opens the post. */
+.card__link { color: inherit; font-weight: inherit; text-decoration: none; }
+.card__link::after { content: ""; position: absolute; inset: 0; }
+.card__link:focus-visible { outline: none; }
+.card:focus-within, .tool:focus-within { outline: 3px solid var(--focus); outline-offset: 3px; }
+.card:hover .card__link, .tool:hover .card__link { text-decoration: underline; text-decoration-thickness: 2px; }
 
 .section-label {
   font-family: var(--font-mono); font-size: 12px; color: var(--text-soft);
@@ -116,6 +121,12 @@ a.card:hover .card__cta { text-decoration: underline; }
 .meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
 .date { font-size: 13px; color: var(--text-soft); }
 .emoji { margin-left: auto; font-size: 20px; }
+/* Post shown in a language other than the interface (no translation yet) */
+.lang-tag {
+  display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .04em;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--border);
+}
 /* Post image instead of the emoji (front matter "image:") */
 .emoji--img { width: 40px; height: 40px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface-2); }
 .article__title { display: flex; align-items: center; gap: 12px; }
@@ -136,6 +147,105 @@ a.card:hover .card__cta { text-decoration: underline; }
 .tone--peri   { background: var(--tone-peri); }
 
 .empty, .error { color: var(--text-soft); padding: 24px 0; }
+
+/* ---------- Home layout: content + progress panel ----------
+   Phones/tablets: one column. The panel comes first in the HTML, so it sits under the hero.
+   ≥ 1200px: two columns. The page gets wider (1320px instead of 1040px) so the extra space
+   is used by the panel instead of empty margins. */
+.home-layout { display: grid; gap: 28px; margin-top: 28px; }
+.home-layout .search { margin-top: 0; }
+.home-main { min-width: 0; } /* lets the tool row scroll instead of stretching the column */
+
+@media (min-width: 1200px) {
+  .wrap--home { max-width: 1320px; }
+  .home-layout { grid-template-columns: minmax(0, 1fr) 300px; gap: 36px; align-items: start; }
+  /* same row, but the panel goes to the right column: HTML order ≠ visual order */
+  .home-main { grid-column: 1; grid-row: 1; }
+  .panel { grid-column: 2; grid-row: 1; position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; }
+  .panel__grid { grid-template-columns: 1fr; }
+  .panel__graph { min-height: 120px; }
+}
+
+/* ---------- Progress panel ---------- */
+.panel {
+  padding: 18px 20px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.panel__title { font-size: 18px; font-weight: 800; color: var(--heading); margin-bottom: 12px; }
+/* below 1200px the blocks sit side by side when there is room */
+.panel__grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+.panel__block { display: grid; gap: 8px; align-content: start; }
+.panel__label { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--text-soft); }
+.panel__muted { display: block; font-size: 14px; color: var(--text-soft); }
+.panel__link { font-family: var(--font-mono); font-size: 13px; text-decoration: none; }
+.panel__link:hover { text-decoration: underline; }
+.panel__continue { display: flex; gap: 10px; align-items: center; color: var(--heading); text-decoration: none; font-weight: 700; }
+.panel__continue:hover .panel__continue-title { text-decoration: underline; }
+.panel__continue-icon { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--surface-2); }
+.panel__continue-title { display: block; line-height: 1.3; }
+.panel__streak { display: flex; align-items: baseline; gap: 8px; }
+.panel__streak-number { font-size: 32px; font-weight: 800; color: var(--heading); line-height: 1; }
+.panel__bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: var(--surface-2); }
+.panel__seg { height: 100%; }
+.panel__states { list-style: none; display: grid; gap: 4px; font-size: 14px; }
+.panel__states li { display: flex; align-items: center; gap: 8px; }
+.panel__states strong { margin-left: auto; font-family: var(--font-mono); }
+.panel__dot { width: 10px; height: 10px; border-radius: 50%; }
+.st--dominado { background: var(--tone-mint); }
+.st--en-progreso { background: var(--tone-pink); }
+.st--disponible { background: var(--tone-lav); }
+.st--bloqueado { background: var(--border); }
+.panel__graph {
+  min-height: 72px; display: grid; place-items: center; padding: 12px; text-align: center;
+  border: 1px dashed var(--border); border-radius: var(--radius-sm); background: var(--surface-2);
+}
+
+/* ---------- Home sections ---------- */
+#content { margin: 24px 0 60px; }
+#content .grid { margin: 0; }
+.home-section + .home-section { margin-top: 44px; }
+.home-section__head { margin-bottom: 14px; }
+.home-section__head h2 { font-size: 24px; font-weight: 800; color: var(--heading); line-height: 1.25; }
+.home-section__desc { color: var(--text-soft); font-size: 15px; }
+
+/* Start here: 1–2 bigger cards. auto-fit stretches them: one card takes the whole row,
+   two cards share it (each ≈ 1.5 columns of the normal grid). */
+.featured { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); }
+.card--featured .card__bar { height: 12px; }
+.card--featured h3 { font-size: 28px; }
+.card--featured .card__summary { font-size: 18px; }
+
+/* Tools: one horizontal row. Columns are created automatically (grid-auto-flow: column),
+   and if they don't fit the row scrolls sideways instead of wrapping. */
+.tool-row {
+  list-style: none; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 1fr);
+  gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 14px; margin: 0 -4px;
+}
+.tool-row__item { display: flex; scroll-snap-align: start; }
+.tool {
+  display: flex; gap: 14px; align-items: flex-start; width: 100%; padding: 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); color: inherit; text-decoration: none; font-weight: 400;
+  transition: transform .18s, box-shadow .18s;
+}
+.tool { position: relative; }
+.tool:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.tool__icon { flex: none; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; }
+.tool__emoji { font-size: 26px; line-height: 1; }
+.tool__emoji--img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+.tool__title { display: block; margin: 0; font-size: 17px; font-weight: 800; color: var(--heading); line-height: 1.3; }
+.tool__summary {
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  margin-top: 4px; font-family: var(--font-read); font-size: 15px; line-height: 1.45; color: var(--text-soft);
+}
+
+/* Diary: compact list, no cards */
+.diary { list-style: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.diary__item { display: flex; gap: 16px; align-items: baseline; padding: 12px 18px; border-top: 1px solid var(--border); }
+.diary__item:first-child { border-top: 0; }
+.diary__date { flex: none; min-width: 7.5em; font-family: var(--font-mono); font-size: 12px; color: var(--text-soft); }
+.diary__link { color: var(--heading); text-decoration: none; font-weight: 700; }
+.diary__link:hover { text-decoration: underline; }
 
 /* ---------- Post page ---------- */
 .back { display: inline-block; margin: 32px 0 0; font-family: var(--font-mono); font-size: 14px; }

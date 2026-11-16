@@ -1,6 +1,7 @@
 // post.js — renders one Markdown post (post.html?p=slug) with games, highlighter and Feynman checklist.
 import { initHeader } from './header.js';
-import { loadCatalog, el, formatDate, readingTime, isSafeSlug, sectionName, norm, store, postIcon } from './data.js';
+import { loadCatalog, el, dateLine, isSafeSlug, sectionName, norm, store, postIcon, langTag } from './data.js';
+import { markOpened, getStatus, setStatus, isTopic } from './progress.js';
 import { t } from './i18n.js';
 import { renderMarkdown, parseFrontMatter } from './markdown.js';
 import { renderGame } from './games.js';
@@ -15,13 +16,14 @@ const back = el('a', { class: 'back', href: './' }, t('back'));
 async function load() {
   if (!isSafeSlug(slug)) throw new Error('not-found');
   const { posts } = await loadCatalog();
+  // the catalog already picked the version in the active language (or the original)
   const meta = posts.find((p) => p.slug === slug);
   if (!meta) throw new Error('not-found');
-  const res = await fetch(`content/posts/${slug}.md`, { cache: 'no-cache' });
+  const res = await fetch(meta.file, { cache: 'no-cache' });
   if (!res.ok) throw new Error('not-found');
   const { data, body } = parseFrontMatter(await res.text());
-  // image comes from the index, where build-index.mjs already checked it
-  return { ...meta, ...data, image: meta.image, body };
+  // image, section and language come from the index, where build-index.mjs already checked them
+  return { ...meta, ...data, image: meta.image, section: meta.section, lang: meta.lang, body };
 }
 
 try {
@@ -56,22 +58,29 @@ try {
   const stepKey = `feynman:${slug}`;
   const done = new Set(store.get(stepKey, []));
   const bar = el('div', { class: 'progress__bar' });
-  const update = () => { bar.style.width = `${(done.size / 4) * 100}%`; };
+  // the 4 steps ticked = topic mastered ("dominado"); unticking one goes back to "en-progreso"
+  const update = () => {
+    bar.style.width = `${(done.size / 4) * 100}%`;
+    if (!isTopic(post)) return;
+    if (done.size === 4) setStatus(slug, 'dominado');
+    else if (getStatus(slug) === 'dominado') setStatus(slug, 'en-progreso');
+  };
   const steps = [1, 2, 3, 4].map((n) => {
     const box = el('input', { type: 'checkbox' });
     box.checked = done.has(n);
     box.addEventListener('change', () => { box.checked ? done.add(n) : done.delete(n); store.set(stepKey, [...done]); update(); });
     return el('li', {}, el('label', {}, box, t(`step_${n}`)));
   });
+  markOpened(slug);
   update();
 
   main.replaceChildren(
     back,
     el('article', { class: 'article' },
       el('header', { class: 'article__head' },
-        el('span', { class: 'section-label' }, sectionName(post.section)),
+        el('span', { class: 'section-label' }, sectionName(post.section), ' ', langTag(post)),
         el('h1', { class: 'article__title' }, postIcon(post, 'title-icon'), post.title),
-        el('p', { class: 'date' }, `${formatDate(post.date)} · ${readingTime(post.body)} ${t('min_read')}`),
+        el('p', { class: 'date' }, dateLine(post)),
         tags.length ? el('ul', { class: 'tags' }, tags.map((tag) => el('li', { class: 'tag' }, `#${tag}`))) : null),
       content),
     el('section', { class: 'feynman', 'aria-labelledby': 'feynman-title' },
@@ -79,7 +88,8 @@ try {
       el('ul', { class: 'feynman__steps' }, steps),
       el('div', { class: 'progress' }, bar)));
 
-  const hl = initHighlighter(content, { slug, title: post.title });
+  // each language version keeps its own highlights (the text positions are different)
+  const hl = initHighlighter(content, { slug: post.original ? slug : `${slug}.${post.lang}`, title: post.title });
   const m = /#hl=([\w-]+)/.exec(location.hash);
   if (m) hl.flash(m[1]);
   else if (location.hash.length > 1) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
