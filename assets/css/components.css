@@ -188,7 +188,26 @@ h1 .accent { color: var(--md-h1); }
   .panel__graph { min-height: 120px; }
 }
 
+/* ---------- Post page layout: post + syllabus ----------
+   Phones: the post first and the syllabus under it (HTML order).
+   ≥ 1000px: the syllabus moves to the left in a sticky column and the post keeps a
+   comfortable reading width (max 780px) instead of stretching. */
+.post-layout { display: grid; gap: 28px; grid-template-areas: "main" "syllabus"; }
+.post-layout > main { grid-area: main; min-width: 0; }
+.post-layout .syllabus { margin-bottom: 48px; }
+
+@media (min-width: 1000px) {
+  .wrap--post { max-width: 1100px; }
+  .post-layout {
+    grid-template-columns: 240px minmax(0, 780px);
+    grid-template-areas: "syllabus main";
+    justify-content: center; gap: 32px; align-items: start;
+  }
+  .post-layout .syllabus { margin-top: 32px; } /* lines up with the "← back" link */
+}
+
 /* ---------- Syllabus side menu (content/temario.md) ---------- */
+.syllabus__topic.is-current a { background: var(--surface-2); color: var(--accent); box-shadow: inset 3px 0 0 var(--tone-pink); }
 .syllabus {
   padding: 16px 12px 12px;
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);

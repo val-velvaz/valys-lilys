@@ -19,7 +19,7 @@
 </head>
 <body>
 <a class="skip-link" href="#post" data-i18n="skip_post">Saltar a la entrada</a>
-<div class="wrap wrap--narrow">
+<div class="wrap wrap--post">
   <header class="site-header site-header--small">
     <div class="topbar">
       <a class="logo" href="./" data-i18n="logo">valy's lilys</a>
@@ -34,10 +34,19 @@
     </div>
   </header>
 
+  <div class="post-layout">
   <!-- The post is rendered from content/posts/<slug>.md -->
   <main id="post">
     <p class="empty" data-i18n="loading">Cargando…</p>
   </main>
+
+  <!-- Syllabus side menu (content/temario.md). After the post in the HTML so phones show
+       the post first; on wide screens CSS puts it on the left. Filled by post.js -->
+  <nav class="syllabus" id="syllabus" aria-labelledby="syllabus-title" hidden>
+    <h2 class="syllabus__title" id="syllabus-title" data-i18n="syllabus_title">Temario</h2>
+    <div id="syllabus-body"></div>
+  </nav>
+  </div>
 
 <footer class="site-footer">
   <span data-i18n="footer">Hecho con ♡ y el método Feynman</span> · <a href="https://github.com/val-velvaz/valys-lilys" target="_blank" rel="noopener noreferrer">GitHub</a>

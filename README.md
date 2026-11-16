@@ -78,7 +78,7 @@ El reparto está en `GROUPS`, al principio de `assets/js/home.js`.
 
 ## Temario (menú lateral)
 
-El menú de la izquierda de la portada sale de **un solo archivo**: `content/temario.md`. Tiene tres niveles:
+El menú de la izquierda (en la portada y en cada entrada) sale de **un solo archivo**: `content/temario.md`. Tiene tres niveles:
 
 | Nivel | Se escribe | Ejemplo |
 | --- | --- | --- |
@@ -100,6 +100,8 @@ El menú de la izquierda de la portada sale de **un solo archivo**: `content/tem
 - El emoji o símbolo antes del nombre del área es su icono. Si no pones ninguno, se usa la primera letra.
 - Los colores de las áreas se asignan solos, por orden: rosa, menta, azul, lila, melocotón, mantequilla.
 - El contador `1/9` de cada área es "temas con entrada / temas en total".
+- En una entrada, el menú abre el área de ese tema y lo resalta. En móvil aparece debajo de la entrada, para leer primero.
+- El código del menú está en `assets/js/syllabus.js` (lo usan `home.js` y `post.js`).
 
 ### Recetas rápidas
 
@@ -197,7 +199,7 @@ subrayados.html           mis subrayados
 assets/css/tokens.css     colores y fuentes (el único sitio donde viven)
 assets/css/base.css       reset y tipografía
 assets/css/components.css piezas: cabecera, tarjetas, entrada, juegos, subrayado
-assets/js/                theme · i18n · data · header · markdown · games · highlight · progress · home · post · highlights-page
+assets/js/                theme · i18n · data · header · markdown · games · highlight · progress · syllabus · home · post · highlights-page
 content/posts/*.md        entradas
 content/temario.md        menú lateral de temas (temario.en.md, temario.de.md)
 content/index.json        índice generado
