@@ -13,10 +13,11 @@ draft: true
 
 <!--
   PLANTILLA
-  1. Copia este archivo a content/posts/mi-entrada.md (nombre: solo a-z, 0-9 y "-").
+  1. Copia este archivo a content/es/posts/mi-entrada.md (nombre: solo a-z, 0-9 y "-").
   2. section: math, cs, games, projects, challenges, blog o about.
   3. Borra "draft: true" para publicarla.
   4. Ejecuta:  node scripts/build-index.mjs
+  Para traducirla:  node scripts/traducir.mjs mi-entrada en   (o de)
 -->
 
 ## Explicado como a un niño

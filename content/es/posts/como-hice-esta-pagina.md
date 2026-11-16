@@ -22,7 +22,7 @@ Una página sencilla: una portada con buscador, filtros por sección y tarjetas,
 | Subrayados | `assets/js/highlight.js` |
 | Índice de entradas | `scripts/build-index.mjs` |
 
-Cada entrada es un `.md` en `content/posts/` con *front matter*:
+Cada entrada es un `.md` en `content/es/posts/` con *front matter*:
 
 ```markdown
 ---

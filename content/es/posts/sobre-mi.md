@@ -25,4 +25,4 @@ Porque me di cuenta de que **memorizaba sin entender**. Explicar en voz alta cam
 > [!FEYNMAN]
 > Si algo de esta página no se entiende, es culpa mía, no tuya. ¡Avísame!
 
-<!-- Edita este archivo (content/posts/sobre-mi.md) con tu información real. -->
+<!-- Edita este archivo (content/es/posts/sobre-mi.md) con tu información real. -->

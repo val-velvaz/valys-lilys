@@ -1,4 +1,4 @@
-// syllabus.js — the side menu built from content/temario.md: area → unit → topic.
+// syllabus.js — the side menu built from content/<lang>/temario.md: area → unit → topic.
 // Used by the home page and by every post page.
 //
 //   renderSyllabus(nav, areas, posts, { current })
