@@ -121,6 +121,20 @@ h1 .accent { color: var(--md-h1); }
 .meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
 .date { font-size: 13px; color: var(--text-soft); }
 .emoji { margin-left: auto; font-size: 20px; }
+/* Progress state on cards: icon + word, colors from the same state palette as the panel */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600; white-space: nowrap;
+  color: var(--text); border: 1px solid var(--border); background: var(--surface);
+}
+.status-pill--en-progreso { background: color-mix(in srgb, var(--tone-pink) 35%, var(--surface)); border-color: transparent; }
+.status-pill--dominado { background: color-mix(in srgb, var(--tone-mint) 70%, var(--surface)); border-color: transparent; }
+.status-pill--bloqueado { color: var(--text-soft); }
+/* high contrast: solid neon so black text stays readable */
+:root[data-theme="contrast"] .status-pill--en-progreso { background: var(--tone-pink); color: #000; }
+:root[data-theme="contrast"] .status-pill--dominado { background: var(--tone-mint); color: #000; }
+.tool .status-pill { margin-top: 6px; }
+
 /* Post shown in a language other than the interface (no translation yet) */
 .lang-tag {
   display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px;
