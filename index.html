@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio · valy's lilys</title>
+  <meta name="description" content="Blog educativo para aprender y aplicar el método Feynman con juegos y entradas personales.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/markdown.css">
+  <link rel="stylesheet" href="css/widgets.css">
+</head>
+<body data-page="home">
+<main id="main" class="home">
+  <ul class="welcome" id="welcome" role="img"></ul>
+
+  <div class="paper tilt-l">
+    <span class="deco-pin" style="top:-14px;left:-14px"></span>
+    <span class="deco-tape t-lilac" style="top:-10px;left:42%;transform:rotate(-4deg)"></span>
+    <span class="deco-lips" style="top:-14px;right:-6px" aria-hidden="true">💋</span>
+    <div class="md welcome-text" id="welcome-text"></div>
+  </div>
+
+  <div class="paper paper-cream gh-widget">
+    <span class="deco-bow" style="top:-22px;left:-18px"><i></i></span>
+    <span class="deco-tape t-butter" style="bottom:-10px;right:20px;transform:rotate(-6deg)"></span>
+    <h2 class="gh-title" data-i18n="githubWidget">GITHUB WIDGET</h2>
+    <div id="gh-body"><p class="muted" data-i18n="loading">cargando…</p></div>
+  </div>
+
+  <div class="paper tilt-r">
+    <span class="cookie-rail" aria-hidden="true"><span class="treat treat-chip"></span><span class="treat treat-cookie"></span><span class="treat treat-chip"></span><span class="treat treat-cookie"></span><span class="treat treat-chip"></span></span>
+    <a class="deco-clip" href="blog.html" style="top:-16px;right:-6px" data-i18n="archive">Archive</a>
+    <span class="deco-tape t-butter" style="bottom:-8px;right:40px;transform:rotate(-8deg)"></span>
+    <div class="md welcome-text" id="project-text"></div>
+  </div>
+
+  <div class="paper paper-cream">
+    <span class="deco-tape t-mint" style="top:-10px;left:30px;transform:rotate(-3deg)"></span>
+    <h2 class="gh-title">✿ <span data-i18n="latest">lo más nuevo</span></h2>
+    <ul class="latest-list cards" id="latest"></ul>
+  </div>
+</main>
+
+<noscript>✿ Este sitio necesita JavaScript para cargar las entradas en Markdown. ✿</noscript>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/core.js"></script>
+<script src="js/widgets.js"></script>
+<script src="js/highlight.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/home.js"></script>
+</body>
+</html>

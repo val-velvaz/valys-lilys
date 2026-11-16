@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#fff6ea"/><stop offset=".6" stop-color="#e4c1f9"/><stop offset="1" stop-color="#c5c6e4"/></radialGradient>
+    <linearGradient id="pet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffecf2"/><stop offset="1" stop-color="#f99dce"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#bg)"/>
+  <g fill="#fff" opacity=".7"><circle cx="30" cy="40" r="3"/><circle cx="160" cy="30" r="2"/><circle cx="170" cy="150" r="3"/><circle cx="40" cy="160" r="2"/></g>
+  <path d="M100 190 C98 150 104 130 100 110" stroke="#7cc39d" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M100 160 C80 150 70 135 72 120 C88 128 96 140 100 160Z" fill="#a8dcbf"/>
+  <g transform="translate(100 92)">
+    <path d="M0 0 C-40 -10 -50 -50 -30 -60 C-15 -45 -5 -25 0 0Z" fill="url(#pet)" transform="rotate(-20)"/>
+    <path d="M0 0 C-40 -10 -50 -50 -30 -60 C-15 -45 -5 -25 0 0Z" fill="url(#pet)" transform="rotate(60) scale(-1 1)"/>
+    <path d="M0 0 C-22 -30 -18 -62 0 -72 C18 -62 22 -30 0 0Z" fill="url(#pet)"/>
+    <path d="M0 0 C-30 5 -58 -5 -62 -22 C-40 -26 -18 -16 0 0Z" fill="#f6b9db"/>
+    <path d="M0 0 C30 5 58 -5 62 -22 C40 -26 18 -16 0 0Z" fill="#f6b9db"/>
+    <g stroke="#fcf5bf" stroke-width="2.5" stroke-linecap="round"><path d="M0 0 L-8 -34"/><path d="M0 0 L0 -38"/><path d="M0 0 L8 -34"/></g>
+    <g fill="#ffb7c3"><circle cx="-8" cy="-35" r="3.5"/><circle cx="0" cy="-39" r="3.5"/><circle cx="8" cy="-35" r="3.5"/></g>
+  </g>
+</svg>
