@@ -1,6 +1,6 @@
 // post.js — renders one Markdown post (post.html?p=slug) with games, highlighter and Feynman checklist.
 import { initHeader } from './header.js';
-import { loadCatalog, el, formatDate, readingTime, isSafeSlug, sectionName, norm, store, postIcon, langTag } from './data.js';
+import { loadCatalog, el, dateLine, isSafeSlug, sectionName, norm, store, postIcon, langTag } from './data.js';
 import { markOpened, getStatus, setStatus, isTopic } from './progress.js';
 import { t } from './i18n.js';
 import { renderMarkdown, parseFrontMatter } from './markdown.js';
@@ -80,7 +80,7 @@ try {
       el('header', { class: 'article__head' },
         el('span', { class: 'section-label' }, sectionName(post.section), ' ', langTag(post)),
         el('h1', { class: 'article__title' }, postIcon(post, 'title-icon'), post.title),
-        el('p', { class: 'date' }, `${formatDate(post.date)} · ${readingTime(post.body)} ${t('min_read')}`),
+        el('p', { class: 'date' }, dateLine(post)),
         tags.length ? el('ul', { class: 'tags' }, tags.map((tag) => el('li', { class: 'tag' }, `#${tag}`))) : null),
       content),
     el('section', { class: 'feynman', 'aria-labelledby': 'feynman-title' },

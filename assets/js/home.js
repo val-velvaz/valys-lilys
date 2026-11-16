@@ -1,7 +1,7 @@
 // home.js — home page: sections (start here, tools, explanations, diary),
 // search and section filters (from content/index.json).
 import { initHeader } from './header.js';
-import { loadCatalog, el, formatDate, readingTime, norm, SECTIONS, sectionName, postIcon, langTag } from './data.js';
+import { loadCatalog, el, formatDate, dateLine, norm, SECTIONS, sectionName, postIcon, langTag } from './data.js';
 import { t } from './i18n.js';
 import { getLastOpened, getStreak, getSummary, CHALLENGE } from './progress.js';
 
@@ -29,29 +29,32 @@ search.value = params.get('q') || '';
 
 const postUrl = (post) => `post.html?p=${encodeURIComponent(post.slug)}`;
 
+// The whole card is clickable, but there is only ONE link: the title.
+// CSS stretches that link over the card (.card__link::after), so screen readers
+// announce just the title instead of reading the whole card as a link.
 function card(post, extraClass = '') {
   const tone = SECTIONS[post.section] || 'lav';
-  return el('a', { class: `card ${extraClass}`, href: postUrl(post) },
+  const date = dateLine(post);
+  return el('article', { class: `card ${extraClass}` },
     el('div', { class: `card__bar tone--${tone}` }),
     el('div', { class: 'card__body' },
       el('div', { class: 'meta' },
         el('span', { class: 'section-label' }, sectionName(post.section), langTag(post)),
         postIcon(post, 'emoji')),
-      el('h3', {}, post.title),
-      el('p', { class: 'date' }, `${formatDate(post.date)} · ${readingTime(post.text)} ${t('min_read')}`),
+      el('h3', {}, el('a', { class: 'card__link', href: postUrl(post) }, post.title)),
+      date ? el('p', { class: 'date' }, date) : null,
       post.summary ? el('p', { class: 'card__summary' }, post.summary) : null,
-      post.tags?.length ? el('ul', { class: 'tags' }, post.tags.map((tag) => el('li', { class: 'tag' }, `#${tag}`))) : null,
-      el('span', { class: 'card__cta' }, t('read'))));
+      post.tags?.length ? el('ul', { class: 'tags' }, post.tags.map((tag) => el('li', { class: 'tag' }, `#${tag}`))) : null));
 }
 
-// Tools are apps, not articles: big icon, title and one line
+// Tools are apps, not articles: big icon, title and one line (same single-link pattern)
 function toolCard(post) {
   const tone = SECTIONS[post.section] || 'lav';
   return el('li', { class: 'tool-row__item' },
-    el('a', { class: 'tool', href: postUrl(post) },
+    el('article', { class: 'tool' },
       el('span', { class: `tool__icon tone--${tone}` }, postIcon(post, 'tool__emoji')),
       el('span', { class: 'tool__text' },
-        el('span', { class: 'tool__title' }, post.title, langTag(post)),
+        el('h3', { class: 'tool__title' }, el('a', { class: 'card__link', href: postUrl(post) }, post.title), langTag(post)),
         post.summary ? el('span', { class: 'tool__summary' }, post.summary) : null)));
 }
 

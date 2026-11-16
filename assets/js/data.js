@@ -48,7 +48,11 @@ export function formatDate(iso) {
   return d.toLocaleDateString(locale(), { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-export const readingTime = (text) => Math.max(1, Math.round(String(text || '').split(/\s+/).length / 200));
+// Reading time comes from the index (build-index.mjs). Short posts (< 3 min) don't show it.
+export const MIN_MINUTES_SHOWN = 3;
+export const minutesLabel = (post) => (post.minutes >= MIN_MINUTES_SHOWN ? `${post.minutes} ${t('min_read')}` : '');
+// "date · 5 min read" (or just the date)
+export const dateLine = (post) => [formatDate(post.date), minutesLabel(post)].filter(Boolean).join(' · ');
 
 // Lowercase without accents, for search
 export const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
