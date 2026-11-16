@@ -3,6 +3,7 @@
 import { initHeader } from './header.js';
 import { loadCatalog, el, formatDate, readingTime, norm, SECTIONS, sectionName, postIcon, langTag } from './data.js';
 import { t } from './i18n.js';
+import { getLastOpened, getStreak, getSummary, CHALLENGE } from './progress.js';
 
 initHeader();
 
@@ -70,8 +71,68 @@ function homeSection(id, items) {
     items);
 }
 
+/* ---------- Progress panel (everything comes from progress.js / localStorage) ---------- */
+const panelBody = document.getElementById('panel-body');
+
+function panelBlock(title, ...children) {
+  return el('section', { class: 'panel__block' }, el('h3', { class: 'panel__label' }, title), ...children);
+}
+
+function renderPanel(all) {
+  const bySlug = new Map(all.map((p) => [p.slug, p]));
+
+  // 1. Continue where you left off (or a suggestion the first time)
+  const last = getLastOpened();
+  const lastPost = last && bySlug.get(last.slug);
+  const suggestion = all.find((p) => p.featured) || all[0];
+  const continueBlock = lastPost
+    ? panelBlock(t('panel_continue'),
+      el('a', { class: 'panel__continue', href: postUrl(lastPost) },
+        el('span', { class: 'panel__continue-icon', 'aria-hidden': 'true' }, postIcon(lastPost, 'tool__emoji')),
+        el('span', {}, el('span', { class: 'panel__continue-title' }, lastPost.title),
+          el('span', { class: 'panel__muted' }, sectionName(lastPost.section)))))
+    : panelBlock(t('panel_continue'),
+      el('p', { class: 'panel__muted' }, t('panel_continue_empty')),
+      suggestion ? el('a', { class: 'panel__link', href: postUrl(suggestion) }, `→ ${suggestion.title}`) : null);
+
+  // 2. 30-day challenge streak
+  const streak = getStreak();
+  const challenge = bySlug.get(CHALLENGE);
+  const streakBlock = panelBlock(t('panel_streak'),
+    el('p', { class: 'panel__streak' },
+      el('span', { class: 'panel__streak-number' }, `🔥 ${streak}`),
+      el('span', { class: 'panel__muted' }, t(streak === 1 ? 'panel_streak_day' : 'panel_streak_days'))),
+    challenge ? el('a', { class: 'panel__link', href: postUrl(challenge) }, t(streak ? 'panel_streak_go' : 'panel_streak_start')) : null);
+
+  // 3. Summary of topics by state
+  const summary = getSummary(all);
+  const total = Object.values(summary).reduce((a, b) => a + b, 0) || 1;
+  const states = ['dominado', 'en-progreso', 'disponible', 'bloqueado'].filter((s) => s !== 'bloqueado' || summary[s]);
+  const summaryBlock = panelBlock(t('panel_summary'),
+    el('div', { class: 'panel__bar', role: 'img', 'aria-label': states.map((s) => `${t(`st_${s}`)}: ${summary[s]}`).join(', ') },
+      states.map((s) => {
+        const seg = el('span', { class: `panel__seg st--${s}` });
+        seg.style.width = `${(summary[s] / total) * 100}%`;
+        return seg;
+      })),
+    el('ul', { class: 'panel__states' }, states.map((s) => el('li', {},
+      el('span', { class: `panel__dot st--${s}`, 'aria-hidden': 'true' }),
+      el('span', {}, t(`st_${s}`)),
+      el('strong', {}, String(summary[s]))))));
+
+  // 4. Reserved space for the future topic graph (only the container for now)
+  const graphBlock = panelBlock(t('panel_graph'),
+    el('div', { class: 'panel__graph', id: 'topic-graph', 'data-graph': 'pending' },
+      el('span', { class: 'panel__muted' }, t('panel_graph_soon'))));
+
+  panelBody.replaceChildren(continueBlock, streakBlock, summaryBlock, graphBlock);
+}
+
 try {
   const { posts: all } = await loadCatalog();
+  renderPanel(all);
+  // coming back with the browser's back button shows the page from cache: refresh the panel
+  window.addEventListener('pageshow', (e) => { if (e.persisted) renderPanel(all); });
   const posts = all.filter((p) => !HIDDEN.has(p.section));
   const present = Object.keys(SECTIONS).filter((s) => !HIDDEN.has(s) && posts.some((p) => p.section === s));
   const count = (s) => posts.filter((p) => p.section === s).length;

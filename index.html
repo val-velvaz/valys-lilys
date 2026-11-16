@@ -20,7 +20,7 @@
 </head>
 <body data-i18n-title="meta.home_title">
 <a class="skip-link" href="#content" data-i18n="skip_home">Saltar a las entradas</a>
-<div class="wrap">
+<div class="wrap wrap--home">
   <header class="site-header">
     <div class="topbar">
       <a class="logo" href="./" data-i18n="logo">valy's lilys</a>
@@ -47,6 +47,15 @@
     </div>
   </header>
 
+  <div class="home-layout">
+  <!-- Progress panel: first in the HTML so on phones it sits right under the hero;
+       on wide screens CSS moves it to a sticky column on the right. Filled by home.js -->
+  <aside class="panel" id="progress-panel" aria-labelledby="panel-title">
+    <h2 class="panel__title" id="panel-title" data-i18n="panel_title">Tu progreso</h2>
+    <div class="panel__grid" id="panel-body"></div>
+  </aside>
+
+  <div class="home-main">
   <!-- Filters and cards are generated from content/index.json -->
   <div class="search">
     <label class="visually-hidden" for="search" data-i18n="search_label">Buscar entradas</label>
@@ -58,6 +67,8 @@
   <main id="content" aria-live="polite">
     <p class="empty" data-i18n="loading">Cargando…</p>
   </main>
+  </div>
+  </div>
 
 <footer class="site-footer">
   <span data-i18n="footer">Hecho con ♡ y el método Feynman</span> · <a href="https://github.com/val-velvaz/valys-lilys" target="_blank" rel="noopener noreferrer">GitHub</a>
