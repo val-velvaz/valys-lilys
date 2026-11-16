@@ -148,23 +148,78 @@ h1 .accent { color: var(--md-h1); }
 
 .empty, .error { color: var(--text-soft); padding: 24px 0; }
 
-/* ---------- Home layout: content + progress panel ----------
-   Phones/tablets: one column. The panel comes first in the HTML, so it sits under the hero.
-   ≥ 1200px: two columns. The page gets wider (1320px instead of 1040px) so the extra space
-   is used by the panel instead of empty margins. */
-.home-layout { display: grid; gap: 28px; margin-top: 28px; }
+/* ---------- Home layout: syllabus + content + progress panel ----------
+   Each block gets a name (grid-area) and each screen size just "draws" where they go
+   with grid-template-areas. The HTML order never changes (panel, syllabus, content).
+     < 1000px      one column: panel, syllabus, content
+     1000–1279px   two columns: syllabus on the left (full height), panel + content on the right
+     ≥ 1280px      three columns: syllabus | content | panel, page widened to 1440px */
+.home-layout {
+  display: grid; gap: 28px; margin-top: 28px;
+  grid-template-areas: "panel" "syllabus" "main";
+}
 .home-layout .search { margin-top: 0; }
-.home-main { min-width: 0; } /* lets the tool row scroll instead of stretching the column */
+.panel { grid-area: panel; }
+.syllabus { grid-area: syllabus; }
+.home-main { grid-area: main; min-width: 0; } /* min-width: 0 lets the tool row scroll instead of stretching the column */
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   .wrap--home { max-width: 1320px; }
-  .home-layout { grid-template-columns: minmax(0, 1fr) 300px; gap: 36px; align-items: start; }
-  /* same row, but the panel goes to the right column: HTML order ≠ visual order */
-  .home-main { grid-column: 1; grid-row: 1; }
-  .panel { grid-column: 2; grid-row: 1; position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; }
+  .home-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-areas:
+      "syllabus panel"
+      "syllabus main";
+    gap: 28px 32px; align-items: start;
+  }
+  /* sticky: the menu stays in its column but follows you while you scroll the content */
+  .syllabus { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; }
+}
+
+@media (min-width: 1280px) {
+  .wrap--home { max-width: 1440px; }
+  .home-layout {
+    grid-template-columns: 240px minmax(0, 1fr) 300px;
+    grid-template-areas: "syllabus main panel";
+    gap: 32px;
+  }
+  .panel { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; }
   .panel__grid { grid-template-columns: 1fr; }
   .panel__graph { min-height: 120px; }
 }
+
+/* ---------- Syllabus side menu (content/temario.md) ---------- */
+.syllabus {
+  padding: 16px 12px 12px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.syllabus__title { padding: 0 8px 8px; font-size: 18px; font-weight: 800; color: var(--heading); }
+.syllabus__area + .syllabus__area { border-top: 1px solid var(--border); }
+.syllabus__summary {
+  display: flex; align-items: center; gap: 10px; padding: 10px 8px; cursor: pointer;
+  border-radius: var(--radius-sm); list-style: none; font-weight: 800; color: var(--heading);
+}
+.syllabus__summary::-webkit-details-marker { display: none; }
+.syllabus__summary::after { content: "›"; margin-left: 4px; color: var(--text-soft); transition: transform .2s; }
+.syllabus__area[open] > .syllabus__summary::after { transform: rotate(90deg); }
+.syllabus__summary:hover { background: var(--surface-2); }
+.syllabus__icon { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; font-size: 15px; color: #000; }
+.syllabus__area-title { flex: 1; min-width: 0; }
+.syllabus__count { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--text-soft); }
+.syllabus__unit { padding: 2px 8px 8px 48px; }
+.syllabus__unit-title {
+  margin: 6px 0 2px; font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--text-soft);
+}
+.syllabus__topics { list-style: none; }
+.syllabus__topic { font-size: 14px; line-height: 1.35; }
+.syllabus__topic a, .syllabus__topic.is-soon { display: flex; align-items: baseline; gap: 8px; padding: 4px 6px; margin-left: -6px; border-radius: 8px; }
+.syllabus__topic a { color: var(--text); font-weight: 600; text-decoration: none; }
+.syllabus__topic a:hover { background: var(--surface-2); color: var(--accent-2); }
+.syllabus__topic.is-soon { color: var(--text-soft); }
+.syllabus__dot { flex: none; width: 8px; height: 8px; border-radius: 50%; transform: translateY(-1px); background: var(--tone-lav); }
+.syllabus__topic.is-soon .syllabus__dot { background: transparent; border: 1.5px dashed var(--text-soft); }
+.syllabus__soon { margin-left: auto; font-family: var(--font-mono); font-size: 10px; text-transform: lowercase; }
 
 /* ---------- Progress panel ---------- */
 .panel {

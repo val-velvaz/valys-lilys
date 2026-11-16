@@ -30,6 +30,8 @@ export function loadCatalog() {
     data.posts = [...bySlug.values()]
       .map((p) => ({ ...p, foreign: p.lang !== lang }))
       .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    // side menu in the active language, or the Spanish one
+    data.syllabus = (data.syllabus && (data.syllabus[lang] || data.syllabus.es)) || [];
     return data;
   });
   return catalogPromise;
