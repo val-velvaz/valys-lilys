@@ -3,8 +3,9 @@
 import { initHeader } from './header.js';
 import { loadCatalog, el, formatDate, dateLine, norm, SECTIONS, sectionName, postIcon, langTag } from './data.js';
 import { renderSyllabus } from './syllabus.js';
+import { renderTopicGraph } from './graph.js';
 import { t } from './i18n.js';
-import { getLastOpened, getStreak, getSummary, CHALLENGE } from './progress.js';
+import { getLastOpened, getStreak, getSummary, getStatus, isTopic, CHALLENGE } from './progress.js';
 
 initHeader();
 
@@ -30,6 +31,16 @@ search.value = params.get('q') || '';
 
 const postUrl = (post) => `post.html?p=${encodeURIComponent(post.slug)}`;
 
+// Progress state of a topic as a small pill: icon + word (never color alone).
+// The diary and the about page are not topics, so they get none.
+const STATUS_ICON = { disponible: '○', 'en-progreso': '•', dominado: '✓', bloqueado: '🔒' };
+function statusPill(post) {
+  if (!isTopic(post)) return null;
+  const s = getStatus(post.slug, post);
+  return el('span', { class: `status-pill status-pill--${s}` },
+    el('span', { 'aria-hidden': 'true' }, STATUS_ICON[s]), ` ${t(`status_${s}`)}`);
+}
+
 // The whole card is clickable, but there is only ONE link: the title.
 // CSS stretches that link over the card (.card__link::after), so screen readers
 // announce just the title instead of reading the whole card as a link.
@@ -41,6 +52,7 @@ function card(post, extraClass = '') {
     el('div', { class: 'card__body' },
       el('div', { class: 'meta' },
         el('span', { class: 'section-label' }, sectionName(post.section), langTag(post)),
+        statusPill(post),
         postIcon(post, 'emoji')),
       el('h3', {}, el('a', { class: 'card__link', href: postUrl(post) }, post.title)),
       date ? el('p', { class: 'date' }, date) : null,
@@ -56,6 +68,7 @@ function toolCard(post) {
       el('span', { class: `tool__icon tone--${tone}` }, postIcon(post, 'tool__emoji')),
       el('span', { class: 'tool__text' },
         el('h3', { class: 'tool__title' }, el('a', { class: 'card__link', href: postUrl(post) }, post.title), langTag(post)),
+        statusPill(post),
         post.summary ? el('span', { class: 'tool__summary' }, post.summary) : null)));
 }
 
@@ -124,13 +137,25 @@ function renderPanel(all) {
       el('span', {}, t(`st_${s}`)),
       el('strong', {}, String(summary[s]))))));
 
-  // 4. Reserved space for the future topic graph (only the container for now)
-  const graphBlock = panelBlock(t('panel_graph'),
-    el('div', { class: 'panel__graph', id: 'topic-graph', 'data-graph': 'pending' },
-      el('span', { class: 'panel__muted' }, t('panel_graph_soon'))));
+  // 4. Topic map: how topics connect ("requiere:" in the front matter), see graph.js
+  const graphBox = el('div', { class: 'panel__graph', id: 'topic-graph' });
+  const graphBlock = panelBlock(t('panel_graph'), graphBox);
 
   panelBody.replaceChildren(continueBlock, streakBlock, summaryBlock, graphBlock);
+  // drawn after it is on the page, so it can measure its width
+  renderTopicGraph(graphBox, all, { current: last?.slug });
 }
+
+// the map is drawn for the panel's width: redraw it if that width changes
+let graphWidth = 0;
+new ResizeObserver((entries) => {
+  const box = document.getElementById('topic-graph');
+  const w = Math.round(entries[0].contentRect.width);
+  if (box && w && Math.abs(w - graphWidth) > 8) {
+    graphWidth = w;
+    loadCatalog().then(({ posts }) => renderTopicGraph(box, posts, { current: getLastOpened()?.slug })).catch(() => {});
+  }
+}).observe(document.getElementById('progress-panel'));
 
 try {
   const { posts: all, syllabus } = await loadCatalog();
@@ -138,7 +163,7 @@ try {
   const syllabusNav = document.getElementById('syllabus');
   renderSyllabus(syllabusNav, syllabus, all);
   // coming back with the browser's back button shows the page from cache: refresh progress
-  window.addEventListener('pageshow', (e) => { if (e.persisted) { renderPanel(all); renderSyllabus(syllabusNav, syllabus, all); } });
+  window.addEventListener('pageshow', (e) => { if (e.persisted) { renderPanel(all); renderSyllabus(syllabusNav, syllabus, all); render(); } });
   const posts = all.filter((p) => !HIDDEN.has(p.section));
   const present = Object.keys(SECTIONS).filter((s) => !HIDDEN.has(s) && posts.some((p) => p.section === s));
   const count = (s) => posts.filter((p) => p.section === s).length;

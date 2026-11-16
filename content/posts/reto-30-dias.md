@@ -4,6 +4,7 @@ section: challenges
 date: 2026-11-03
 tags: [feynman, reto]
 summary: Un concepto al día, explicado en 5 frases o menos. Marca tus días y no rompas la racha.
+requiere: [hoja-feynman, detector-de-jerga]
 emoji: 🔥
 ---
 

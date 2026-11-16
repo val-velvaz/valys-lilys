@@ -4,6 +4,7 @@ section: cs
 date: 2026-11-09
 tags: [python, algorithms, feynman]
 summary: Una función que se llama a sí misma suena a magia. Es más bien como pedirle ayuda a alguien idéntico a ti.
+requiere: [metodo-feynman]
 emoji: 🪜
 image: assets/img/posts/recursion.svg
 ---

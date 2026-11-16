@@ -121,6 +121,20 @@ h1 .accent { color: var(--md-h1); }
 .meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
 .date { font-size: 13px; color: var(--text-soft); }
 .emoji { margin-left: auto; font-size: 20px; }
+/* Progress state on cards: icon + word, colors from the same state palette as the panel */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600; white-space: nowrap;
+  color: var(--text); border: 1px solid var(--border); background: var(--surface);
+}
+.status-pill--en-progreso { background: color-mix(in srgb, var(--tone-pink) 35%, var(--surface)); border-color: transparent; }
+.status-pill--dominado { background: color-mix(in srgb, var(--tone-mint) 70%, var(--surface)); border-color: transparent; }
+.status-pill--bloqueado { color: var(--text-soft); }
+/* high contrast: solid neon so black text stays readable */
+:root[data-theme="contrast"] .status-pill--en-progreso { background: var(--tone-pink); color: #000; }
+:root[data-theme="contrast"] .status-pill--dominado { background: var(--tone-mint); color: #000; }
+.tool .status-pill { margin-top: 6px; }
+
 /* Post shown in a language other than the interface (no translation yet) */
 .lang-tag {
   display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px;
@@ -269,10 +283,27 @@ h1 .accent { color: var(--md-h1); }
 .st--en-progreso { background: var(--tone-pink); }
 .st--disponible { background: var(--tone-lav); }
 .st--bloqueado { background: var(--border); }
-.panel__graph {
-  min-height: 72px; display: grid; place-items: center; padding: 12px; text-align: center;
-  border: 1px dashed var(--border); border-radius: var(--radius-sm); background: var(--surface-2);
+.panel__graph { min-width: 0; }
+
+/* ---------- Topic map (graph.js) ----------
+   The SVG is drawn at the panel's real width (viewBox = width), so text never gets scaled. */
+.graph { display: block; max-width: 100%; height: auto; overflow: visible; }
+.graph__edge { fill: none; stroke: var(--text-soft); stroke-opacity: .45; stroke-width: 1.5; }
+.graph__node { stroke: var(--surface); stroke-width: 2; }
+.graph__node.st--dominado { fill: var(--tone-mint); }
+.graph__node.st--en-progreso { fill: var(--tone-pink); }
+.graph__node.st--disponible { fill: var(--tone-lav); }
+.graph__node.st--bloqueado { fill: var(--border); }
+.graph__ring { fill: none; stroke: var(--accent-2); stroke-width: 2; }
+/* the halo (stroke painted under the letters, in the panel color) hides any line behind the text */
+.graph__label {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--text);
+  stroke: var(--surface); stroke-width: 4px; paint-order: stroke; stroke-linejoin: round;
 }
+.graph__link:hover .graph__label, .graph__link:focus .graph__label { fill: var(--accent-2); text-decoration: underline; }
+.graph__link:focus { outline: none; }
+.graph__link:focus-visible .graph__node { stroke: var(--focus); stroke-width: 3; }
+.graph__caption { margin-top: 6px; font-size: 12px; line-height: 1.4; color: var(--text-soft); }
 
 /* ---------- Home sections ---------- */
 #content { margin: 24px 0 60px; }

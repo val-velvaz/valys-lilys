@@ -101,6 +101,8 @@ for (const name of (await readdir(POSTS)).sort()) {
     emoji: data.emoji || '',
     image: safeImage(name, data.image),
     featured: data.destacado === true,
+    // "requiere: [slug, slug]" → topics to learn before this one (used by the topic map)
+    requires: (Array.isArray(data.requiere) ? data.requiere : data.requiere ? [data.requiere] : []).map(String),
     draft: data.draft === true,
     minutes: Math.max(1, Math.round(text.split(/\s+/).filter(Boolean).length / WORDS_PER_MINUTE)),
     text: text.slice(0, 6000)
@@ -131,6 +133,33 @@ posts.sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.slug.loca
    Mistakes here are warnings only: a broken link just shows as "coming soon". */
 const warnings = [];
 const published = new Set(posts.filter((p) => !p.draft).map((p) => p.slug));
+
+/* ---------- Prerequisites ("requiere:") ----------
+   Only links between published posts are kept. Translations always use the original's list.
+   A loop (A requires B and B requires A) can't be drawn as a map, so the link that
+   closes it is dropped with a warning. Like the syllabus, mistakes here never stop the build. */
+const requiresOf = new Map();
+for (const p of posts.filter((q) => q.original)) {
+  const valid = [...new Set(p.requires)].filter((slug) => {
+    if (slug === p.slug) { warnings.push(`${p.file}: a post can't require itself`); return false; }
+    if (!published.has(slug)) { warnings.push(`${p.file}: requiere "${slug}", which is not a published post`); return false; }
+    return true;
+  });
+  requiresOf.set(p.slug, valid);
+}
+const state = new Map(); // 1 = visiting, 2 = done
+function visit(slug) {
+  state.set(slug, 1);
+  for (const dep of [...(requiresOf.get(slug) || [])]) {
+    if (state.get(dep) === 1) {
+      warnings.push(`${slug}: "requiere: ${dep}" makes a loop, ignored`);
+      requiresOf.set(slug, requiresOf.get(slug).filter((s) => s !== dep));
+    } else if (!state.has(dep)) visit(dep);
+  }
+  state.set(slug, 2);
+}
+for (const slug of requiresOf.keys()) if (!state.has(slug)) visit(slug);
+for (const p of posts) p.requires = requiresOf.get(p.slug) || [];
 
 function parseSyllabus(file, src) {
   const areas = [];

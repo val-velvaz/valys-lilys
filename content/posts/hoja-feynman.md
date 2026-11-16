@@ -4,6 +4,7 @@ section: games
 date: 2026-11-16
 tags: [feynman, plantilla]
 summary: Rellena los 4 pasos del método con cualquier concepto y descárgalo como una entrada Markdown lista para el blog.
+requiere: [metodo-feynman]
 emoji: 📝
 destacado: true
 ---

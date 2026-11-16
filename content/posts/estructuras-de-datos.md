@@ -4,6 +4,7 @@ section: games
 date: 2026-11-14
 tags: [datastructures, juego]
 summary: Cada estructura de datos se parece a algo de la vida real. Repásalas con tarjetas.
+requiere: [recursion]
 emoji: 🧩
 ---
 
