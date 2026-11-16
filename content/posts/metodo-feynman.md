@@ -5,6 +5,7 @@ date: 2026-11-02
 tags: [feynman, aprendizaje]
 summary: Las 4 reglas para entender cualquier cosa de verdad, explicadas con galletas. Esta entrada también muestra todas las etiquetas de Markdown que puedes usar.
 emoji: ⚛
+destacado: true
 ---
 
 # ¿Qué es el método Feynman?

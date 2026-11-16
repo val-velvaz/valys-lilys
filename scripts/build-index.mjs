@@ -2,8 +2,14 @@
 /* Builds content/index.json from the Markdown posts.
    Usage:  node scripts/build-index.mjs
    - Reads content/posts/*.md (files starting with "_" are ignored, e.g. the template)
-   - Takes the front matter (title, date, section, tags, summary, emoji, image, draft)
-   - Stores plain text too, so the home search finds words inside the posts. */
+   - Takes the front matter (title, date, section, tags, summary, emoji, image, destacado, lang, draft)
+   - Stores plain text too, so the home search finds words inside the posts.
+   - Computes fields so the browser doesn't have to:
+       lang     "recursion.en.md" is the English version of "recursion.md" (same slug);
+                a file without suffix is the original, Spanish unless it says "lang: en|de"
+       featured "destacado: true" in the front matter
+       minutes  reading time of the whole post
+       langs    every language available for that slug */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -12,6 +18,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const POSTS = join(ROOT, 'content', 'posts');
 const SECTIONS = ['math', 'cs', 'games', 'projects', 'challenges', 'blog', 'about'];
+const LANGS = ['es', 'en', 'de'];
+const DEFAULT_LANG = 'es';
+const WORDS_PER_MINUTE = 200;
 
 function parseFrontMatter(src) {
   const m = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?/.exec(src);
@@ -68,25 +77,50 @@ function safeImage(file, value) {
 const posts = [];
 for (const name of (await readdir(POSTS)).sort()) {
   if (!name.endsWith('.md') || name.startsWith('_')) continue;
-  const slug = name.replace(/\.md$/, '');
-  if (!/^[a-z0-9-]+$/.test(slug)) { problems.push(`${name}: the file name may only use a-z, 0-9 and "-"`); continue; }
+  // "slug.md" (original) or "slug.<lang>.md" (translation)
+  const m = /^([a-z0-9-]+)(?:\.([a-z]{2}))?\.md$/.exec(name);
+  if (!m) { problems.push(`${name}: the file name may only use a-z, 0-9 and "-" (plus an optional .en/.de/.es before .md)`); continue; }
+  const [, slug, suffix] = m;
+  if (suffix && !LANGS.includes(suffix)) { problems.push(`${name}: language "${suffix}" is not one of ${LANGS.join(', ')}`); continue; }
   const { data, body } = parseFrontMatter(await readFile(join(POSTS, name), 'utf8'));
-  if (!SECTIONS.includes(data.section)) problems.push(`${name}: section "${data.section}" is not one of ${SECTIONS.join(', ')}`);
+  const lang = suffix || (LANGS.includes(data.lang) ? data.lang : DEFAULT_LANG);
+  if (data.lang && !LANGS.includes(data.lang)) problems.push(`${name}: lang "${data.lang}" is not one of ${LANGS.join(', ')}`);
+  if (data.section && !SECTIONS.includes(data.section)) problems.push(`${name}: section "${data.section}" is not one of ${SECTIONS.join(', ')}`);
   const text = plainText(body);
   posts.push({
     slug,
-    section: data.section || 'blog',
+    lang,
+    original: !suffix,
+    file: `content/posts/${name}`,
+    section: data.section || '',
     title: data.title || slug,
     date: data.date || '',
     tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : [],
     summary: data.summary || text.slice(0, 160),
     emoji: data.emoji || '',
     image: safeImage(name, data.image),
+    featured: data.destacado === true,
     draft: data.draft === true,
+    minutes: Math.max(1, Math.round(text.split(/\s+/).filter(Boolean).length / WORDS_PER_MINUTE)),
     text: text.slice(0, 6000)
   });
 }
-posts.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+
+// Translations inherit what they don't set from the original (section, date, emoji, image…)
+const originals = new Map(posts.filter((p) => p.original).map((p) => [p.slug, p]));
+for (const p of posts) {
+  const base = originals.get(p.slug);
+  if (!p.original && !base) problems.push(`${p.file}: translation without an original ${p.slug}.md`);
+  if (!p.original && base) {
+    for (const key of ['section', 'date', 'emoji', 'image']) if (!p[key]) p[key] = base[key];
+    if (!p.tags.length) p.tags = base.tags;
+    p.featured = p.featured || base.featured;
+    p.draft = p.draft || base.draft;
+  }
+  if (!p.section) { problems.push(`${p.file}: missing "section"`); p.section = 'blog'; }
+  p.langs = posts.filter((q) => q.slug === p.slug).map((q) => q.lang);
+}
+posts.sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.slug.localeCompare(b.slug));
 await writeFile(join(ROOT, 'content', 'index.json'), `${JSON.stringify({ generated: new Date().toISOString(), posts }, null, 1)}\n`);
 console.log(`✿ content/index.json: ${posts.length} posts (${posts.filter((p) => p.draft).length} drafts)`);
 if (problems.length) { console.warn(problems.map((p) => `  ⚠ ${p}`).join('\n')); process.exitCode = 1; }
