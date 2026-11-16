@@ -76,6 +76,42 @@ content/posts/recursion.de.md   ← traducción al alemán
 
 El reparto está en `GROUPS`, al principio de `assets/js/home.js`.
 
+## Temario (menú lateral)
+
+El menú de la izquierda de la portada sale de **un solo archivo**: `content/temario.md`. Tiene tres niveles:
+
+| Nivel | Se escribe | Ejemplo |
+| --- | --- | --- |
+| 1 · Área | `# ` + emoji opcional + nombre | `# 🛡 Ciberseguridad` |
+| 2 · Unidad | `## ` + nombre | `## Pentesting` |
+| 3 · Tema | `- ` + nombre | `- Escalada de privilegios` |
+
+```markdown
+# ∑ Matemáticas
+
+## Cálculo
+- Límites
+- [La derivada es un velocímetro](derivadas)
+- Integrales
+```
+
+- **Tema sin enlace** (`- Límites`): sale en gris con la etiqueta "pronto". Sirve para anunciar lo que vas a escribir.
+- **Tema con enlace** (`- [Título](slug)`): el `slug` es el nombre del archivo de la entrada sin `.md` (`derivadas` → `content/posts/derivadas.md`). Sale como enlace, con un punto de color según el progreso de quien lo visita: lila = disponible, rosa = en progreso, verde = dominado.
+- El emoji o símbolo antes del nombre del área es su icono. Si no pones ninguno, se usa la primera letra.
+- Los colores de las áreas se asignan solos, por orden: rosa, menta, azul, lila, melocotón, mantequilla.
+- El contador `1/9` de cada área es "temas con entrada / temas en total".
+
+### Recetas rápidas
+
+- **Publicar un tema que estaba en "pronto":** escribe la entrada (`content/posts/integrales.md`) y en el temario cambia `- Integrales` por `- [Integrales](integrales)`.
+- **Añadir una unidad:** una línea `## Nombre` debajo del área, y sus temas debajo con `- `.
+- **Añadir un área nueva:** una línea `# 🎨 Diseño` al final, con sus `##` y `- `.
+- **Cambiar el orden:** mueve las líneas. El menú respeta el orden del archivo.
+
+Después de editar, ejecuta `node scripts/build-index.mjs` (o haz push a `main`, que lo hace solo). El script avisa con `·` de cualquier línea que no entienda o de un enlace a una entrada que no existe, y ese tema sale como "pronto" en vez de romper la página.
+
+**En otros idiomas:** `content/temario.en.md` y `content/temario.de.md`, con la misma estructura. Si falta el de un idioma, se muestra el español. Los enlaces usan el mismo `slug`, así que llevan a la traducción de la entrada si existe.
+
 ## Progreso
 
 El panel **Tu progreso** (a la derecha en pantallas anchas y bajo la cabecera en móvil) lee `assets/js/progress.js`, que guarda todo en el navegador:
@@ -155,7 +191,7 @@ concepto: la recursión
 ## Estructura
 
 ```
-index.html                portada: secciones, buscador, filtros y panel de progreso
+index.html                portada: temario, secciones, buscador, filtros y panel de progreso
 post.html?p=<slug>        una entrada
 subrayados.html           mis subrayados
 assets/css/tokens.css     colores y fuentes (el único sitio donde viven)
@@ -163,6 +199,7 @@ assets/css/base.css       reset y tipografía
 assets/css/components.css piezas: cabecera, tarjetas, entrada, juegos, subrayado
 assets/js/                theme · i18n · data · header · markdown · games · highlight · progress · home · post · highlights-page
 content/posts/*.md        entradas
+content/temario.md        menú lateral de temas (temario.en.md, temario.de.md)
 content/index.json        índice generado
 scripts/build-index.mjs   genera el índice
 ```
