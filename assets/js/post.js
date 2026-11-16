@@ -6,8 +6,18 @@ import { t } from './i18n.js';
 import { renderMarkdown, parseFrontMatter } from './markdown.js';
 import { renderGame } from './games.js';
 import { initHighlighter } from './highlight.js';
+import { renderSyllabus } from './syllabus.js';
 
 initHeader();
+
+// Side menu with the syllabus; the area of the post being read opens and its topic is marked
+const syllabusNav = document.getElementById('syllabus');
+async function showSyllabus(current) {
+  try {
+    const { syllabus, posts } = await loadCatalog();
+    renderSyllabus(syllabusNav, syllabus, posts, { current });
+  } catch (e) { /* no catalog: the menu simply stays hidden */ }
+}
 
 const main = document.getElementById('post');
 const slug = new URLSearchParams(location.search).get('p');
@@ -61,9 +71,11 @@ try {
   // the 4 steps ticked = topic mastered ("dominado"); unticking one goes back to "en-progreso"
   const update = () => {
     bar.style.width = `${(done.size / 4) * 100}%`;
-    if (!isTopic(post)) return;
-    if (done.size === 4) setStatus(slug, 'dominado');
-    else if (getStatus(slug) === 'dominado') setStatus(slug, 'en-progreso');
+    if (isTopic(post)) {
+      if (done.size === 4) setStatus(slug, 'dominado');
+      else if (getStatus(slug) === 'dominado') setStatus(slug, 'en-progreso');
+    }
+    showSyllabus(slug); // redraw so the dot of this topic shows its new state
   };
   const steps = [1, 2, 3, 4].map((n) => {
     const box = el('input', { type: 'checkbox' });
@@ -96,4 +108,5 @@ try {
 } catch (err) {
   if (err.message !== 'not-found') console.error(err);
   main.replaceChildren(back, el('p', { class: 'error' }, err.message === 'not-found' ? t('not_found') : t('error_catalog')));
+  showSyllabus(null);
 }

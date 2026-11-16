@@ -40,6 +40,14 @@ export function renderSyllabus(nav, areas, posts, { current = null } = {}) {
     return details;
   }));
   nav.hidden = !areas.length;
+
+  // On wide screens the menu has its own scroll: bring the current topic into view
+  // (only the first time, so ticking a checkbox later doesn't make the menu jump)
+  const link = current && body.querySelector('[aria-current="page"]');
+  if (link && !nav.dataset.scrolled && nav.scrollHeight > nav.clientHeight) {
+    nav.scrollTop = Math.max(0, link.offsetTop - nav.clientHeight / 3);
+    nav.dataset.scrolled = '1';
+  }
 }
 
 function topicItem(topic, known, current) {
