@@ -1,7 +1,7 @@
 # ✿ valy's lilys ✿
 
 Blog educativo para **aprender y aplicar el método Feynman** con juegos y entradas personales.
-Layout inspirado en MySpace, estética Y2K y mucha interactividad. Todo está hecho con HTML, CSS y JavaScript, sin frameworks y sin imágenes para los adornos: el encaje, el chorreado, las cuentas con letras, los macarons, las galletas, la espiral y las rayas están dibujados con CSS.
+Layout inspirado en MySpace (navbar, título, foto de perfil, botones, calendario, navegación, contenido, temas y footer), con un diseño simple y plano: la paleta pastel y las fuentes Nunito, Tinos y Fira Code. Hecho con HTML, CSS y JavaScript, sin frameworks.
 
 ## Ver la página en local
 
@@ -47,20 +47,20 @@ Cada etiqueta tiene su propio estilo en `css/markdown.css`:
 | Markdown | Estilo |
 | --- | --- |
 | `# título` / `## título` | Nunito itálica con barra redondeada debajo |
-| `### título` | etiqueta lila en Fira Code |
-| `#### título` | rosa con ✿ |
+| `### título` | Nunito en negrita |
+| `#### título` | rosa |
 | párrafos | Tinos |
 | `==texto==` | subrayado tipo marcador (amarillo) |
 | `=={rosa}texto==` | subrayado de color: `rosa`/`pink`, `amarillo`/`yellow`, `azul`/`blue`, `verde`/`green`, `lila`/`lilac` |
-| `> cita` | papel cuadriculado con cinta |
+| `> cita` | caja blanca con borde rosa a la izquierda |
 | `> [!NOTE]`, `[!TIP]`, `[!FEYNMAN]`, `[!WARNING]`, `[!IMPORTANT]`, `[!IDEA]` | callouts de colores |
-| listas `-` / `1.` | flores ✿ y números en cuentas |
+| listas `-` / `1.` | viñetas ✿ y números rosas |
 | `- [ ] tarea` | checkbox con corazón (se guarda el progreso) |
 | tablas | encabezados pastel y filas alternas |
-| `---` | franja de rayas (las texturas de tus imágenes) |
+| `---` | franja fina de rayas pastel |
 | ` ```lenguaje ` | ventana de código con botón de copiar |
-| `![alt](img.png)` | foto polaroid con cinta (el `alt` es el pie de foto) |
-| `<details>` | acordeón menta |
+| `![alt](img.png)` | imagen con marco blanco (el `alt` es el pie de foto) |
+| `<details>` | desplegable menta |
 
 ## Juegos dentro del Markdown
 
@@ -104,10 +104,10 @@ concepto: la recursión
 
 - **Buscador en todas las páginas** (pulsa <kbd>/</kbd>): resultados al momento y página `buscar.html` con filtro por sección.
 - **Sistema de subrayado**: selecciona texto en una entrada, elige color y añade notas. Todo se reúne en `subrayados.html`, desde donde también se exporta a Markdown.
-- **Calendario de cuentas**: los días con entradas tienen anillo; al pulsarlos aparece la lista.
+- **Calendario**: los días con entradas aparecen en rosa; al pulsarlos se ve la lista.
 - **Checklist Feynman** e índice en cada entrada, con barra de progreso.
 - **Idiomas EN / ES / DE** para la interfaz. Los textos de inicio viven en `content/paginas/*.{es,en}.md`.
-- **Fondos** recreados con CSS a partir de tus texturas de rayas (puntos, candy, lila, azul, aqua, menta, salvia y crema), brillitos que siguen al cursor, corazones que explotan, macarons que se abren, un contador de visitas y una entrada al azar.
+- Contador de visitas y botón de entrada al azar en el footer.
 - **My IDE** (`ide.html`): editor de JS y HTML que corre aislado en un iframe.
 - **GitHub widget**: repos recientes y último commit (API pública de GitHub, por https).
 
@@ -115,7 +115,7 @@ concepto: la recursión
 
 ## Personalizar
 
-- `js/config.js`: nombre, versión, foto de perfil, usuario de GitHub, enlaces de `media`, botones, macarons y temas de la columna derecha.
+- `js/config.js`: nombre, versión, foto de perfil, usuario de GitHub, enlaces de `media`, botones, menú de navegación y temas de la columna derecha.
 - `js/i18n.js`: textos de la interfaz en cada idioma.
 - `css/main.css`: paleta (variables en `:root`) y layout.
 - **Foto de perfil sincronizada con GitHub**: con `profileImage: "github"` (por defecto) la página usa tu avatar de `https://github.com/<githubUser>.png`. Lo vuelve a pedir cada `avatarRefreshMinutes` (5 min) y al volver a la pestaña, así que si cambias tu foto en GitHub, la web se actualiza sola y aparece el sello **● live**. Si GitHub no responde, se muestra la lila de `assets/img/perfil.svg`. Para usar otra imagen, pon su ruta en `profileImage`.

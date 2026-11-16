@@ -6,7 +6,6 @@ VL.ready(function () {
 
   main.innerHTML = `
     <div class="paper paper-cream">
-      <span class="deco-bow" style="top:-20px;left:30px"><i></i></span>
       <div class="section-head"><h1 class="section-title"><span class="sec-icon">✎</span>${esc(t("highlights"))}</h1>
         <button class="btn btn-small" type="button" id="exp">${esc(t("export"))} ⬇</button></div>
       <div class="hl-filter" id="flt">

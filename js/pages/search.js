@@ -12,7 +12,6 @@ VL.ready(async function () {
 
   main.innerHTML = `
     <div class="paper paper-cream">
-      <span class="deco-tape t-mint" style="top:-12px;left:36px;transform:rotate(-3deg)"></span>
       <div class="section-head"><h1 class="section-title"><span class="sec-icon">✦</span>${esc(t("search").replace(/\.+$/, ""))}</h1></div>
       <form class="toolbar" action="buscar.html">
         <input class="input-pill" name="q" type="search" value="${esc(q)}" placeholder="${esc(t("search"))}" aria-label="${esc(t("search"))}">

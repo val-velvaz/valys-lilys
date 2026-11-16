@@ -12,7 +12,6 @@ VL.ready(function () {
 
   main.innerHTML = `
     <div class="paper paper-cream">
-      <span class="deco-tape t-lilac" style="top:-12px;left:30px;transform:rotate(-4deg)"></span>
       <div class="section-head"><h1 class="section-title"><span class="sec-icon">&lt;/&gt;</span>${esc(t("ide"))}</h1></div>
       <p class="section-intro">Practica aquí lo que explicas: el código corre en tu navegador, aislado. <kbd>Ctrl</kbd> + <kbd>Enter</kbd> para ejecutar.</p>
       <div class="ide">

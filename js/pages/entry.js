@@ -23,8 +23,6 @@ VL.ready(async function () {
 
   main.innerHTML = `
     <article class="paper entry">
-      <span class="deco-tape t-butter" style="top:-12px;left:40px;transform:rotate(-3deg)"></span>
-      <span class="deco-bow" style="top:-20px;right:30px"><i></i></span>
       <header class="entry-head">
         <a class="sec-badge sec-${esc(entry.section)}" href="${esc(VL.sectionPage(entry.section))}">${esc(C.sections[entry.section] ? C.sections[entry.section].icon : "✿")} ${esc(VL.sectionLabel(entry.section))}</a>
         <div class="md"><h1 class="entry-title">${fm.emoji ? `<span aria-hidden="true">${esc(fm.emoji)}</span> ` : ""}${esc(fm.title)}</h1></div>
@@ -42,7 +40,6 @@ VL.ready(async function () {
       </nav>
     </article>
     <section class="paper paper-cream guestbook" aria-labelledby="gb-h">
-      <span class="deco-pin" style="top:-16px;left:-12px"></span>
       <div class="md"><h2 id="gb-h">${esc(t("comments"))}</h2></div>
       <form><input name="who" maxlength="40" placeholder="tu nombre ✿" aria-label="nombre"><textarea name="msg" rows="3" maxlength="600" placeholder="${esc(t("commentPh"))}" aria-label="mensaje" required></textarea>
       <div class="w-row" style="margin:0"><button class="btn" type="submit">${esc(t("send"))} ♡</button><small>${esc(t("localNote"))}</small></div></form>

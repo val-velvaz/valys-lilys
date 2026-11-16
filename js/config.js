@@ -31,6 +31,7 @@ window.VL_CONFIG = {
   ],
 
   // Pila de macarons (navegación izquierda)
+  // Menú "navigation" de la columna izquierda
   macarons: [
     { key: "games", href: "games.html", flavor: "pink" },
     { key: "projects", href: "projects.html", flavor: "mint" },

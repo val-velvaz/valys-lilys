@@ -12,8 +12,6 @@ VL.ready(async function () {
   document.title = `${title} · ${C.siteName}`;
   main.innerHTML = `
     <div class="paper paper-cream">
-      <span class="deco-tape t-lilac" style="top:-12px;left:30px;transform:rotate(-4deg)"></span>
-      <span class="deco-pin" style="top:-18px;right:-14px"></span>
       <div class="section-head"><h1 class="section-title"><span class="sec-icon" aria-hidden="true">${esc(topic ? "#" : sec.icon || "✿")}</span>${esc(title)}</h1></div>
       <div class="md section-intro" id="intro"></div>
       <div class="toolbar">
@@ -74,7 +72,6 @@ VL.ready(async function () {
     $$(".view-toggle button", main).forEach((b) => b.classList.toggle("is-on", b.dataset.v === state.view));
     cards.innerHTML = list.map((e, i) => `
       <li><a class="card" href="${VL.entryUrl(e)}">
-        ${i % 3 === 0 ? `<span class="deco-tape ${["", "t-mint", "t-lilac"][i % 3]}"></span>` : ""}
         <span class="card-date">${esc(VL.fmtDate(e.date))}</span>
         ${e.emoji ? `<span class="card-emoji" aria-hidden="true">${esc(e.emoji)}</span>` : ""}
         <h3>${state.q ? VL.markTerms(e.title, state.q) : esc(e.title)}</h3>
