@@ -2,22 +2,64 @@
 //   ```flashcards     question :: answer        (one per line)
 //   ```quiz           ? question / + right / - wrong / > why   (blank line between questions)
 //   ```pasos          lines in the right order (they get shuffled)
-//   ```jerga          optional "concepto: X" + extra words to watch, one per line
+//   ```jerga          optional "concepto: X" (or concept: / Konzept:) + extra words to watch, one per line
 //   ```hoja-feynman   optional "concepto: X" → 4-step sheet exportable as a .md post
 import { el, store, norm, download } from './data.js';
 import { t } from './i18n.js';
 import { inline } from './markdown.js';
+import { DEFAULT_LANG } from './langs.js';
 
 const lines = (src) => src.split('\n').map((l) => l.trim()).filter(Boolean);
 const shuffle = (a) => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const box = (title, score) => el('div', { class: 'game no-hl' }, el('p', { class: 'game__title' }, title, score || null));
 
-export function renderGame(lang, code, ctx) {
-  const make = GAMES[lang];
+// ctx = { slug, lang }: lang is the language of the post, so games that read or write text
+// (jargon detector, Feynman sheet) use the right words. Drafts are saved per language
+// (Spanish keeps the old key so nothing saved before is lost).
+export function renderGame(game, code, ctx) {
+  const make = GAMES[game];
   if (!make) return null;
   ctx.n = (ctx.n || 0) + 1;
-  return make(code, `game:${ctx.slug}:${lang}:${ctx.n}`);
+  const lang = WORDS[ctx.lang] ? ctx.lang : DEFAULT_LANG;
+  return make(code, `game:${ctx.slug}:${game}:${ctx.n}${lang === DEFAULT_LANG ? '' : `:${lang}`}`, lang);
 }
+
+/* ---------- Words per language ----------
+   jargon      words that make an explanation hard for a 12-year-old (written without accents:
+               the text is compared after removing them, so "metodología" matches "metodologia")
+   analogy     phrases that show you are using an example or an analogy
+   longWord    letters from which a word counts as "very long" (German joins words, so it's higher)
+   sheet       texts of the .md file exported by the Feynman sheet */
+const WORDS = {
+  es: {
+    jargon: ['paradigma', 'intrinseco', 'sinergia', 'heuristica', 'ontologia', 'epistemologia', 'implementar', 'optimizar', 'inherente',
+      'subyacente', 'metodologia', 'abstraccion', 'dicotomia', 'holistico', 'iterativo', 'asintotico', 'polimorfismo', 'encapsulamiento',
+      'instanciar', 'isomorfismo', 'estocastico', 'framework', 'pipeline', 'escalable', 'robusto', 'trivial', 'obviamente', 'evidentemente',
+      'claramente', 'simplemente', 'basicamente', 'a priori', 'ergo', 'biyectiva'],
+    analogy: /\b(como si|es como|imagina|igual que|por ejemplo)\b/g,
+    longWord: 12,
+    sheet: { untitled: 'Mi concepto', summary: (x) => `Mi explicación de ${x} con el método Feynman.`, simple: 'Explicado como a un niño', gaps: 'Mis lagunas', analogy: 'La analogía' }
+  },
+  en: {
+    jargon: ['paradigm', 'intrinsic', 'synergy', 'heuristic', 'ontology', 'epistemology', 'implement', 'optimize', 'inherent', 'inherently',
+      'underlying', 'methodology', 'abstraction', 'dichotomy', 'holistic', 'iterative', 'asymptotic', 'polymorphism', 'encapsulation',
+      'instantiate', 'isomorphism', 'stochastic', 'framework', 'pipeline', 'scalable', 'robust', 'leverage', 'trivial', 'trivially',
+      'obviously', 'clearly', 'simply', 'basically', 'a priori', 'ergo', 'bijective'],
+    analogy: /\b(it['’]?s like|is like|like a|imagine|for example|for instance|as if)\b/g,
+    longWord: 12,
+    sheet: { untitled: 'My concept', summary: (x) => `My explanation of ${x} with the Feynman method.`, simple: 'Explained like to a kid', gaps: 'My gaps', analogy: 'The analogy' }
+  },
+  de: {
+    jargon: ['paradigma', 'intrinsisch', 'synergie', 'heuristik', 'ontologie', 'epistemologie', 'implementieren', 'optimieren', 'inharent',
+      'zugrundeliegend', 'methodik', 'methodologie', 'abstraktion', 'dichotomie', 'holistisch', 'iterativ', 'asymptotisch', 'polymorphie',
+      'kapselung', 'instanziieren', 'isomorphie', 'stochastisch', 'framework', 'pipeline', 'skalierbar', 'robust', 'trivial', 'trivialerweise',
+      'offensichtlich', 'selbstverstandlich', 'klarerweise', 'bekanntlich', 'a priori', 'ergo', 'bijektiv'],
+    analogy: /\b(ist wie|wie ein|wie eine|stell dir vor|zum beispiel|als ob)\b/g,
+    longWord: 16,
+    sheet: { untitled: 'Mein Konzept', summary: (x) => `Meine Erklärung von ${x} mit der Feynman-Methode.`, simple: 'Erklärt wie einem Kind', gaps: 'Meine Lücken', analogy: 'Die Analogie' }
+  }
+};
+const CONCEPT = /^(concepto|concept|konzept)\s*:\s*(.*)$/i;
 
 const GAMES = {
   flashcards(src) {
@@ -106,18 +148,15 @@ const GAMES = {
     return wrapper;
   },
 
-  jerga(src, key) {
-    const JARGON = ['paradigma', 'intrinseco', 'sinergia', 'heuristica', 'ontologia', 'epistemologia', 'implementar', 'optimizar', 'inherente',
-      'subyacente', 'metodologia', 'abstraccion', 'dicotomia', 'holistico', 'iterativo', 'asintotico', 'polimorfismo', 'encapsulamiento',
-      'instanciar', 'isomorfismo', 'estocastico', 'framework', 'pipeline', 'escalable', 'robusto', 'trivial', 'obviamente', 'evidentemente',
-      'claramente', 'simplemente', 'basicamente', 'a priori', 'ergo', 'biyectiva'];
+  jerga(src, key, lang) {
+    const W = WORDS[lang];
     let concept = '';
     const extra = [];
     for (const l of lines(src)) {
-      const m = /^concepto\s*:\s*(.*)$/i.exec(l);
-      if (m) concept = m[1]; else extra.push(norm(l));
+      const m = CONCEPT.exec(l);
+      if (m) concept = m[2]; else extra.push(norm(l));
     }
-    const words = [...JARGON, ...extra];
+    const words = [...W.jargon, ...extra];
     const area = el('textarea', { rows: '6', placeholder: t('g_placeholder'), 'aria-label': t('g_placeholder') });
     area.value = store.get(key, '');
     area.addEventListener('input', () => store.set(key, area.value));
@@ -132,10 +171,10 @@ const GAMES = {
       const sentences = text.split(/[.!?¡¿]+/).map((s) => s.trim()).filter(Boolean);
       const tokens = text.split(/\s+/).filter(Boolean);
       const avg = tokens.length / Math.max(1, sentences.length);
-      const longWords = tokens.map((w) => w.replace(/[^\p{L}]/gu, '')).filter((w) => w.length >= 12);
+      const longWords = tokens.map((w) => w.replace(/[^\p{L}]/gu, '')).filter((w) => w.length >= W.longWord);
       const n = norm(text);
       const found = words.filter((w) => w && new RegExp(`(^|[^a-z])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z]|$)`).test(n));
-      const analogies = (n.match(/\b(como si|es como|imagina|igual que|por ejemplo|like a|imagine)\b/g) || []).length;
+      const analogies = (n.match(W.analogy) || []).length;
       const score = Math.max(0, Math.min(100, Math.round(100 - Math.max(0, avg - 14) * 3 - longWords.length * 4 - found.length * 9 + Math.min(analogies, 3) * 5)));
       bar.style.width = `${score}%`;
       label.textContent = `${t('g_score')}: ${score}/100 ${score >= 85 ? '🌸' : score >= 60 ? '🌱' : '🧪'}`;
@@ -168,9 +207,10 @@ const GAMES = {
     return wrapper;
   },
 
-  'hoja-feynman'(src, key) {
-    const m = /concepto\s*:\s*(.+)/i.exec(src || '');
-    const data = store.get(key, { concept: m ? m[1].trim() : '', simple: '', gaps: '', analogy: '' });
+  'hoja-feynman'(src, key, lang) {
+    const S = WORDS[lang].sheet;
+    const m = lines(src || '').map((l) => CONCEPT.exec(l)).find((x) => x && x[2]);
+    const data = store.get(key, { concept: m ? m[2].trim() : '', simple: '', gaps: '', analogy: '' });
     const bar = el('div', { class: 'meter__bar' });
     const fields = [['concept', 'g_concept', 1], ['simple', 'g_simple', 5], ['gaps', 'g_gaps', 3], ['analogy', 'g_analogy', 3]].map(([k, label, rows]) => {
       const input = rows === 1 ? el('input', { class: 'input', type: 'text' }) : el('textarea', { rows: String(rows) });
@@ -182,10 +222,11 @@ const GAMES = {
     progress();
     const exportMd = () => {
       const today = new Date().toISOString().slice(0, 10);
-      const title = data.concept || 'Mi concepto';
+      const title = data.concept || S.untitled;
       const quoteLines = (s) => (s || '').split('\n').map((l) => `> ${l}`).join('\n');
+      // the file goes to content/<lang>/posts/ (same language as this page)
       download(`${(norm(title).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'feynman')}.md`,
-        `---\ntitle: ${title}\ndate: ${today}\nsection: blog\ntags: [feynman]\nsummary: Mi explicación de ${title} con el método Feynman.\nemoji: ⚛\n---\n\n## Explicado como a un niño\n\n${data.simple}\n\n## Mis lagunas\n\n> [!NOTE]\n${quoteLines(data.gaps)}\n\n## La analogía\n\n> [!FEYNMAN]\n${quoteLines(data.analogy)}\n`);
+        `---\ntitle: ${title}\ndate: ${today}\nsection: blog\ntags: [feynman]\nsummary: ${S.summary(title)}\nemoji: ⚛\n---\n\n## ${S.simple}\n\n${data.simple}\n\n## ${S.gaps}\n\n> [!NOTE]\n${quoteLines(data.gaps)}\n\n## ${S.analogy}\n\n> [!FEYNMAN]\n${quoteLines(data.analogy)}\n`);
     };
     const wrapper = box(t('g_sheet'));
     wrapper.append(el('div', { class: 'sheet' }, fields.map(([, label]) => label)), el('div', { class: 'meter' }, bar),
