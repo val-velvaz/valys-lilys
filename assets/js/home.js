@@ -1,6 +1,6 @@
 // home.js — search, section filters and the card grid (from content/index.json).
 import { initHeader } from './header.js';
-import { loadCatalog, el, formatDate, readingTime, norm, SECTIONS, sectionName } from './data.js';
+import { loadCatalog, el, formatDate, readingTime, norm, SECTIONS, sectionName, postIcon } from './data.js';
 import { t } from './i18n.js';
 
 initHeader();
@@ -21,7 +21,7 @@ function card(post) {
     el('div', { class: 'card__body' },
       el('div', { class: 'meta' },
         el('span', { class: 'section-label' }, sectionName(post.section)),
-        post.emoji ? el('span', { class: 'emoji', 'aria-hidden': 'true' }, post.emoji) : null),
+        postIcon(post, 'emoji')),
       el('h3', {}, post.title),
       el('p', { class: 'date' }, `${formatDate(post.date)} · ${readingTime(post.text)} ${t('min_read')}`),
       post.summary ? el('p', { class: 'card__summary' }, post.summary) : null,

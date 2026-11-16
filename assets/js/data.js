@@ -63,6 +63,13 @@ export function el(tag, attrs = {}, ...children) {
   return node;
 }
 
+// Post icon: the image from the front matter if there is one, otherwise the emoji
+export function postIcon(post, className) {
+  if (post.image) return el('img', { class: `${className} ${className}--img`, src: post.image, alt: '', loading: 'lazy', decoding: 'async' });
+  if (post.emoji) return el('span', { class: className, 'aria-hidden': 'true' }, post.emoji);
+  return null;
+}
+
 // Downloads a text file (used to export .md)
 export function download(name, text) {
   const url = URL.createObjectURL(new Blob([text], { type: 'text/markdown' }));

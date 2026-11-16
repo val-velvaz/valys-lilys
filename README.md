@@ -30,6 +30,14 @@ Después abre <http://localhost:8000>.
    ```
 
    `section` puede ser `math`, `cs`, `games`, `projects`, `challenges`, `blog` o `about`. Con `draft: true` la entrada no se publica.
+
+   **Imagen en lugar del emoji (opcional):** guarda la imagen en `assets/img/posts/` y añade `image:` al front matter. Se muestra en la tarjeta y junto al título; si falta, se usa el emoji.
+
+   ```markdown
+   image: assets/img/posts/integrales.png
+   ```
+
+   Sirve cualquier `png`, `jpg`, `webp`, `gif`, `svg` o `avif`. Mejor si es cuadrada (por ejemplo 240×240) y pesa poco. También vale una URL `https://…`. `build-index.mjs` avisa si la ruta no existe.
 3. Regenera el índice que usan la portada y el buscador:
 
    ```bash
