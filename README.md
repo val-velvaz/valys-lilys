@@ -266,8 +266,8 @@ concepto: la recursión
 ```
 ````
 
-- **jerga**: puntúa si un niño de 12 años entendería tu explicación.
-- **hoja-feynman**: los 4 pasos del método. Se exporta como una entrada `.md` lista para `content/es/posts/`.
+- **jerga**: puntúa si un niño de 12 años entendería tu explicación. Usa las palabras del **idioma de la entrada** (jerga, analogías y largo de palabra en `WORDS`, al principio de `assets/js/games.js`): para mejorar la lista de un idioma, edítala ahí.
+- **hoja-feynman**: los 4 pasos del método. Se exporta como una entrada `.md` en el idioma de la página, lista para `content/<idioma>/posts/`.
 
 ## Funciones
 

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-16T23:14:09.725Z",
+ "generated": "2026-11-16T23:19:06.124Z",
  "syllabus": {
   "es": [
    {
@@ -572,7 +572,65 @@
    "minutes": 1,
    "text": "Esta es la herramienta que uso para escribir cada entrada del blog. Se guarda sola mientras escribes, y al final puedes exportarla como archivo .md para ponerla en content/es/posts/. concepto: El archivo exportado ya trae el front matter (título, fecha, sección, tags…). Solo muévelo a content/es/posts/ y ejecuta node scripts/build-index.mjs.",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "hoja-feynman",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/hoja-feynman.md",
+   "section": "games",
+   "title": "My Feynman sheet",
+   "date": "2026-11-16",
+   "tags": [
+    "feynman",
+    "plantilla"
+   ],
+   "summary": "Fill in the 4 steps of the method with any concept and download it as a Markdown post ready for the blog.",
+   "emoji": "📝",
+   "image": "",
+   "featured": true,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "This is the tool I use to write every post on the blog. It saves itself while you write, and at the end you can export it as a .md file to put in content/en/posts/. concepto: The exported file already has the front matter (title, date, section, tags…). Just move it to content/en/posts/ and run node scripts/build-index.mjs.",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "hoja-feynman",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/hoja-feynman.md",
+   "section": "games",
+   "title": "Mein Feynman-Blatt",
+   "date": "2026-11-16",
+   "tags": [
+    "feynman",
+    "plantilla"
+   ],
+   "summary": "Fülle die 4 Schritte der Methode mit einem beliebigen Konzept aus und lade es als Markdown-Beitrag für den Blog herunter.",
+   "emoji": "📝",
+   "image": "",
+   "featured": true,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Das ist das Werkzeug, mit dem ich jeden Beitrag im Blog schreibe. Es speichert sich beim Schreiben von selbst, und am Ende kannst du es als .md-Datei exportieren und in content/de/posts/ ablegen. concepto: Die exportierte Datei hat schon das Front Matter (Titel, Datum, Bereich, Tags…). Verschiebe sie einfach nach content/de/posts/ und führe node scripts/build-index.mjs aus.",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -596,7 +654,61 @@
    "minutes": 1,
    "text": "La idea Una página sencilla: una portada con buscador, filtros por sección y tarjetas, y una página por entrada. Dos temas, pastel y alto contraste, y la interfaz en inglés, español y alemán. Cómo funciona Pieza Archivo --- --- Colores y fuentes assets/css/tokens.css Portada: búsqueda, filtros y tarjetas assets/js/home.js Markdown → página assets/js/markdown.js Juegos assets/js/games.js Subrayados assets/js/highlight.js Índice de entradas scripts/build-index.mjs Cada entrada es un .md en content/es/posts/ con front matter: - title: Mi entrada section: cs date: 2026-11-15 tags: [python, feynman] summary: Una frase que la resume. emoji: 🌸 - Aquí va el contenido ✿ Después se ejecuta node scripts/build-index.mjs para regenerar el índice que usan la portada y el buscador. Por seguridad, la página no carga scripts de otros sitios: el Markdown se convierte a HTML con un intérprete propio que nunca usa innerHTML.",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "como-hice-esta-pagina",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/como-hice-esta-pagina.md",
+   "section": "projects",
+   "title": "How I made this site",
+   "date": "2026-11-15",
+   "tags": [
+    "web",
+    "javascript"
+   ],
+   "summary": "HTML, CSS and JavaScript with no frameworks or external scripts. All the content lives in Markdown files.",
+   "emoji": "🧁",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "The idea A simple site: a home page with search, section filters and cards, and one page per post. Two themes, pastel and high contrast, and the interface in English, Spanish and German. How it works Piece File --- --- Colors and fonts assets/css/tokens.css Home: search, filters and cards assets/js/home.js Markdown → page assets/js/markdown.js Games assets/js/games.js Highlights assets/js/highlight.js Post index scripts/build-index.mjs Every post is a .md file in content/<language>/posts/ with front matter: - title: My post section: cs date: 2026-11-15 tags: [python, feynman] summary: One sentence that sums it up. emoji: 🌸 - The content goes here ✿ Then node scripts/build-index.mjs rebuilds the index used by the home page and the search. For security, the site doesn't load scripts from other sites: Markdown is turned into HTML by its own parser, which never uses innerHTML.",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "como-hice-esta-pagina",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/como-hice-esta-pagina.md",
+   "section": "projects",
+   "title": "Wie ich diese Seite gebaut habe",
+   "date": "2026-11-15",
+   "tags": [
+    "web",
+    "javascript"
+   ],
+   "summary": "HTML, CSS und JavaScript ohne Frameworks oder externe Skripte. Alle Inhalte stehen in Markdown-Dateien.",
+   "emoji": "🧁",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Die Idee Eine einfache Seite: eine Startseite mit Suche, Bereichsfiltern und Karten, und eine Seite pro Beitrag. Zwei Designs, Pastell und hoher Kontrast, und die Oberfläche auf Englisch, Spanisch und Deutsch. Wie es funktioniert Teil Datei --- --- Farben und Schriften assets/css/tokens.css Startseite: Suche, Filter und Karten assets/js/home.js Markdown → Seite assets/js/markdown.js Spiele assets/js/games.js Markierungen assets/js/highlight.js Beitragsindex scripts/build-index.mjs Jeder Beitrag ist eine .md-Datei in content/<sprache>/posts/ mit Front Matter: - title: Mein Beitrag section: cs date: 2026-11-15 tags: [python, feynman] summary: Ein Satz, der ihn zusammenfasst. emoji: 🌸 - Hier kommt der Inhalt ✿ Danach baut node scripts/build-index.mjs den Index neu, den die Startseite und die Suche verwenden. Aus Sicherheitsgründen lädt die Seite keine Skripte von anderen Seiten: Markdown wird von einem eigenen Parser in HTML umgewandelt, der nie innerHTML benutzt.",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -622,7 +734,65 @@
    "minutes": 1,
    "text": "Cada estructura de datos se parece a algo que ya conoces. Repásalas con tarjetas ✦ Pila (stack) Una torre de platos 🍽 Cola (queue) La fila del helado 🍦 Árbol Un árbol genealógico 🌳 Grafo Un mapa de metro 🚇 Diccionario Una agenda de contactos 📒 Array Una caja de huevos 🥚 ¿Por qué esas analogías? Pila: solo puedes coger el plato de arriba → último en entrar, primero en salir. Cola: el primero que llegó es el primero que se va → primero en entrar, primero en salir. Array: cada huevo tiene su hueco numerado.",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "estructuras-de-datos",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/estructuras-de-datos.md",
+   "section": "games",
+   "title": "Data structures with analogies",
+   "date": "2026-11-14",
+   "tags": [
+    "datastructures",
+    "juego"
+   ],
+   "summary": "Every data structure looks like something from real life. Review them with cards.",
+   "emoji": "🧩",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "recursion"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Every data structure looks like something you already know. Review them with cards ✦ Stack A tower of plates 🍽 Queue The line at the ice cream shop 🍦 Tree A family tree 🌳 Graph A subway map 🚇 Dictionary A contact book 📒 Array An egg carton 🥚 Why those analogies? Stack: you can only take the plate on top → last in, first out. Queue: the first one who arrived is the first one to leave → first in, first out. Array: every egg has its own numbered slot.",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "estructuras-de-datos",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/estructuras-de-datos.md",
+   "section": "games",
+   "title": "Datenstrukturen mit Analogien",
+   "date": "2026-11-14",
+   "tags": [
+    "datastructures",
+    "juego"
+   ],
+   "summary": "Jede Datenstruktur ähnelt etwas aus dem echten Leben. Wiederhole sie mit Karteikarten.",
+   "emoji": "🧩",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "recursion"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Jede Datenstruktur ähnelt etwas, das du schon kennst. Wiederhole sie mit Karteikarten ✦ Stapel (Stack) Ein Tellerstapel 🍽 Warteschlange (Queue) Die Schlange vor der Eisdiele 🍦 Baum Ein Stammbaum 🌳 Graph Ein U-Bahn-Plan 🚇 Wörterbuch (Dictionary) Ein Adressbuch 📒 Array Ein Eierkarton 🥚 Warum diese Analogien? Stapel: Du kannst nur den obersten Teller nehmen → zuletzt rein, zuerst raus. Warteschlange: Wer zuerst kam, geht zuerst → zuerst rein, zuerst raus. Array: Jedes Ei hat seinen eigenen nummerierten Platz.",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -648,7 +818,65 @@
    "minutes": 1,
    "text": "Cómo se juega Elige un concepto y explícalo como a un niño de 12 años. El detector revisa: frases demasiado largas palabras larguísimas jerga (en rosa) y palabras muy largas (en lila) si usas analogías (\"es como…\", \"imagina…\") ✿ concepto: ¿qué es un algoritmo? Las palabras \"obviamente\", \"simplemente\" o \"trivial\" restan puntos: casi siempre esconden una laguna.",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "detector-de-jerga",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/detector-de-jerga.md",
+   "section": "games",
+   "title": "Jargon detector",
+   "date": "2026-11-12",
+   "tags": [
+    "feynman",
+    "juego"
+   ],
+   "summary": "Write your explanation and the detector tells you whether a 12-year-old would understand it. Get 85 points or more!",
+   "emoji": "🔍",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "How to play Pick a concept and explain it like to a 12-year-old. The detector checks: sentences that are too long very long words jargon (in pink) and very long words (in lilac) whether you use analogies (\"it's like…\", \"imagine…\") ✿ concepto: what is an algorithm? Words like \"obviously\", \"simply\" or \"trivial\" cost points: they almost always hide a gap.",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "detector-de-jerga",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/detector-de-jerga.md",
+   "section": "games",
+   "title": "Fachjargon-Detektor",
+   "date": "2026-11-12",
+   "tags": [
+    "feynman",
+    "juego"
+   ],
+   "summary": "Schreib deine Erklärung und der Detektor sagt dir, ob ein 12-jähriges Kind sie verstehen würde. Schaffe 85 Punkte oder mehr!",
+   "emoji": "🔍",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "So wird gespielt Wähle ein Konzept und erkläre es wie einem 12-jährigen Kind. Der Detektor prüft: zu lange Sätze sehr lange Wörter Fachjargon (in Rosa) und sehr lange Wörter (in Lila) ob du Analogien benutzt („das ist wie…“, „stell dir vor…“) ✿ concepto: Was ist ein Algorithmus? Wörter wie „offensichtlich“, „einfach“ oder „trivial“ kosten Punkte: Sie verstecken fast immer eine Lücke.",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -673,7 +901,63 @@
    "minutes": 1,
    "text": "Esta semana intenté explicarle la recursión a una amiga y… me quedé en blanco a la mitad. Plot twist: no la entendía tanto como creía. Mi laguna: sabía escribir funciones recursivas, pero no sabía explicar por qué la respuesta \"baja\" de vuelta. Volví a estudiar, encontré la analogía de la escalera y ahora sí. La escribí en La recursión explicada con escaleras. Lo que aprendí Saber hacer ≠ saber explicar. Las pausas incómodas son pistas. Las analogías se quedan; las definiciones se olvidan.",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "diario-semana-2",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/diario-semana-2.md",
+   "section": "blog",
+   "title": "Study diary · week 2",
+   "date": "2026-11-10",
+   "tags": [
+    "personal",
+    "python",
+    "feynman"
+   ],
+   "summary": "This week I found out I didn't understand recursion as well as I thought. The Feynman method caught me.",
+   "emoji": "📓",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "This week I tried to explain recursion to a friend and… I went blank halfway through. Plot twist: I didn't understand it as well as I thought. My gap: I knew how to write recursive functions, but I couldn't explain why the answer \"comes back down\". I studied again, found the staircase analogy and now I get it. I wrote it up in Recursion explained with stairs. What I learned Knowing how to do ≠ knowing how to explain. Awkward pauses are clues. Analogies stick; definitions fade.",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "diario-semana-2",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/diario-semana-2.md",
+   "section": "blog",
+   "title": "Lerntagebuch · Woche 2",
+   "date": "2026-11-10",
+   "tags": [
+    "personal",
+    "python",
+    "feynman"
+   ],
+   "summary": "Diese Woche habe ich gemerkt, dass ich Rekursion nicht so gut verstand, wie ich dachte. Die Feynman-Methode hat mich erwischt.",
+   "emoji": "📓",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Diese Woche habe ich versucht, einer Freundin Rekursion zu erklären, und… mitten drin hatte ich ein Blackout. Plot Twist: Ich verstand sie nicht so gut, wie ich dachte. Meine Lücke: Ich konnte rekursive Funktionen schreiben, aber nicht erklären, warum die Antwort wieder „nach unten“ kommt. Ich habe noch einmal gelernt, die Treppen-Analogie gefunden, und jetzt klappt es. Ich habe sie in Rekursion erklärt mit Treppen aufgeschrieben. Was ich gelernt habe Etwas können ≠ etwas erklären können. Peinliche Pausen sind Hinweise. Analogien bleiben; Definitionen vergisst man.",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -701,7 +985,8 @@
    "text": "Explicado como a un niño Quieres contar los escalones de una escalera muy larga. Haces trampa: cuentas uno y le dices a tu clon \"cuenta tú el resto\". Tu clon hace lo mismo… hasta que alguien llega arriba y dice \"aquí ya no quedan: cero\". Entonces cada clon suma su uno y la respuesta baja la escalera. Eso es la recursión: resolver un problema grande usando el mismo problema, pero más pequeño. def contar(escalones): if escalones 0: # caso base: ya no quedan return 0 return 1 + contar(escalones - 1) # uno + el resto Las dos reglas Un caso base que se resuelve sin ayuda (si no, los clones nunca paran). Un paso recursivo que hace el problema más pequeño. Si olvidas el caso base, la función se llama para siempre y Python se queja con RecursionError. Repasa con tarjetas ¿Qué es la recursión? Resolver un problema usando una versión más pequeña del mismo problema. ¿Qué es el caso base? El caso que se resuelve sin volver a llamar a la función. ¿Qué pasa sin caso base? La función se llama infinitamente → RecursionError. Analogía favorita Contar escalones pidiéndole a tu clon que cuente el resto. Ponte a prueba ¿Qué necesita SIEMPRE una función recursiva? Un caso base Un bucle for Una variable global Sin caso base, la función nunca deja de llamarse a sí misma. contar(3) devuelve… 1 3 0 1 + 1 + 1 + 0 = 3",
    "langs": [
     "es",
-    "en"
+    "en",
+    "de"
    ]
   },
   {
@@ -729,7 +1014,37 @@
    "text": "Explained like to a kid You want to count the steps of a very long staircase. You cheat: you count one and tell your clone \"you count the rest\". Your clone does the same… until someone reaches the top and says \"there are none left here: zero\". Then every clone adds its one and the answer comes back down the stairs. That is recursion: solving a big problem using the same problem, only smaller. def count(steps): if steps 0: # base case: nothing left return 0 return 1 + count(steps - 1) # one + the rest The two rules A base case that is solved without help (otherwise the clones never stop). A recursive step that makes the problem smaller. If you forget the base case, the function calls itself forever and Python complains with RecursionError. Review with cards What is recursion? Solving a problem using a smaller version of the same problem. What is the base case? The case that is solved without calling the function again. What happens without a base case? The function calls itself forever → RecursionError. Favorite analogy Counting steps by asking your clone to count the rest. Test yourself What does a recursive function ALWAYS need? A base case A for loop A global variable Without a base case, the function never stops calling itself. count(3) returns… 1 3 0 1 + 1 + 1 + 0 = 3",
    "langs": [
     "es",
-    "en"
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "recursion",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/recursion.md",
+   "section": "cs",
+   "title": "Rekursion erklärt mit Treppen",
+   "date": "2026-11-09",
+   "tags": [
+    "python",
+    "algorithms",
+    "feynman"
+   ],
+   "summary": "Eine Funktion, die sich selbst aufruft, klingt nach Zauberei. Eigentlich ist es, als würdest du jemanden um Hilfe bitten, der genau wie du ist.",
+   "emoji": "🪜",
+   "image": "assets/img/posts/recursion.svg",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Erklärt wie einem Kind Du willst die Stufen einer sehr langen Treppe zählen. Du schummelst: Du zählst eine und sagst zu deinem Klon „zähl du den Rest“. Dein Klon macht dasselbe… bis jemand oben ankommt und sagt: „hier ist keine mehr übrig: null“. Dann zählt jeder Klon seine eine Stufe dazu, und die Antwort wandert die Treppe hinunter. Das ist Rekursion: ein großes Problem lösen, indem man dasselbe Problem in klein löst. def zaehlen(stufen): if stufen 0: # Basisfall: keine Stufen mehr return 0 return 1 + zaehlen(stufen - 1) # eine + der Rest Die zwei Regeln Ein Basisfall, der ohne Hilfe gelöst wird (sonst hören die Klone nie auf). Ein rekursiver Schritt, der das Problem kleiner macht. Wenn du den Basisfall vergisst, ruft sich die Funktion für immer selbst auf und Python beschwert sich mit RecursionError. Wiederhole mit Karteikarten Was ist Rekursion? Ein Problem mit einer kleineren Version desselben Problems lösen. Was ist der Basisfall? Der Fall, der gelöst wird, ohne die Funktion erneut aufzurufen. Was passiert ohne Basisfall? Die Funktion ruft sich endlos auf → RecursionError. Lieblingsanalogie Stufen zählen, indem man seinen Klon den Rest zählen lässt. Teste dich Was braucht eine rekursive Funktion IMMER? Einen Basisfall Eine for-Schleife Eine globale Variable Ohne Basisfall hört die Funktion nie auf, sich selbst aufzurufen. zaehlen(3) gibt zurück… 1 3 0 1 + 1 + 1 + 0 = 3",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -755,7 +1070,65 @@
    "minutes": 1,
    "text": "Explicado como a un niño Una base de datos es una biblioteca muy ordenada: cada tabla es una estantería con un tema, cada fila es un libro, cada columna es un dato del libro (título, autora, año), y una consulta (SQL) es pedirle algo a la bibliotecaria. SELECT titulo FROM libros WHERE autora = 'Ada Lovelace'; Traducción: \"bibliotecaria, ¿me traes los títulos de los libros de Ada?\" Tabla Una estantería con libros del mismo tipo Fila Un libro Columna Un dato que tienen todos los libros (p. ej. el título) Consulta SQL Una petición a la bibliotecaria",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "bases-de-datos",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/bases-de-datos.md",
+   "section": "cs",
+   "title": "A database is a library",
+   "date": "2026-11-07",
+   "tags": [
+    "databases",
+    "feynman"
+   ],
+   "summary": "Tables, rows and queries explained as shelves, books and librarians.",
+   "emoji": "📚",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Explained like to a kid A database is a very tidy library: each table is a shelf about one topic, each row is a book, each column is a piece of data about the book (title, author, year), and a query (SQL) is asking the librarian for something. SELECT title FROM books WHERE author = 'Ada Lovelace'; Translation: \"librarian, could you bring me the titles of Ada's books?\" Table A shelf of books of the same kind Row One book Column A piece of data every book has (e.g. the title) SQL query A request to the librarian",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "bases-de-datos",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/bases-de-datos.md",
+   "section": "cs",
+   "title": "Eine Datenbank ist eine Bibliothek",
+   "date": "2026-11-07",
+   "tags": [
+    "databases",
+    "feynman"
+   ],
+   "summary": "Tabellen, Zeilen und Abfragen erklärt als Regale, Bücher und Bibliothekarinnen.",
+   "emoji": "📚",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Erklärt wie einem Kind Eine Datenbank ist eine sehr ordentliche Bibliothek: jede Tabelle ist ein Regal zu einem Thema, jede Zeile ist ein Buch, jede Spalte ist eine Angabe zum Buch (Titel, Autorin, Jahr), und eine Abfrage (SQL) ist eine Bitte an die Bibliothekarin. SELECT titel FROM buecher WHERE autorin = 'Ada Lovelace'; Übersetzung: „Bibliothekarin, bringst du mir die Titel von Adas Büchern?“ Tabelle Ein Regal mit Büchern derselben Art Zeile Ein Buch Spalte Eine Angabe, die jedes Buch hat (z. B. der Titel) SQL-Abfrage Eine Bitte an die Bibliothekarin",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -782,6 +1155,35 @@
    "text": "La idea en una frase La derivada es lo que marca el velocímetro: qué tan rápido cambia algo en este instante. Si vas en coche, la posición cambia con el tiempo. El velocímetro no te dice dónde estás, sino qué tan rápido cambia tu posición. Eso es la derivada de la posición. ¿Y la fórmula? Mide cuánto cambias en un ratito muy, muy pequeño: velocidad ≈ (dónde estoy después − dónde estaba) / (tiempo que pasó) Cuando ese \"ratito\" se hace casi cero, obtienes la velocidad exacta del momento. Los matemáticos lo escriben así: f'(x) = lim (f(x+h) − f(x)) / h. Si la función… La derivada es… Analogía --- --- --- sube positiva acelerador baja negativa marcha atrás está plana cero coche parado Mi laguna: al principio no entendía por qué h tiende a cero. La analogía del velocímetro me lo resolvió: quiero la velocidad de ahora, no la media del viaje. Si una función está subiendo, su derivada es… positiva negativa cero La derivada de una función constante (f(x) = 5) es… 5 0 1 Un coche parado no cambia de posición: velocidad cero.",
    "langs": [
     "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "derivadas",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/derivadas.md",
+   "section": "math",
+   "title": "The derivative is a speedometer",
+   "date": "2026-11-05",
+   "tags": [
+    "calculo",
+    "feynman"
+   ],
+   "summary": "Forget limits for a moment. A derivative tells you how fast something is changing right now.",
+   "emoji": "🏎",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "metodo-feynman"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "The idea in one sentence The derivative is what the speedometer shows: how fast something is changing at this very moment. When you're driving, your position changes over time. The speedometer doesn't tell you where you are, but how fast your position is changing. That's the derivative of position. And the formula? Measure how much you change over a very, very short moment: speed ≈ (where I am after − where I was) / (time that passed) When that \"short moment\" gets close to zero, you get the exact speed at that instant. Mathematicians write it like this: f'(x) = lim (f(x+h) − f(x)) / h. If the function… the derivative is… Analogy --- --- --- goes up positive gas pedal goes down negative reverse gear is flat zero parked car My gap: at first I didn't understand why h goes to zero. The speedometer analogy solved it: I want the speed now, not the average of the whole trip. If a function is going up, its derivative is… positive negative zero The derivative of a constant function (f(x) = 5) is… 5 0 1 A parked car doesn't change position: speed zero.",
+   "langs": [
+    "es",
+    "en",
     "de"
    ]
   },
@@ -809,6 +1211,7 @@
    "text": "Die Idee in einem Satz Die Ableitung ist das, was der Tacho anzeigt: wie schnell sich etwas in diesem Moment verändert. Wenn du Auto fährst, ändert sich deine Position mit der Zeit. Der Tacho sagt dir nicht, wo du bist, sondern wie schnell sich deine Position ändert. Das ist die Ableitung der Position. Und die Formel? Miss, wie sehr du dich in einem ganz, ganz kurzen Augenblick veränderst: Geschwindigkeit ≈ (wo ich danach bin − wo ich vorher war) / (vergangene Zeit) Wenn dieser „Augenblick“ fast null wird, bekommst du die genaue Geschwindigkeit des Moments. Mathematiker schreiben das so: f'(x) = lim (f(x+h) − f(x)) / h. Wenn die Funktion… ist die Ableitung… Analogie --- --- --- steigt positiv Gaspedal fällt negativ Rückwärtsgang flach ist null stehendes Auto Meine Lücke: Am Anfang verstand ich nicht, warum h gegen null geht. Die Tacho-Analogie hat es gelöst: Ich will die Geschwindigkeit von jetzt, nicht den Durchschnitt der Fahrt. Wenn eine Funktion steigt, ist ihre Ableitung… positiv negativ null Die Ableitung einer konstanten Funktion (f(x) = 5) ist… 5 0 1 Ein stehendes Auto ändert seine Position nicht: Geschwindigkeit null.",
    "langs": [
     "es",
+    "en",
     "de"
    ]
   },
@@ -836,7 +1239,67 @@
    "minutes": 1,
    "text": "Las reglas Un concepto nuevo cada día. Explícalo en 5 frases o menos. Pásalo por el detector de jerga. Si consigues 85+, ¡día completado! Mi racha [ ] Día 1 · Variable [ ] Día 2 · Función [ ] Día 3 · Bucle [ ] Día 4 · Recursión [ ] Día 5 · Derivada [ ] Día 6 · Integral [ ] Día 7 · Base de datos [ ] Día 8 · Algoritmo de ordenamiento [ ] Día 9 · Big O [ ] Día 10 · Red neuronal Copia esta lista en tu propia entrada y cámbiala por los temas que quieras aprender.",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "reto-30-dias",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/reto-30-dias.md",
+   "section": "challenges",
+   "title": "30-day Feynman challenge",
+   "date": "2026-11-03",
+   "tags": [
+    "feynman",
+    "reto"
+   ],
+   "summary": "One concept a day, explained in 5 sentences or less. Tick your days and don't break the streak.",
+   "emoji": "🔥",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "hoja-feynman",
+    "detector-de-jerga"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "The rules A new concept every day. Explain it in 5 sentences or less. Run it through the jargon detector. If you get 85+, day completed! My streak [ ] Day 1 · Variable [ ] Day 2 · Function [ ] Day 3 · Loop [ ] Day 4 · Recursion [ ] Day 5 · Derivative [ ] Day 6 · Integral [ ] Day 7 · Database [ ] Day 8 · Sorting algorithm [ ] Day 9 · Big O [ ] Day 10 · Neural network Copy this list into your own post and swap in the topics you want to learn.",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "reto-30-dias",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/reto-30-dias.md",
+   "section": "challenges",
+   "title": "30-Tage-Feynman-Challenge",
+   "date": "2026-11-03",
+   "tags": [
+    "feynman",
+    "reto"
+   ],
+   "summary": "Ein Konzept pro Tag, erklärt in höchstens 5 Sätzen. Hak deine Tage ab und unterbrich die Serie nicht.",
+   "emoji": "🔥",
+   "image": "",
+   "featured": false,
+   "requires": [
+    "hoja-feynman",
+    "detector-de-jerga"
+   ],
+   "draft": false,
+   "minutes": 1,
+   "text": "Die Regeln Jeden Tag ein neues Konzept. Erkläre es in höchstens 5 Sätzen. Lass es durch den Fachjargon-Detektor laufen. Wenn du 85+ schaffst, ist der Tag geschafft! Meine Serie [ ] Tag 1 · Variable [ ] Tag 2 · Funktion [ ] Tag 3 · Schleife [ ] Tag 4 · Rekursion [ ] Tag 5 · Ableitung [ ] Tag 6 · Integral [ ] Tag 7 · Datenbank [ ] Tag 8 · Sortieralgorithmus [ ] Tag 9 · O-Notation [ ] Tag 10 · Neuronales Netz Kopiere diese Liste in deinen eigenen Beitrag und ersetze die Themen durch die, die du lernen willst.",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -860,7 +1323,61 @@
    "minutes": 2,
    "text": "¿Qué es el método Feynman? Richard Feynman era un físico que tenía una regla muy simple: si no puedes explicarlo con palabras sencillas, no lo entiendes. El método que lleva su nombre convierte esa idea en cuatro pasos. Aprender no es memorizar palabras raras. Es poder contarle la idea a alguien de 12 años y que la entienda a la primera. Los cuatro pasos Elige un concepto y escribe su nombre arriba de una hoja. Explícalo a un niño: sin jerga, con frases cortas. Encuentra las lagunas: donde te trabes, vuelve a estudiar. Simplifica y usa analogías: \"es como…\". ordena los 4 pasos del método Elige un concepto Explícalo como a un niño Encuentra tus lagunas y vuelve a estudiar Simplifica y usa analogías ¿Por qué funciona? Cuando explicas, tu cerebro tiene que ordenar la información. Si algo está flojo, se nota enseguida: te quedas callada a media frase. Esa pausa es un regalo, porque te dice exactamente qué repasar. Explicar te obliga a ordenar ideas Las lagunas aparecen solas y sabes qué estudiar después sin perder tiempo en lo que ya sabes Las analogías hacen que lo recuerdes Una analogía con galletas Imagina que tu conocimiento es una caja de galletas. Leer un libro es meter galletas en la caja. Explicar es sacarlas una por una: si una está rota, la ves enseguida. 🍪 Lo que no puedo crear, no lo entiendo. — Richard Feynman -- Cheat sheet de Markdown Esta entrada también sirve de muestra de estilos. Cada etiqueta del Markdown tiene su propio diseño: Markdown Se ve como Para qué --- --- --- negrita negrita ideas clave itálica itálica matices subrayado subrayado lo importante texto texto subrayado de color tachado tachado errores corregidos ` código código` nombres técnicos Colores de subrayado: rosa, amarillo, azul, verde y lila. Bloques de código def explicar(concepto, oyente=\"niña de 12 años\"): \"\"\"El método Feynman en una función ✿\"\"\" explicacion = simplificar(concepto) while haylagunas(explicacion): estudiarotravez(concepto) explicacion = simplificar(concepto) return explicacion Lista de tareas (se guarda tu progreso) [x] Leer sobre Feynman [ ] Explicarle la recursión a alguien [ ] Escribir mi primera entrada Notas pequeñitas Usa el buscador de la portada para encontrar cualquier tema. Selecciona cualquier frase de esta página y aparecerá el marcador: elige un color, añade una nota y lo encontrarás después en Subrayados. Los subrayados y tu progreso se guardan solo en tu navegador. Si usas palabras como \"obviamente\" o \"trivialmente\", ¡cuidado! Suele ser señal de una laguna escondida. ¿Y si no tengo a quién explicárselo? Explícaselo a un peluche, a una planta o escríbelo aquí en el blog. Lo importante es sacarlo de tu cabeza. Mi lila de perfil",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "metodo-feynman",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/metodo-feynman.md",
+   "section": "cs",
+   "title": "What is the Feynman method?",
+   "date": "2026-11-02",
+   "tags": [
+    "feynman",
+    "aprendizaje"
+   ],
+   "summary": "The 4 rules to truly understand anything, explained with cookies. This post also shows every Markdown tag you can use.",
+   "emoji": "⚛",
+   "image": "",
+   "featured": true,
+   "requires": [],
+   "draft": false,
+   "minutes": 2,
+   "text": "What is the Feynman method? Richard Feynman was a physicist with a very simple rule: if you can't explain it in simple words, you don't understand it. The method named after him turns that idea into four steps. Learning isn't memorizing strange words. It's being able to tell the idea to a 12-year-old and have them get it the first time. The four steps Pick a concept and write its name at the top of a page. Explain it to a kid: no jargon, short sentences. Find the gaps: wherever you get stuck, go back and study. Simplify and use analogies: \"it's like…\". put the 4 steps of the method in order Pick a concept Explain it like to a kid Find your gaps and study again Simplify and use analogies Why does it work? When you explain, your brain has to organize the information. If something is shaky, you notice right away: you go quiet in the middle of a sentence. That pause is a gift, because it tells you exactly what to review. Explaining forces you to organize ideas The gaps show up on their own and you know what to study next without wasting time on what you already know Analogies make you remember An analogy with cookies Imagine your knowledge is a box of cookies. Reading a book is putting cookies in the box. Explaining is taking them out one by one: if one is broken, you see it right away. 🍪 What I cannot create, I do not understand. — Richard Feynman -- Markdown cheat sheet This post is also a style sample. Each Markdown tag has its own design: Markdown Looks like What for --- --- --- bold bold key ideas italic italic nuances highlight highlight what matters text text colored highlight strikethrough strikethrough corrected mistakes ` code code` technical names Highlight colors: pink, yellow, blue, green and lilac. Code blocks def explain(concept, listener=\"12-year-old girl\"): \"\"\"The Feynman method in one function ✿\"\"\" explanation = simplify(concept) while hasgaps(explanation): studyagain(concept) explanation = simplify(concept) return explanation Task list (your progress is saved) [x] Read about Feynman [ ] Explain recursion to someone [ ] Write my first post Tiny notes Use the search on the home page to find any topic. Select any sentence on this page and the highlighter will appear: pick a color, add a note and you'll find it later in Highlights. Highlights and your progress are saved only in your browser. If you use words like \"obviously\" or \"trivially\", careful! It's usually the sign of a hidden gap. What if I have no one to explain it to? Explain it to a stuffed animal, a plant, or write it here on the blog. What matters is getting it out of your head. My profile lily",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "metodo-feynman",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/metodo-feynman.md",
+   "section": "cs",
+   "title": "Was ist die Feynman-Methode?",
+   "date": "2026-11-02",
+   "tags": [
+    "feynman",
+    "aprendizaje"
+   ],
+   "summary": "Die 4 Regeln, um alles wirklich zu verstehen, erklärt mit Keksen. Dieser Beitrag zeigt auch alle Markdown-Elemente, die du verwenden kannst.",
+   "emoji": "⚛",
+   "image": "",
+   "featured": true,
+   "requires": [],
+   "draft": false,
+   "minutes": 2,
+   "text": "Was ist die Feynman-Methode? Richard Feynman war ein Physiker mit einer ganz einfachen Regel: wenn du es nicht mit einfachen Worten erklären kannst, verstehst du es nicht. Die Methode, die seinen Namen trägt, macht aus dieser Idee vier Schritte. Lernen heißt nicht, seltsame Wörter auswendig zu lernen. Es heißt, die Idee einem 12-jährigen Kind zu erzählen, sodass es sie beim ersten Mal versteht. Die vier Schritte Wähle ein Konzept und schreib seinen Namen oben auf ein Blatt. Erkläre es einem Kind: ohne Fachjargon, mit kurzen Sätzen. Finde die Lücken: Wo du hängen bleibst, lernst du noch einmal. Vereinfache und nutze Analogien: „das ist wie…“. bring die 4 Schritte der Methode in die richtige Reihenfolge Wähle ein Konzept Erkläre es wie einem Kind Finde deine Lücken und lerne noch einmal Vereinfache und nutze Analogien Warum funktioniert das? Wenn du erklärst, muss dein Gehirn die Information ordnen. Wenn etwas wackelig ist, merkst du es sofort: Du verstummst mitten im Satz. Diese Pause ist ein Geschenk, denn sie zeigt dir genau, was du wiederholen musst. Erklären zwingt dich, Ideen zu ordnen Die Lücken zeigen sich von selbst und du weißt, was du als Nächstes lernen musst ohne Zeit mit dem zu verschwenden, was du schon kannst Analogien helfen dir, dich zu erinnern Eine Analogie mit Keksen Stell dir vor, dein Wissen ist eine Keksdose. Ein Buch lesen heißt, Kekse in die Dose zu legen. Erklären heißt, sie einzeln herauszunehmen: Ist einer zerbrochen, siehst du es sofort. 🍪 Was ich nicht erschaffen kann, verstehe ich nicht. — Richard Feynman -- Markdown-Spickzettel Dieser Beitrag ist auch ein Stilmuster. Jedes Markdown-Element hat sein eigenes Design: Markdown Sieht so aus Wofür --- --- --- fett fett Kernideen kursiv kursiv Nuancen markiert markiert das Wichtige Text Text farbige Markierung durchgestrichen durchgestrichen korrigierte Fehler ` Code Code` Fachbegriffe Markierungsfarben: Rosa, Gelb, Blau, Grün und Lila. Codeblöcke def erklaeren(konzept, zuhoerer=\"12-jähriges Mädchen\"): \"\"\"Die Feynman-Methode in einer Funktion ✿\"\"\" erklaerung = vereinfachen(konzept) while hatluecken(erklaerung): nochmallernen(konzept) erklaerung = vereinfachen(konzept) return erklaerung Aufgabenliste (dein Fortschritt wird gespeichert) [x] Über Feynman lesen [ ] Jemandem Rekursion erklären [ ] Meinen ersten Beitrag schreiben Kleine Notizen Nutze die Suche auf der Startseite, um jedes Thema zu finden. Markiere einen beliebigen Satz auf dieser Seite und der Textmarker erscheint: Wähle eine Farbe, füge eine Notiz hinzu und du findest sie später unter Markierungen. Markierungen und dein Fortschritt werden nur in deinem Browser gespeichert. Wenn du Wörter wie „offensichtlich“ oder „trivialerweise“ benutzt, Vorsicht! Das ist meist ein Zeichen für eine versteckte Lücke. Und wenn ich niemanden habe, dem ich es erklären kann? Erkläre es einem Kuscheltier, einer Pflanze oder schreib es hier in den Blog. Wichtig ist, es aus deinem Kopf herauszubekommen. Meine Profil-Lilie",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -883,7 +1400,59 @@
    "minutes": 1,
    "text": "¡Hola! Llevaba mucho tiempo queriendo tener un sitio mío en internet. Uno con encaje, macarons y brillitos, como las páginas que me encantaban de pequeña. Pero también quería que fuera útil. Así que este blog tiene una regla: todo lo que publique tiene que poder entenderlo alguien que no sabe nada del tema. Lo que viene [x] Montar la página [ ] Escribir una entrada por semana [ ] Crear un juego por cada tema grande [ ] Explicarle la recursión a mi abuela Gracias por pasarte. Deja un comentario abajo si quieres ♡",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "hola-mundo",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/hola-mundo.md",
+   "section": "blog",
+   "title": "hello world ✿",
+   "date": "2026-11-01",
+   "tags": [
+    "personal"
+   ],
+   "summary": "First post: why I opened this little corner of the internet and what I want to do with it.",
+   "emoji": "🌸",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Hi! I had wanted a place of my own on the internet for a long time. One with lace, macarons and sparkles, like the pages I loved as a kid. But I also wanted it to be useful. So this blog has one rule: everything I publish must be understandable to someone who knows nothing about the topic. What's coming [x] Build the site [ ] Write one post a week [ ] Make a game for every big topic [ ] Explain recursion to my grandma Thanks for stopping by ♡",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "hola-mundo",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/hola-mundo.md",
+   "section": "blog",
+   "title": "hallo Welt ✿",
+   "date": "2026-11-01",
+   "tags": [
+    "personal"
+   ],
+   "summary": "Erster Beitrag: Warum ich diese kleine Ecke im Internet eröffnet habe und was ich damit vorhabe.",
+   "emoji": "🌸",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Hallo! Ich wollte schon lange einen eigenen Ort im Internet haben. Einen mit Spitze, Macarons und Glitzer, wie die Seiten, die ich als Kind geliebt habe. Aber er sollte auch nützlich sein. Deshalb hat dieser Blog eine Regel: alles, was ich veröffentliche, muss für jemanden verständlich sein, der nichts über das Thema weiß. Was kommt [x] Die Seite bauen [ ] Einen Beitrag pro Woche schreiben [ ] Für jedes große Thema ein Spiel machen [ ] Meiner Oma Rekursion erklären Danke fürs Vorbeischauen ♡",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   },
   {
@@ -906,7 +1475,59 @@
    "minutes": 1,
    "text": "¡Hola! Soy Valy ✿ Estudio Matemáticas y Ciencias de la Computación, y me encanta todo lo que tenga brillitos, encaje y colores pastel. Datos curiosos --- --- aprendiendo Python, C++, bases de datos mi lenguaje favorito Python 🐍 postre favorito macarons de pistacho estación otoño 🍂 Por qué el método Feynman Porque me di cuenta de que memorizaba sin entender. Explicar en voz alta cambió mi forma de estudiar y quiero compartirlo. Si algo de esta página no se entiende, es culpa mía, no tuya. ¡Avísame!",
    "langs": [
-    "es"
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "sobre-mi",
+   "lang": "en",
+   "original": false,
+   "file": "content/en/posts/sobre-mi.md",
+   "section": "about",
+   "title": "about me ♡",
+   "date": "2026-10-20",
+   "tags": [
+    "personal"
+   ],
+   "summary": "Who I am, what I study and why I do this.",
+   "emoji": "🌷",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Hi! I'm Valy ✿ I study Mathematics and Computer Science, and I love anything with sparkles, lace and pastel colors. Fun facts --- --- learning Python, C++, databases favorite language Python 🐍 favorite dessert pistachio macarons season autumn 🍂 Why the Feynman method Because I realized I was memorizing without understanding. Explaining out loud changed the way I study, and I want to share it. If something on this page isn't clear, that's my fault, not yours. Let me know!",
+   "langs": [
+    "es",
+    "en",
+    "de"
+   ]
+  },
+  {
+   "slug": "sobre-mi",
+   "lang": "de",
+   "original": false,
+   "file": "content/de/posts/sobre-mi.md",
+   "section": "about",
+   "title": "über mich ♡",
+   "date": "2026-10-20",
+   "tags": [
+    "personal"
+   ],
+   "summary": "Wer ich bin, was ich studiere und warum ich das mache.",
+   "emoji": "🌷",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Hallo! Ich bin Valy ✿ Ich studiere Mathematik und Informatik und liebe alles mit Glitzer, Spitze und Pastellfarben. Lustige Fakten --- --- lerne gerade Python, C++, Datenbanken Lieblingssprache Python 🐍 Lieblingsdessert Pistazien-Macarons Jahreszeit Herbst 🍂 Warum die Feynman-Methode Weil ich gemerkt habe, dass ich auswendig lernte, ohne zu verstehen. Laut zu erklären hat meine Art zu lernen verändert, und das möchte ich teilen. Wenn etwas auf dieser Seite unklar ist, ist das meine Schuld, nicht deine. Sag mir Bescheid!",
+   "langs": [
+    "es",
+    "en",
+    "de"
    ]
   }
  ]

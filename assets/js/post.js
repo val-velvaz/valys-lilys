@@ -66,7 +66,7 @@ try {
   document.title = `${post.title} · valy's lilys`;
   const tags = Array.isArray(post.tags) ? post.tags : [];
 
-  const ctx = { slug };
+  const ctx = { slug, lang: post.lang };
   const content = el('div', { class: 'article__body', id: 'body' });
   // if the post starts with "# <same title>", skip it (the title is already in the header)
   const body = post.body.replace(/^\s*#\s+(.+)\n/, (line, title) => (title.trim() === String(post.title).trim() ? '' : line));
