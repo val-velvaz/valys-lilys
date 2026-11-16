@@ -1,10 +1,9 @@
 {
- "generated": "2026-11-16T18:26:51.057Z",
- "entries": [
+ "generated": "2026-11-16T19:32:24.336Z",
+ "posts": [
   {
-   "id": "games/hoja-feynman",
+   "slug": "hoja-feynman",
    "section": "games",
-   "file": "content/games/hoja-feynman.md",
    "title": "Mi hoja Feynman",
    "date": "2026-11-16",
    "tags": [
@@ -13,49 +12,40 @@
    ],
    "summary": "Rellena los 4 pasos del método con cualquier concepto y descárgalo como una entrada Markdown lista para el blog.",
    "emoji": "📝",
-   "mood": "",
-   "lang": "es",
    "draft": false,
-   "text": "Esta es la herramienta que uso para escribir cada entrada del blog. Se guarda sola mientras escribes, y al final puedes exportarla como archivo .md para ponerla en content/. concepto: El archivo exportado ya trae el front matter (título, fecha, tags…). Solo muévelo a la carpeta de la sección y ejecuta node scripts/build-index.mjs."
+   "text": "Esta es la herramienta que uso para escribir cada entrada del blog. Se guarda sola mientras escribes, y al final puedes exportarla como archivo .md para ponerla en content/posts/. concepto: El archivo exportado ya trae el front matter (título, fecha, sección, tags…). Solo muévelo a content/posts/ y ejecuta node scripts/build-index.mjs."
   },
   {
-   "id": "projects/valys-lilys",
+   "slug": "como-hice-esta-pagina",
    "section": "projects",
-   "file": "content/projects/valys-lilys.md",
    "title": "Cómo hice esta página",
    "date": "2026-11-15",
    "tags": [
     "web",
     "javascript"
    ],
-   "summary": "HTML, CSS y JavaScript sin frameworks. Todo el contenido vive en archivos Markdown.",
+   "summary": "HTML, CSS y JavaScript sin frameworks ni scripts externos. Todo el contenido vive en archivos Markdown.",
    "emoji": "🧁",
-   "mood": "",
-   "lang": "es",
    "draft": false,
-   "text": "La idea Un layout tipo MySpace (columnas, perfil, botones) con estética Y2K: encaje, chorreado de glaseado, cuentas con letras y macarons. Todo dibujado con CSS: ni una sola imagen para los adornos. Cómo funciona Pieza Archivo --- --- Marco, navegación, calendario js/layout.js Markdown, búsqueda, índice js/core.js Juegos js/widgets.js Subrayados js/highlight.js Estilos del Markdown css/markdown.css Cada entrada es un .md con front matter: - title: Mi entrada date: 2026-11-15 tags: [python, feynman] summary: Una frase que la resume. emoji: 🌸 - Aquí va el contenido ✿ Después se ejecuta node scripts/build-index.mjs para regenerar el índice que usa el buscador."
+   "text": "La idea Una página sencilla: una portada con buscador, filtros por sección y tarjetas, y una página por entrada. Dos temas, pastel y alto contraste, y la interfaz en inglés, español y alemán. Cómo funciona Pieza Archivo --- --- Colores y fuentes assets/css/tokens.css Portada: búsqueda, filtros y tarjetas assets/js/home.js Markdown → página assets/js/markdown.js Juegos assets/js/games.js Subrayados assets/js/highlight.js Índice de entradas scripts/build-index.mjs Cada entrada es un .md en content/posts/ con front matter: - title: Mi entrada section: cs date: 2026-11-15 tags: [python, feynman] summary: Una frase que la resume. emoji: 🌸 - Aquí va el contenido ✿ Después se ejecuta node scripts/build-index.mjs para regenerar el índice que usan la portada y el buscador. Por seguridad, la página no carga scripts de otros sitios: el Markdown se convierte a HTML con un intérprete propio que nunca usa innerHTML."
   },
   {
-   "id": "games/memoria-estructuras",
+   "slug": "estructuras-de-datos",
    "section": "games",
-   "file": "content/games/memoria-estructuras.md",
-   "title": "Memoria de estructuras de datos",
+   "title": "Estructuras de datos con analogías",
    "date": "2026-11-14",
    "tags": [
     "datastructures",
     "juego"
    ],
-   "summary": "Empareja cada estructura de datos con su analogía de la vida real. ¿Cuántos movimientos necesitas?",
+   "summary": "Cada estructura de datos se parece a algo de la vida real. Repásalas con tarjetas.",
    "emoji": "🧩",
-   "mood": "",
-   "lang": "es",
    "draft": false,
-   "text": "Cada estructura de datos se parece a algo que ya conoces. Encuentra las parejas ✦ Pila (stack) Una torre de platos 🍽 Cola (queue) La fila del helado 🍦 Árbol Un árbol genealógico 🌳 Grafo Un mapa de metro 🚇 Diccionario Una agenda de contactos 📒 Array Una caja de huevos 🥚 ¿Por qué esas analogías? Pila: solo puedes coger el plato de arriba → último en entrar, primero en salir. Cola: el primero que llegó es el primero que se va → primero en entrar, primero en salir. Array: cada huevo tiene su hueco numerado."
+   "text": "Cada estructura de datos se parece a algo que ya conoces. Repásalas con tarjetas ✦ Pila (stack) Una torre de platos 🍽 Cola (queue) La fila del helado 🍦 Árbol Un árbol genealógico 🌳 Grafo Un mapa de metro 🚇 Diccionario Una agenda de contactos 📒 Array Una caja de huevos 🥚 ¿Por qué esas analogías? Pila: solo puedes coger el plato de arriba → último en entrar, primero en salir. Cola: el primero que llegó es el primero que se va → primero en entrar, primero en salir. Array: cada huevo tiene su hueco numerado."
   },
   {
-   "id": "games/detector-de-jerga",
+   "slug": "detector-de-jerga",
    "section": "games",
-   "file": "content/games/detector-de-jerga.md",
    "title": "Detector de jerga",
    "date": "2026-11-12",
    "tags": [
@@ -64,15 +54,12 @@
    ],
    "summary": "Escribe tu explicación y el detector te dice si un niño de 12 años la entendería. ¡Consigue 85 puntos o más!",
    "emoji": "🔍",
-   "mood": "",
-   "lang": "es",
    "draft": false,
    "text": "Cómo se juega Elige un concepto y explícalo como a un niño de 12 años. El detector revisa: frases demasiado largas palabras larguísimas jerga (en rosa) y palabras muy largas (en lila) si usas analogías (\"es como…\", \"imagina…\") ✿ concepto: ¿qué es un algoritmo? Las palabras \"obviamente\", \"simplemente\" o \"trivial\" restan puntos: casi siempre esconden una laguna."
   },
   {
-   "id": "blog/diario-semana-2",
+   "slug": "diario-semana-2",
    "section": "blog",
-   "file": "content/blog/diario-semana-2.md",
    "title": "Diario de estudio · semana 2",
    "date": "2026-11-10",
    "tags": [
@@ -82,15 +69,12 @@
    ],
    "summary": "Esta semana descubrí que no entendía la recursión tanto como creía. El método Feynman me pilló.",
    "emoji": "📓",
-   "mood": "humilde",
-   "lang": "es",
    "draft": false,
    "text": "Esta semana intenté explicarle la recursión a una amiga y… me quedé en blanco a la mitad. Plot twist: no la entendía tanto como creía. Mi laguna: sabía escribir funciones recursivas, pero no sabía explicar por qué la respuesta \"baja\" de vuelta. Volví a estudiar, encontré la analogía de la escalera y ahora sí. La escribí en La recursión explicada con escaleras. Lo que aprendí Saber hacer ≠ saber explicar. Las pausas incómodas son pistas. Las analogías se quedan; las definiciones se olvidan."
   },
   {
-   "id": "cs/recursion",
+   "slug": "recursion",
    "section": "cs",
-   "file": "content/cs/recursion.md",
    "title": "La recursión explicada con escaleras",
    "date": "2026-11-09",
    "tags": [
@@ -100,15 +84,12 @@
    ],
    "summary": "Una función que se llama a sí misma suena a magia. Es más bien como pedirle ayuda a alguien idéntico a ti.",
    "emoji": "🪜",
-   "mood": "emocionada",
-   "lang": "es",
    "draft": false,
    "text": "Explicado como a un niño Quieres contar los escalones de una escalera muy larga. Haces trampa: cuentas uno y le dices a tu clon \"cuenta tú el resto\". Tu clon hace lo mismo… hasta que alguien llega arriba y dice \"aquí ya no quedan: cero\". Entonces cada clon suma su uno y la respuesta baja la escalera. Eso es la recursión: resolver un problema grande usando el mismo problema, pero más pequeño. def contar(escalones): if escalones 0: # caso base: ya no quedan return 0 return 1 + contar(escalones - 1) # uno + el resto Las dos reglas Un caso base que se resuelve sin ayuda (si no, los clones nunca paran). Un paso recursivo que hace el problema más pequeño. Si olvidas el caso base, la función se llama para siempre y Python se queja con RecursionError. Repasa con tarjetas ¿Qué es la recursión? Resolver un problema usando una versión más pequeña del mismo problema. ¿Qué es el caso base? El caso que se resuelve sin volver a llamar a la función. ¿Qué pasa sin caso base? La función se llama infinitamente → RecursionError. Analogía favorita Contar escalones pidiéndole a tu clon que cuente el resto. Ponte a prueba ¿Qué necesita SIEMPRE una función recursiva? Un caso base Un bucle for Una variable global Sin caso base, la función nunca deja de llamarse a sí misma. contar(3) devuelve… 1 3 0 1 + 1 + 1 + 0 = 3"
   },
   {
-   "id": "more/bases-de-datos",
-   "section": "more",
-   "file": "content/more/bases-de-datos.md",
+   "slug": "bases-de-datos",
+   "section": "cs",
    "title": "Una base de datos es una biblioteca",
    "date": "2026-11-07",
    "tags": [
@@ -117,15 +98,12 @@
    ],
    "summary": "Tablas, filas y consultas explicadas como estanterías, libros y bibliotecarias.",
    "emoji": "📚",
-   "mood": "",
-   "lang": "es",
    "draft": false,
    "text": "Explicado como a un niño Una base de datos es una biblioteca muy ordenada: cada tabla es una estantería con un tema, cada fila es un libro, cada columna es un dato del libro (título, autora, año), y una consulta (SQL) es pedirle algo a la bibliotecaria. SELECT titulo FROM libros WHERE autora = 'Ada Lovelace'; Traducción: \"bibliotecaria, ¿me traes los títulos de los libros de Ada?\" Tabla Una estantería con libros del mismo tipo Fila Un libro Columna Un dato que tienen todos los libros (p. ej. el título) Consulta SQL Una petición a la bibliotecaria"
   },
   {
-   "id": "math/derivadas",
+   "slug": "derivadas",
    "section": "math",
-   "file": "content/math/derivadas.md",
    "title": "La derivada es un velocímetro",
    "date": "2026-11-05",
    "tags": [
@@ -134,15 +112,12 @@
    ],
    "summary": "Olvida los límites por un momento. Una derivada te dice qué tan rápido cambia algo justo ahora.",
    "emoji": "🏎",
-   "mood": "con café ☕",
-   "lang": "es",
    "draft": false,
    "text": "La idea en una frase La derivada es lo que marca el velocímetro: qué tan rápido cambia algo en este instante. Si vas en coche, la posición cambia con el tiempo. El velocímetro no te dice dónde estás, sino qué tan rápido cambia tu posición. Eso es la derivada de la posición. ¿Y la fórmula? Mide cuánto cambias en un ratito muy, muy pequeño: velocidad ≈ (dónde estoy después − dónde estaba) / (tiempo que pasó) Cuando ese \"ratito\" se hace casi cero, obtienes la velocidad exacta del momento. Los matemáticos lo escriben así: f'(x) = lim (f(x+h) − f(x)) / h. Si la función… La derivada es… Analogía --- --- --- sube positiva acelerador baja negativa marcha atrás está plana cero coche parado Mi laguna: al principio no entendía por qué h tiende a cero. La analogía del velocímetro me lo resolvió: quiero la velocidad de ahora, no la media del viaje. Si una función está subiendo, su derivada es… positiva negativa cero La derivada de una función constante (f(x) = 5) es… 5 0 1 Un coche parado no cambia de posición: velocidad cero."
   },
   {
-   "id": "challenges/reto-30-dias",
+   "slug": "reto-30-dias",
    "section": "challenges",
-   "file": "content/challenges/reto-30-dias.md",
    "title": "Reto de 30 días Feynman",
    "date": "2026-11-03",
    "tags": [
@@ -151,15 +126,12 @@
    ],
    "summary": "Un concepto al día, explicado en 5 frases o menos. Marca tus días y no rompas la racha.",
    "emoji": "🔥",
-   "mood": "",
-   "lang": "es",
    "draft": false,
    "text": "Las reglas Un concepto nuevo cada día. Explícalo en 5 frases o menos. Pásalo por el detector de jerga. Si consigues 85+, ¡día completado! Mi racha [ ] Día 1 · Variable [ ] Día 2 · Función [ ] Día 3 · Bucle [ ] Día 4 · Recursión [ ] Día 5 · Derivada [ ] Día 6 · Integral [ ] Día 7 · Base de datos [ ] Día 8 · Algoritmo de ordenamiento [ ] Día 9 · Big O [ ] Día 10 · Red neuronal Copia esta lista en tu propia entrada y cámbiala por los temas que quieras aprender."
   },
   {
-   "id": "cs/metodo-feynman",
+   "slug": "metodo-feynman",
    "section": "cs",
-   "file": "content/cs/metodo-feynman.md",
    "title": "¿Qué es el método Feynman?",
    "date": "2026-11-02",
    "tags": [
@@ -168,15 +140,12 @@
    ],
    "summary": "Las 4 reglas para entender cualquier cosa de verdad, explicadas con galletas. Esta entrada también muestra todas las etiquetas de Markdown que puedes usar.",
    "emoji": "⚛",
-   "mood": "curiosa ✿",
-   "lang": "es",
    "draft": false,
-   "text": "¿Qué es el método Feynman? Richard Feynman era un físico que tenía una regla muy simple: si no puedes explicarlo con palabras sencillas, no lo entiendes. El método que lleva su nombre convierte esa idea en cuatro pasos. Aprender no es memorizar palabras raras. Es poder contarle la idea a alguien de 12 años y que la entienda a la primera. Los cuatro pasos Elige un concepto y escribe su nombre arriba de una hoja. Explícalo a un niño: sin jerga, con frases cortas. Encuentra las lagunas: donde te trabes, vuelve a estudiar. Simplifica y usa analogías: \"es como…\". ordena los 4 pasos del método Elige un concepto Explícalo como a un niño Encuentra tus lagunas y vuelve a estudiar Simplifica y usa analogías ¿Por qué funciona? Cuando explicas, tu cerebro tiene que ordenar la información. Si algo está flojo, se nota enseguida: te quedas callada a media frase. Esa pausa es un regalo, porque te dice exactamente qué repasar. Explicar te obliga a ordenar ideas Las lagunas aparecen solas y sabes qué estudiar después sin perder tiempo en lo que ya sabes Las analogías hacen que lo recuerdes Una analogía con galletas Imagina que tu conocimiento es una caja de galletas. Leer un libro es meter galletas en la caja. Explicar es sacarlas una por una: si una está rota, la ves enseguida. 🍪 Lo que no puedo crear, no lo entiendo. — Richard Feynman -- Cheat sheet de Markdown Esta entrada también sirve de muestra de estilos. Cada etiqueta del Markdown tiene su propio diseño: Markdown Se ve como Para qué --- --- --- negrita negrita ideas clave itálica itálica matices subrayado subrayado lo importante texto texto subrayado de color tachado tachado errores corregidos ` código código` nombres técnicos Colores de subrayado: rosa, amarillo, azul, verde y lila. Bloques de código def explicar(concepto, oyente=\"niña de 12 años\"): \"\"\"El método Feynman en una función ✿\"\"\" explicacion = simplificar(concepto) while haylagunas(explicacion): estudiarotravez(concepto) explicacion = simplificar(concepto) return explicacion Lista de tareas (se guarda tu progreso) [x] Leer sobre Feynman [ ] Explicarle la recursión a alguien [ ] Escribir mi primera entrada Notas pequeñitas Pulsa / en cualquier página para ir directo al buscador. Selecciona cualquier frase de esta página y aparecerá el marcador: elige un color, añade una nota y lo encontrarás después en Subrayados. Los subrayados, el progreso y los comentarios se guardan solo en tu navegador. Si usas palabras como \"obviamente\" o \"trivialmente\", ¡cuidado! Suele ser señal de una laguna escondida. ¿Y si no tengo a quién explicárselo? Explícaselo a un peluche, a una planta o escríbelo aquí en el blog. Lo importante es sacarlo de tu cabeza. Mi lila de perfil"
+   "text": "¿Qué es el método Feynman? Richard Feynman era un físico que tenía una regla muy simple: si no puedes explicarlo con palabras sencillas, no lo entiendes. El método que lleva su nombre convierte esa idea en cuatro pasos. Aprender no es memorizar palabras raras. Es poder contarle la idea a alguien de 12 años y que la entienda a la primera. Los cuatro pasos Elige un concepto y escribe su nombre arriba de una hoja. Explícalo a un niño: sin jerga, con frases cortas. Encuentra las lagunas: donde te trabes, vuelve a estudiar. Simplifica y usa analogías: \"es como…\". ordena los 4 pasos del método Elige un concepto Explícalo como a un niño Encuentra tus lagunas y vuelve a estudiar Simplifica y usa analogías ¿Por qué funciona? Cuando explicas, tu cerebro tiene que ordenar la información. Si algo está flojo, se nota enseguida: te quedas callada a media frase. Esa pausa es un regalo, porque te dice exactamente qué repasar. Explicar te obliga a ordenar ideas Las lagunas aparecen solas y sabes qué estudiar después sin perder tiempo en lo que ya sabes Las analogías hacen que lo recuerdes Una analogía con galletas Imagina que tu conocimiento es una caja de galletas. Leer un libro es meter galletas en la caja. Explicar es sacarlas una por una: si una está rota, la ves enseguida. 🍪 Lo que no puedo crear, no lo entiendo. — Richard Feynman -- Cheat sheet de Markdown Esta entrada también sirve de muestra de estilos. Cada etiqueta del Markdown tiene su propio diseño: Markdown Se ve como Para qué --- --- --- negrita negrita ideas clave itálica itálica matices subrayado subrayado lo importante texto texto subrayado de color tachado tachado errores corregidos ` código código` nombres técnicos Colores de subrayado: rosa, amarillo, azul, verde y lila. Bloques de código def explicar(concepto, oyente=\"niña de 12 años\"): \"\"\"El método Feynman en una función ✿\"\"\" explicacion = simplificar(concepto) while haylagunas(explicacion): estudiarotravez(concepto) explicacion = simplificar(concepto) return explicacion Lista de tareas (se guarda tu progreso) [x] Leer sobre Feynman [ ] Explicarle la recursión a alguien [ ] Escribir mi primera entrada Notas pequeñitas Usa el buscador de la portada para encontrar cualquier tema. Selecciona cualquier frase de esta página y aparecerá el marcador: elige un color, añade una nota y lo encontrarás después en Subrayados. Los subrayados y tu progreso se guardan solo en tu navegador. Si usas palabras como \"obviamente\" o \"trivialmente\", ¡cuidado! Suele ser señal de una laguna escondida. ¿Y si no tengo a quién explicárselo? Explícaselo a un peluche, a una planta o escríbelo aquí en el blog. Lo importante es sacarlo de tu cabeza. Mi lila de perfil"
   },
   {
-   "id": "blog/hola-mundo",
+   "slug": "hola-mundo",
    "section": "blog",
-   "file": "content/blog/hola-mundo.md",
    "title": "hola mundo ✿",
    "date": "2026-11-01",
    "tags": [
@@ -184,31 +153,12 @@
    ],
    "summary": "Primera entrada: por qué abrí este rinconcito de internet y qué quiero hacer con él.",
    "emoji": "🌸",
-   "mood": "nerviosa pero feliz",
-   "lang": "es",
    "draft": false,
    "text": "¡Hola! Llevaba mucho tiempo queriendo tener un sitio mío en internet. Uno con encaje, macarons y brillitos, como las páginas que me encantaban de pequeña. Pero también quería que fuera útil. Así que este blog tiene una regla: todo lo que publique tiene que poder entenderlo alguien que no sabe nada del tema. Lo que viene [x] Montar la página [ ] Escribir una entrada por semana [ ] Crear un juego por cada tema grande [ ] Explicarle la recursión a mi abuela Gracias por pasarte. Deja un comentario abajo si quieres ♡"
   },
   {
-   "id": "portfolio/destacados",
-   "section": "portfolio",
-   "file": "content/portfolio/destacados.md",
-   "title": "Proyectos destacados",
-   "date": "2026-10-28",
-   "tags": [
-    "portfolio"
-   ],
-   "summary": "Una vitrina con mis proyectos favoritos. (¡Edita este archivo con los tuyos!)",
-   "emoji": "🏆",
-   "mood": "",
-   "lang": "es",
-   "draft": false,
-   "text": "valy's lilys Este blog: un lugar para aprender con el método Feynman. Ver cómo lo hice. Próximamente Un visualizador de algoritmos de ordenamiento Un juego de cartas de estructuras de datos Apuntes interactivos de álgebra lineal Esta es una entrada de ejemplo. Reemplázala con tus proyectos reales."
-  },
-  {
-   "id": "about/sobre-mi",
+   "slug": "sobre-mi",
    "section": "about",
-   "file": "content/about/sobre-mi.md",
    "title": "about me ♡",
    "date": "2026-10-20",
    "tags": [
@@ -216,8 +166,6 @@
    ],
    "summary": "Quién soy, qué estudio y por qué hago esto.",
    "emoji": "🌷",
-   "mood": "soñadora",
-   "lang": "es",
    "draft": false,
    "text": "¡Hola! Soy Valy ✿ Estudio Matemáticas y Ciencias de la Computación, y me encanta todo lo que tenga brillitos, encaje y colores pastel. Datos curiosos --- --- aprendiendo Python, C++, bases de datos mi lenguaje favorito Python 🐍 postre favorito macarons de pistacho estación otoño 🍂 Por qué el método Feynman Porque me di cuenta de que memorizaba sin entender. Explicar en voz alta cambió mi forma de estudiar y quiero compartirlo. Si algo de esta página no se entiende, es culpa mía, no tuya. ¡Avísame!"
   }

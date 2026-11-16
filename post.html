@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Security: HTTPS only, no external or inline scripts -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;family=Tinos:ital,wght@0,400;0,700;1,400&amp;family=Fira+Code:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<script src="assets/js/theme.js"></script>
+<title>valy's lilys</title>
+<script type="module" src="assets/js/post.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#post" data-i18n="skip_post">Saltar a la entrada</a>
+<div class="wrap wrap--narrow">
+  <header class="site-header site-header--small">
+    <div class="topbar">
+      <a class="logo" href="./" data-i18n="logo">valy's lilys</a>
+      <div class="controls">
+        <a class="pill-link" href="subrayados.html" data-i18n="nav_highlights">✎ subrayados</a>
+        <div id="lang-switch" class="lang-switch" role="group" aria-label="Idioma" data-i18n-attr="aria-label:lang_label"></div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+          <span class="to-contrast" data-i18n="theme_to_contrast">◑ alto contraste</span>
+          <span class="to-pastel" data-i18n="theme_to_pastel">◐ modo pastel</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- The post is rendered from content/posts/<slug>.md -->
+  <main id="post">
+    <p class="empty" data-i18n="loading">Cargando…</p>
+  </main>
+
+<footer class="site-footer">
+  <span data-i18n="footer">Hecho con ♡ y el método Feynman</span> · <a href="https://github.com/val-velvaz/valys-lilys" target="_blank" rel="noopener noreferrer">GitHub</a>
+</footer>
+</div>
+</body>
+</html>
