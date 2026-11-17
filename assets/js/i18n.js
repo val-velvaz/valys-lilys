@@ -3,12 +3,12 @@ import { LANGS, DEFAULT_LANG } from './langs.js';
 
 const STRINGS = {
   es: {
-    'meta.home_title': "valy's lilys · aprende con el método Feynman",
-    'meta.home_description': 'Blog para aprender y aplicar el método Feynman con juegos y entradas personales.',
+    'meta.home_title': "valy's lilys · aprende a cómo dominar la tecnología",
+    'meta.home_description': 'Página personal que sigue mi trayecto de aprendizaje en la tecnología',
     'meta.highlights_title': "Mis subrayados · valy's lilys",
     skip_home: 'Saltar a las entradas', skip_post: 'Saltar a la entrada',
     logo: "valy's lilys", lang_label: 'Idioma',
-    theme_to_contrast: '◑ alto contraste', theme_to_pastel: '◐ modo pastel',
+    theme_to_contrast: '◑ oscuro', theme_to_pastel: '◐ claro',
     nav_highlights: '✎ subrayados',
     hero_before: 'Aprende con el', hero_accent: 'método Feynman',
     tagline: 'Matemáticas y ciencias de la computación explicadas con palabras sencillas. Si no lo puedo explicar fácil, todavía no lo entiendo.',
