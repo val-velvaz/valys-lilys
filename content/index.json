@@ -60,7 +60,7 @@
     ]
    },
    {
-    "title": "Ciencias de la Computación",
+    "title": "Computación",
     "icon": "💻",
     "units": [
      {
@@ -122,15 +122,6 @@
         "slug": null
        }
       ]
-     },
-     {
-        "title": "Teoría de la Computación",
-        "topics": [
-            {
-                "title": "lorem ipsum",
-                "slug": "teoria-de-la-computacion"
-            }
-        ]
      }
     ]
    },
