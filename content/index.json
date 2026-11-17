@@ -60,22 +60,9 @@
     ]
    },
    {
-    "title": "Ciencias de la Computación",
+    "title": "Algoritmos",
     "icon": "💻",
     "units": [
-     {
-      "title": "Aprender a aprender",
-      "topics": [
-       {
-        "title": "¿Qué es el método Feynman?",
-        "slug": "metodo-feynman"
-       },
-       {
-        "title": "Mi hoja Feynman",
-        "slug": "hoja-feynman"
-       }
-      ]
-     },
      {
       "title": "Algoritmos",
       "topics": [
@@ -92,9 +79,14 @@
         "slug": null
        }
       ]
-     },
-     {
+     }
+    ]
+    },
+
+
+   {
       "title": "Estructuras de datos",
+      "icon": "🔝",
       "topics": [
        {
         "title": "Estructuras de datos con analogías",
@@ -110,6 +102,7 @@
        }
       ]
      },
+
      {
       "title": "Bases de datos",
       "topics": [
