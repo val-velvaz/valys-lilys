@@ -9,4 +9,4 @@
 -->
 # 💻 Inteligencia Artificial'
 ## Aprendizaje no Supervisado
-- [k-means](content/es/posts/k-means.md)
+- [k-means](k-means)
