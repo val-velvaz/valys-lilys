@@ -1,181 +1,16 @@
 {
- "generated": "2026-11-16T23:19:06.124Z",
+ "generated": "2026-11-17T03:28:15.151Z",
  "syllabus": {
   "es": [
    {
-    "title": "Matemáticas",
-    "icon": "∑",
-    "units": [
-     {
-      "title": "Cálculo",
-      "topics": [
-       {
-        "title": "Límites",
-        "slug": null
-       },
-       {
-        "title": "La derivada es un velocímetro",
-        "slug": "derivadas"
-       },
-       {
-        "title": "Integrales",
-        "slug": null
-       }
-      ]
-     },
-     {
-      "title": "Álgebra lineal",
-      "topics": [
-       {
-        "title": "Vectores",
-        "slug": null
-       },
-       {
-        "title": "Matrices",
-        "slug": null
-       },
-       {
-        "title": "Transformaciones lineales",
-        "slug": null
-       }
-      ]
-     },
-     {
-      "title": "Matemáticas discretas",
-      "topics": [
-       {
-        "title": "Lógica",
-        "slug": null
-       },
-       {
-        "title": "Conjuntos",
-        "slug": null
-       },
-       {
-        "title": "Grafos",
-        "slug": null
-       }
-      ]
-     }
-    ]
-   },
-   {
-    "title": "Computación",
+    "title": "Inteligencia Artificial'",
     "icon": "💻",
     "units": [
      {
-      "title": "Aprender a aprender",
+      "title": "Aprendizaje no Supervisado",
       "topics": [
        {
-        "title": "¿Qué es el método Feynman?",
-        "slug": "metodo-feynman"
-       },
-       {
-        "title": "Mi hoja Feynman",
-        "slug": "hoja-feynman"
-       }
-      ]
-     },
-     {
-      "title": "Algoritmos",
-      "topics": [
-       {
-        "title": "Recursión",
-        "slug": "recursion"
-       },
-       {
-        "title": "Ordenamiento",
-        "slug": null
-       },
-       {
-        "title": "Notación Big O",
-        "slug": null
-       }
-      ]
-     },
-     {
-      "title": "Estructuras de datos",
-      "topics": [
-       {
-        "title": "Estructuras de datos con analogías",
-        "slug": "estructuras-de-datos"
-       },
-       {
-        "title": "Pilas y colas",
-        "slug": null
-       },
-       {
-        "title": "Árboles",
-        "slug": null
-       }
-      ]
-     },
-     {
-      "title": "Bases de datos",
-      "topics": [
-       {
-        "title": "Una base de datos es una biblioteca",
-        "slug": "bases-de-datos"
-       },
-       {
-        "title": "SQL básico",
-        "slug": null
-       }
-      ]
-     }
-    ]
-   },
-   {
-    "title": "Ciberseguridad",
-    "icon": "🛡",
-    "units": [
-     {
-      "title": "Fundamentos",
-      "topics": [
-       {
-        "title": "Redes y modelo TCP/IP",
-        "slug": null
-       },
-       {
-        "title": "Linux para seguridad",
-        "slug": null
-       },
-       {
-        "title": "Criptografía básica",
-        "slug": null
-       }
-      ]
-     },
-     {
-      "title": "Pentesting",
-      "topics": [
-       {
-        "title": "Reconocimiento con nmap",
-        "slug": null
-       },
-       {
-        "title": "Enumeración de servicios",
-        "slug": null
-       },
-       {
-        "title": "Escalada de privilegios",
-        "slug": null
-       }
-      ]
-     },
-     {
-      "title": "Seguridad web",
-      "topics": [
-       {
-        "title": "OWASP Top 10",
-        "slug": null
-       },
-       {
-        "title": "Inyección SQL",
-        "slug": null
-       },
-       {
-        "title": "Cross-site scripting (XSS)",
+        "title": "k-means",
         "slug": null
        }
       ]
@@ -634,6 +469,32 @@
    ]
   },
   {
+   "slug": "k-means",
+   "lang": "es",
+   "original": true,
+   "file": "content/es/posts/k-means.md",
+   "section": "ia",
+   "title": "K-means",
+   "date": "2026-11-16",
+   "tags": [
+    "IA",
+    "computación",
+    "algoritmos",
+    "aprendizaje no supervisado"
+   ],
+   "summary": "Una frase que resume la entrada (sale en las tarjetas y en la búsqueda).",
+   "emoji": "🧠",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": false,
+   "minutes": 1,
+   "text": "Explicado como a un niño Escribe aquí tu explicación sencilla. Usa subrayado para lo importante. Mis lagunas ¿Dónde te trabaste? Juegos (opcional) pregunta respuesta Pregunta respuesta correcta respuesta incorrecta explicación",
+   "langs": [
+    "es"
+   ]
+  },
+  {
    "slug": "como-hice-esta-pagina",
    "lang": "es",
    "original": true,
@@ -872,7 +733,7 @@
    ],
    "draft": false,
    "minutes": 1,
-   "text": "So wird gespielt Wähle ein Konzept und erkläre es wie einem 12-jährigen Kind. Der Detektor prüft: zu lange Sätze sehr lange Wörter Fachjargon (in Rosa) und sehr lange Wörter (in Lila) ob du Analogien benutzt („das ist wie…“, „stell dir vor…“) ✿ concepto: Was ist ein Algorithmus? Wörter wie „offensichtlich“, „einfach“ oder „trivial“ kosten Punkte: Sie verstecken fast immer eine Lücke.",
+   "text": "So wird gespielt Wähle ein Konzept und erkläre es wie einem 12-jährigen Kind. Der Detektor prüft: zu lange Sätze sehr lange Wörter Fachjargon (in Rosa) und sehr lange Wörter (in Lila) ob du Analogien benutzt („das ist wie…“, „stell dir vor…“) ✿ concepto: Was ist ein Algorithmus? Wörter wie „offensichtlich“, „selbstverständlich“ oder „trivial“ kosten Punkte: Sie verstecken fast immer eine Lücke.",
    "langs": [
     "es",
     "en",

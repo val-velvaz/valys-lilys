@@ -7,7 +7,14 @@ export const GITHUB_USER = 'val-velvaz';
 
 // Section → color tone of the card bar (colors live in tokens.css)
 export const SECTIONS = {
-  math: 'pink', cs: 'mint', games: 'lav', projects: 'sky', challenges: 'peach', blog: 'butter', about: 'peri'
+  math: 'pink',
+  cs: 'mint',
+  ia: 'salmon',
+  games: 'lav',
+  projects: 'sky',
+  challenges: 'peach',
+  blog: 'butter',
+  about: 'peri'
 };
 export const sectionName = (s) => t(`sec_${s}`) === `sec_${s}` ? s : t(`sec_${s}`);
 
