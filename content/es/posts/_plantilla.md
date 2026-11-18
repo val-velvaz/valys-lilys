@@ -6,7 +6,7 @@ tags: [feynman, python]
 summary: Una frase que resume la entrada (sale en las tarjetas y en la búsqueda).
 emoji: 🌸
 # destacado: true   (opcional: sale en "Empieza aquí")
-# requiere: [metodo-feynman]   (opcional: temas que conviene leer antes; se ven en el mapa)
+# requiere: [metodo-feynman]   (opcional: temas que conviene leer antes)
 # image: assets/img/posts/mi-entrada.png   (opcional: sustituye al emoji)
 draft: true
 ---
