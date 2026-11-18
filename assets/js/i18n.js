@@ -27,8 +27,16 @@ const STRINGS = {
     syllabus_title: 'Temario', syllabus_ready: 'temas con entrada / temas en total', syllabus_soon: 'pronto',
     'status_dominado': 'dominado', 'status_en-progreso': 'en progreso', 'status_disponible': 'disponible', 'status_bloqueado': 'bloqueado',
     // change section
-    sec_math: 'matemáticas', sec_cs: 'computación', sec_games: 'juegos', sec_projects: 'proyectos', sec_ia: 'ia',
-    sec_challenges: 'retos', sec_blog: 'blog', sec_about: 'sobre mí',
+    sec_math: 'matemáticas',
+    sec_cs: 'computación',
+    sec_games: 'juegos',
+    sec_projects: 'proyectos',
+    sec_ia: 'ia',
+    sec_challenges: 'retos',
+    sec_blog: 'blog',
+    sec_about: 'sobre mí',
+    sec_os: 'sistemas operativos',
+
     feynman_title: '⚛ ¿Aplicaste el método Feynman?',
     step_1: 'Elegí un concepto', step_2: 'Lo expliqué como a un niño', step_3: 'Encontré mis lagunas', step_4: 'Lo simplifiqué con una analogía',
     hl_note: '✎ nota', hl_remove: '✕ quitar', hl_save: 'guardar',
