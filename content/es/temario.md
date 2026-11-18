@@ -10,3 +10,7 @@
 # 💻 Inteligencia Artificial'
 ## Aprendizaje no Supervisado
 - [k-means](k-means)
+
+# Sistemas Operativos
+## Memoria
+-- [Paginación Simple](paginacion-simple)
