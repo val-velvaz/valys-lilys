@@ -14,7 +14,8 @@ export const SECTIONS = {
   projects: 'sky',
   challenges: 'peach',
   blog: 'butter',
-  about: 'peri'
+  about: 'peri',
+  os: 'lav'
 };
 export const sectionName = (s) => t(`sec_${s}`) === `sec_${s}` ? s : t(`sec_${s}`);
 

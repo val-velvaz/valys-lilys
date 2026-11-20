@@ -23,7 +23,7 @@ import { LANGS, FALLBACK, DEFAULT_LANG } from '../assets/js/langs.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const CONTENT = join(ROOT, 'content');
-const SECTIONS = ['math', 'cs', 'games', 'projects', 'challenges', 'blog', 'about', 'ia'];
+const SECTIONS = ['math', 'cs', 'games', 'projects', 'challenges', 'blog', 'about', 'ia', 'os'];
 const WORDS_PER_MINUTE = 200;
 
 function parseFrontMatter(src) {
