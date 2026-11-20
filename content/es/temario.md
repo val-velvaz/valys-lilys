@@ -7,10 +7,10 @@
     - [Tema](slug) → enlaza a content/es/posts/slug.md
   Después de editarlo: node scripts/build-index.mjs  (o haz push a main)
 -->
-# 💻 Inteligencia Artificial'
+# 💻 Inteligencia Artificial
 ## Aprendizaje no Supervisado
 - [k-means](k-means)
 
 # Sistemas Operativos
 ## Memoria
--- [Paginación Simple](paginacion-simple)
+- [Paginación Simple](paginacion-simple)

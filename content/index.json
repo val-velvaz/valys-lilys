@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-18T19:00:35.945Z",
+ "generated": "2026-11-20T22:10:01.147Z",
  "syllabus": {
   "es": [
    {
-    "title": "Inteligencia Artificial'",
+    "title": "Inteligencia Artificial",
     "icon": "💻",
     "units": [
      {
@@ -12,6 +12,21 @@
        {
         "title": "k-means",
         "slug": "k-means"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Sistemas Operativos",
+    "icon": "",
+    "units": [
+     {
+      "title": "Memoria",
+      "topics": [
+       {
+        "title": "Paginación Simple",
+        "slug": null
        }
       ]
      }
@@ -384,6 +399,30 @@
   ]
  },
  "posts": [
+  {
+   "slug": "paginacion-simple",
+   "lang": "es",
+   "original": true,
+   "file": "content/es/posts/paginacion-simple.md",
+   "section": "os",
+   "title": "Paginación simple",
+   "date": "2026-11-18",
+   "tags": [
+    "sistemas operativos",
+    "memoria"
+   ],
+   "summary": "Cómo el sistema operativo divide la memoria en páginas.",
+   "emoji": "💾",
+   "image": "",
+   "featured": false,
+   "requires": [],
+   "draft": true,
+   "minutes": 1,
+   "text": "",
+   "langs": [
+    "es"
+   ]
+  },
   {
    "slug": "hoja-feynman",
    "lang": "es",

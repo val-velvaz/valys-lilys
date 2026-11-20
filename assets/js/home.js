@@ -18,7 +18,7 @@ const noResults = document.getElementById('no-results');
 // projects sit with the explanations: they are long articles you read from start to end.
 const GROUPS = {
   tools: ['games', 'challenges'],
-  explanations: ['math', 'cs', 'projects', 'ia', 'operating systems'],
+  explanations: ['math', 'cs', 'projects', 'ia', 'os'],
   diary: ['blog']
 };
 const HIDDEN = new Set(['about']); // linked from the avatar, not listed on the home page
